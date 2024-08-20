@@ -1,0 +1,12 @@
+build/
+dist/
+__pycache__
+excel
+main.spec
+problemas.txt
+errores.txt
+*.cfg
+problemas.txt
+*.pyproject*
+*.json
+*xls*

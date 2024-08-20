@@ -1,0 +1,1 @@
+/home/sergio/Programación/Python/SuiteRadiofísica/src/globalVars.py

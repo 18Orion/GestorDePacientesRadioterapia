@@ -1,0 +1,101 @@
+# -*- coding: utf-8 -*-
+
+################################################################################
+## Form generated from reading UI file 'launcherUI.ui'
+##
+## Created by: Qt User Interface Compiler version 6.7.2
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QFormLayout, QLabel, QMainWindow,
+    QPushButton, QSizePolicy, QStatusBar, QWidget)
+
+class Ui_launcher(object):
+    def setupUi(self, launcher):
+        if not launcher.objectName():
+            launcher.setObjectName(u"launcher")
+        launcher.resize(672, 639)
+        self.centralwidget = QWidget(launcher)
+        self.centralwidget.setObjectName(u"centralwidget")
+        self.formLayoutWidget = QWidget(self.centralwidget)
+        self.formLayoutWidget.setObjectName(u"formLayoutWidget")
+        self.formLayoutWidget.setGeometry(QRect(0, 0, 671, 621))
+        self.formLayout = QFormLayout(self.formLayoutWidget)
+        self.formLayout.setObjectName(u"formLayout")
+        self.formLayout.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.formLayoutWidget)
+        self.label.setObjectName(u"label")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
+        self.label.setSizePolicy(sizePolicy)
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label)
+
+        self.label_2 = QLabel(self.formLayoutWidget)
+        self.label_2.setObjectName(u"label_2")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
+        self.label_2.setSizePolicy(sizePolicy1)
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_2)
+
+        self.patientUILaunch = QPushButton(self.formLayoutWidget)
+        self.patientUILaunch.setObjectName(u"patientUILaunch")
+
+        self.formLayout.setWidget(1, QFormLayout.SpanningRole, self.patientUILaunch)
+
+        self.exportUILaunch = QPushButton(self.formLayoutWidget)
+        self.exportUILaunch.setObjectName(u"exportUILaunch")
+
+        self.formLayout.setWidget(2, QFormLayout.SpanningRole, self.exportUILaunch)
+
+        self.importUILaunch = QPushButton(self.formLayoutWidget)
+        self.importUILaunch.setObjectName(u"importUILaunch")
+        self.importUILaunch.setEnabled(False)
+
+        self.formLayout.setWidget(3, QFormLayout.SpanningRole, self.importUILaunch)
+
+        self.changeCredentialsUILaunch = QPushButton(self.formLayoutWidget)
+        self.changeCredentialsUILaunch.setObjectName(u"changeCredentialsUILaunch")
+        self.changeCredentialsUILaunch.setEnabled(False)
+
+        self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.changeCredentialsUILaunch)
+
+        self.label_3 = QLabel(self.formLayoutWidget)
+        self.label_3.setObjectName(u"label_3")
+
+        self.formLayout.setWidget(5, QFormLayout.SpanningRole, self.label_3)
+
+        launcher.setCentralWidget(self.centralwidget)
+        self.statusbar = QStatusBar(launcher)
+        self.statusbar.setObjectName(u"statusbar")
+        launcher.setStatusBar(self.statusbar)
+
+        self.retranslateUi(launcher)
+
+        QMetaObject.connectSlotsByName(launcher)
+    # setupUi
+
+    def retranslateUi(self, launcher):
+        launcher.setWindowTitle(QCoreApplication.translate("launcher", u"launcher", None))
+        self.label.setText(QCoreApplication.translate("launcher", u"Has iniciado sesi\u00f3n como:", None))
+        self.label_2.setText(QCoreApplication.translate("launcher", u"TextLabel", None))
+        self.patientUILaunch.setText(QCoreApplication.translate("launcher", u"Introducir/Editar tratamiento", None))
+        self.exportUILaunch.setText(QCoreApplication.translate("launcher", u"Exportar datos", None))
+        self.importUILaunch.setText(QCoreApplication.translate("launcher", u"Importar datos", None))
+        self.changeCredentialsUILaunch.setText(QCoreApplication.translate("launcher", u"Cambiar credenciales", None))
+        self.label_3.setText(QCoreApplication.translate("launcher", u"Creado por Sergio Mi\u00f1ano Ramos", None))
+    # retranslateUi
+
