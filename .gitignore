@@ -2,7 +2,7 @@ build/
 dist/
 __pycache__
 excel
-main.spec
+*.spec
 problemas.txt
 errores.txt
 *.cfg
