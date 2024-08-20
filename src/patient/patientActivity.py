@@ -301,11 +301,9 @@ class patientActivity(QMainWindow, dataToSQL):
             self.ui.calcRetries.clear()
 
     def loadMatchingTreatments(self):
-        treatment=self.sql.loadPatientTreatment(self.ui.historyNumberEdit.text())
-        numberOfMatchingTreatments=len(treatment)
+        numberOfMatchingTreatments=len(self.sql.loadPatientTreatment(self.ui.historyNumberEdit.text()))
         self.ui.treatmentNumber.clear()
-        for i in range(numberOfMatchingTreatments):
-            self.ui.treatmentNumber.addItems(str(i+1))
+        self.ui.treatmentNumber.addItems(range(1, numberOfMatchingTreatments))
         self.ui.treatmentNumber.addItem("Nuevo tratamiento")
         self.ui.treatmentNumber.setCurrentIndex(numberOfMatchingTreatments)
 
