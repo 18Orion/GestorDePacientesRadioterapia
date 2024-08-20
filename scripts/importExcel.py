@@ -129,7 +129,9 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 if __name__ == "__main__":
     d=gender.Detector(False)
     #Get MySQL credentials
-    cred=("sergio", "soplao")
+    user=input("Usuario: ")
+    passwd=input("Contraseña: ")
+    cred=(user, passwd)
     #Stablish connection to db
     sql=MySQLdb(cred)
     sql.connectToDemographicDB()
@@ -137,9 +139,10 @@ if __name__ == "__main__":
     sql.loadDemographicTable()
     sql.loadTreatmentTable()
     # Define variable to load the dataframe
+    excelFile=input("Archivo excel (.xlsx):")
     loadTime=time()
     print("Cargando excel...")
-    dataframe = openpyxl.load_workbook("dosimetria.xlsx")
+    dataframe = openpyxl.load_workbook(excelFile)
     print("Excel cargado en ", str(time()-loadTime), "s")
     # Define variable to read sheet
     spreadshit = dataframe.active
