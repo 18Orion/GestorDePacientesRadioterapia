@@ -1,0 +1,2 @@
+Este programa y sus herramientas tienen el objetivo de dar una forma segura y eficaz de almacenar y explotar los datos de los pacientes. Entre sus herramientas se incluyen diferentes scripts para migrar de excel a la base de datos.
+La base de datos se basa en el standard SQL y concretamente usa MySQL.
