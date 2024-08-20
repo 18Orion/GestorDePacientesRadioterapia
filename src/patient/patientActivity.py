@@ -120,6 +120,7 @@ class patientActivity(QMainWindow, dataToSQL):
 
     def checkForClinicNumber(self):
         self.restartDemographicField()
+        self.restartTreatmentField()
         if(self.setHistory(self.ui.historyNumberEdit.text())):
             self.ui.treatmentNumber.clear()
             self.ui.treatmentNumber.addItem("Nuevo tratamiento")
@@ -165,13 +166,13 @@ class patientActivity(QMainWindow, dataToSQL):
             self.ui.doctorComboBox.setCurrentIndex(self.doctorsList.index(self.patientData.attendingDoctor))
         else:
             self.ui.doctorComboBox.addItem(self.patientData.attendingDoctor)
-            self.ui.doctorComboBox.setCurrentIndex(len(self.doctorsList)+1)
+            self.ui.doctorComboBox.setCurrentIndex(len(self.doctorsList))
 
         if self.patientData.attendingRadiophysicist in self.techniciansList:
             self.ui.technicianComboBox.setCurrentIndex(self.techniciansList.index(self.patientData.attendingRadiophysicist))
         else:
             self.ui.technicianComboBox.addItem(self.patientData.attendingRadiophysicist)
-            self.ui.technicianComboBox.setCurrentIndex(len(self.techniciansList)+1)
+            self.ui.technicianComboBox.setCurrentIndex(len(self.techniciansList))
 
     def onBirthDayDateChanged(self):
         self.patientData.patientBirthday=date.fromisoformat(str(self.ui.birthdayEdit.date().toPython())).toordinal()
@@ -201,7 +202,7 @@ class patientActivity(QMainWindow, dataToSQL):
     
     def writeDateListOnComboBox(self, dateList):
         for i in dateList:
-            self.writeDateItem(i[0], i[1], i[2])
+            self.writeDateItem(i[0], i[1], i[2], False)
 
     def readDatesOfDateComboBox(self):
         dateList=[]
@@ -212,52 +213,62 @@ class patientActivity(QMainWindow, dataToSQL):
             dateList.append(dateTuple)
         return dateList
 
-    def writeDateItem(self, typeOfDate, itemDate, daysFromReception=0):
+    def writeDateItem(self, typeOfDate, itemDate, daysFromReception=0, validate=True):
         #Check whether the dates are introduced in good order and writes them
         writeable=False
         if (type(itemDate)==int):
             ordinalDate=itemDate
         else:
             ordinalDate=date.fromisoformat(str(itemDate)).toordinal()
-        if ordinalDate>=self.previousDate:          #Checks if the new date is as recent or more than the previous one
-            #Checks that user doesn't add a date in an erroneus order
-            match typeOfDate:
-                case 1:
-                    if not(self.hasRequest):
-                        writeable=True
-                    self.hasRequest=True
-                case 2:
-                    if (self.hasRequest)and(not(self.hasCompleteReception)):
-                        writeable=True
-                        self.hasCompleteReception=True
-                case 3:
-                    if (self.hasRequest)and(not(self.hasCompleteReception)):
-                        writeable=True
-                case 4:
-                    if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
-                        writeable=True
-                case 5:
-                    if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
-                        writeable=True
-                        self.hasCalcEnd=True
-                case 6:
-                    if (self.hasCalcEnd):
-                        writeable=True
-                        self.hasEmision=True
-            if writeable:
-                rowNumber=self.ui.dateTableView.rowCount()
-                self.ui.dateTableView.insertRow(rowNumber)
-                self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[typeOfDate]))
-                if type(itemDate)==int:
-                    self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(date.fromordinal(itemDate))))
+        if validate:
+            if ordinalDate>=self.previousDate:          #Checks if the new date is as recent or more than the previous one
+                #Checks that user doesn't add a date in an erroneus order
+                match typeOfDate:
+                    case 1:
+                        if not(self.hasRequest):
+                            writeable=True
+                        self.hasRequest=True
+                    case 2:
+                        if (self.hasRequest)and(not(self.hasCompleteReception)):
+                            writeable=True
+                            self.hasCompleteReception=True
+                    case 3:
+                        if (self.hasRequest)and(not(self.hasCompleteReception)):
+                            writeable=True
+                    case 4:
+                        if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
+                            writeable=True
+                    case 5:
+                        if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
+                            writeable=True
+                            self.hasCalcEnd=True
+                    case 6:
+                        if (self.hasCalcEnd):
+                            writeable=True
+                            self.hasEmision=True
+                if writeable:
+                    rowNumber=self.ui.dateTableView.rowCount()
+                    self.ui.dateTableView.insertRow(rowNumber)
+                    self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[typeOfDate]))
+                    if type(itemDate)==int:
+                        self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(date.fromordinal(itemDate))))
+                    else:
+                        self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(itemDate)))
+                    self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
+                    self.previousDate=ordinalDate
                 else:
-                    self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(itemDate)))
-                self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
-                self.previousDate=ordinalDate
+                    self.writeFeedback("No se puede escribir la fecha, compruebe el orden de las fechas",True)
             else:
-                self.writeFeedback("No se puede escribir la fecha, compruebe el orden de las fechas",True)
+                self.writeFeedback("La nueva fecha no puede ser más antigua que la previa",True)
         else:
-            self.writeFeedback("La nueva fecha no puede ser más antigua que la previa",True)
+            rowNumber=self.ui.dateTableView.rowCount()
+            self.ui.dateTableView.insertRow(rowNumber)
+            self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[typeOfDate]))
+            if type(itemDate)==int:
+                self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(date.fromordinal(itemDate))))
+            else:
+                self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(itemDate)))
+            self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
 
 
     def setPhysicistNames(self):
@@ -303,7 +314,8 @@ class patientActivity(QMainWindow, dataToSQL):
     def loadMatchingTreatments(self):
         numberOfMatchingTreatments=len(self.sql.loadPatientTreatment(self.ui.historyNumberEdit.text()))
         self.ui.treatmentNumber.clear()
-        self.ui.treatmentNumber.addItems(range(1, numberOfMatchingTreatments))
+        for i in range(1, numberOfMatchingTreatments+1):
+            self.ui.treatmentNumber.addItem(str(i))
         self.ui.treatmentNumber.addItem("Nuevo tratamiento")
         self.ui.treatmentNumber.setCurrentIndex(numberOfMatchingTreatments)
 
