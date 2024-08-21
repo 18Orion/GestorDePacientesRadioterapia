@@ -41,15 +41,15 @@ class Ui_launcher(object):
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label)
 
-        self.label_2 = QLabel(self.formLayoutWidget)
-        self.label_2.setObjectName(u"label_2")
+        self.name = QLabel(self.formLayoutWidget)
+        self.name.setObjectName(u"name")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.label_2.sizePolicy().hasHeightForWidth())
-        self.label_2.setSizePolicy(sizePolicy1)
+        sizePolicy1.setHeightForWidth(self.name.sizePolicy().hasHeightForWidth())
+        self.name.setSizePolicy(sizePolicy1)
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.label_2)
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.name)
 
         self.patientUILaunch = QPushButton(self.formLayoutWidget)
         self.patientUILaunch.setObjectName(u"patientUILaunch")
@@ -91,7 +91,7 @@ class Ui_launcher(object):
     def retranslateUi(self, launcher):
         launcher.setWindowTitle(QCoreApplication.translate("launcher", u"launcher", None))
         self.label.setText(QCoreApplication.translate("launcher", u"Has iniciado sesi\u00f3n como:", None))
-        self.label_2.setText(QCoreApplication.translate("launcher", u"TextLabel", None))
+        self.name.setText(QCoreApplication.translate("launcher", u"TextLabel", None))
         self.patientUILaunch.setText(QCoreApplication.translate("launcher", u"Introducir/Editar tratamiento", None))
         self.exportUILaunch.setText(QCoreApplication.translate("launcher", u"Exportar datos", None))
         self.importUILaunch.setText(QCoreApplication.translate("launcher", u"Importar datos", None))

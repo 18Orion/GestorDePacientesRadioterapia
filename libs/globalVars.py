@@ -26,3 +26,6 @@ DATE_OPTIONS=["Sin escoger",
     "QA",
     "Fin del calculo",
     "Emisión"]
+
+GENDER_OPTIONS=["Masculino", 
+    "Femenino"]

@@ -1,1 +1,0 @@
-/home/sergio/Programación/Python/SuiteRadiofísica/src/patient/MySQLdb.py

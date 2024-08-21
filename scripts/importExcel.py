@@ -1,9 +1,9 @@
 import openpyxl
-from globalVars import TREATMENT_DICT
+from ..libs.globalVars import TREATMENT_DICT
 from time import time
 from datetime import date, datetime 
 import gender_guesser.detector as gender
-from MySQLdb import MySQLdb
+from ..libs.MySQLdb import MySQLdb
 
 def getNUSHA(nusha):
     if nusha:

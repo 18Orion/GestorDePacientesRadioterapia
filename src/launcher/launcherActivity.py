@@ -19,6 +19,7 @@ class launcherActivity(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_launcher()
         self.ui.setupUi(self)
+        self.ui.name.setText(credentials[0])
         self.credentials=credentials
         self.ui.patientUILaunch.clicked.connect(self.launchPatient)
         self.ui.exportUILaunch.clicked.connect(self.launchExport)

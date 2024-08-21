@@ -1,6 +1,7 @@
 from datetime import date
-from .MySQLdb import MySQLdb
-from .patientDataStructure import patientDataStructure
+from libs.MySQLdb import MySQLdb
+from libs.patientDataStructure import patientDataStructure
+from libs.globalVars import *
 
 class dataToSQL(object):
     def __init__(self):
@@ -11,15 +12,9 @@ class dataToSQL(object):
         #Create patient data structure        
         self.patientData=patientDataStructure()
         #Create lists
-        self.TREATMENT_OPTIONS=["Sin escoger","3D","VMAT","IMRT","ICT","BQ-C", "BQ-F","Urgencia"]     #Constant
-        self.GENDER_OPTIONS=["Masculino", "Femenino"]                                       #Constant
-        self.DATE_OPTIONS=["Sin escoger", 
-            "Solicitud", 
-            "Recepción completa", 
-            "Recepción incompleta",
-            "QA",
-            "Fin del calculo",
-            "Emisión"]
+        self.TREATMENT_OPTIONS=TREATMENT_OPTIONS                                #Constant
+        self.GENDER_OPTIONS=GENDER_OPTIONS                                      #Constant
+        self.DATE_OPTIONS=DATE_OPTIONS                                          #Constant
         self.getTechniciansList()       #Reads config for physicians' list
         self.getDoctorsList()           #Reads config for doctors' list
         self.matchingTreatmentOptions=["Nuevo tratamiento"]
