@@ -13,7 +13,6 @@ class loginActivity(QMainWindow):
         self.ui.user.returnPressed.connect(self.moveOnToPassword)
         self.ui.password.returnPressed.connect(self.loginClicked)
 
-
     def loginClicked(self):
         try:
             DB=mysql.connector.connect(host='localhost',

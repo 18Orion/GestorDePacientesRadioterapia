@@ -14,7 +14,7 @@ TREATMENT_OPTIONS=["Sin escoger",
     "VMAT",
     "IMRT",
     "ICT",
-    "BQ-C",
+    "BQ-C (BQ-HDR)",
     "BQ-F",
     "Urgencia", 
     "Implante semillas"]
@@ -24,7 +24,7 @@ DATE_OPTIONS=["Sin escoger",
     "Recepción completa", 
     "Recepción incompleta",
     "QA",
-    "Fin del calculo",
+    "Fin del calculo (Fin DC)",
     "Emisión"]
 
 GENDER_OPTIONS=["Masculino", 

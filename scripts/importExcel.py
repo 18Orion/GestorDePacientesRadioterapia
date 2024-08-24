@@ -1,9 +1,9 @@
 import openpyxl
-from ..libs.globalVars import TREATMENT_DICT
+from libs.globalVars import TREATMENT_DICT
 from time import time
 from datetime import date, datetime 
 import gender_guesser.detector as gender
-from ..libs.MySQLdb import MySQLdb
+from libs.MySQLdb import MySQLdb
 
 def getNUSHA(nusha):
     if nusha:
@@ -69,10 +69,10 @@ def showColumns():
         print(str(i), ":", str(spreadshit.cell(3, i).value))
 
 def getExtraStrings(rowNumber):
-    yield str(spreadshit.cell(rowNumber, 48).value)    #Doctor
-    yield str(spreadshit.cell(rowNumber, 53).value)    #Radiofísico
-    yield str(spreadshit.cell(rowNumber, 27).value)    #Doctors observation
-    yield str(spreadshit.cell(rowNumber, 38).value)    #Radiofísico observation
+    yield spreadshit.cell(rowNumber, 48).value    #Doctor
+    yield spreadshit.cell(rowNumber, 53).value    #Radiofísico
+    yield spreadshit.cell(rowNumber, 27).value    #Doctors observation
+    yield spreadshit.cell(rowNumber, 38).value    #Radiofísico observation
 
 def getDates(rowNumber):
     dates=dateDefiningString(1, spreadshit.cell(rowNumber, 28).value.toordinal(), 0)

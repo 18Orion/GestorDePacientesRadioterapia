@@ -12,7 +12,7 @@ from .launcherUI import Ui_launcher
 #Import all activities
 from src.patient.patientActivity import patientActivity     #Introducing patient data
 from src.exploit.exploitActivity import exploitActivity     #Exporting data
-
+from src.credentials.credentialsActivity import credentialsActivity
 
 class launcherActivity(QMainWindow):
     def __init__(self, credentials, parent=None):
@@ -23,6 +23,7 @@ class launcherActivity(QMainWindow):
         self.credentials=credentials
         self.ui.patientUILaunch.clicked.connect(self.launchPatient)
         self.ui.exportUILaunch.clicked.connect(self.launchExport)
+        self.ui.changeCredentialsUILaunch.clicked.connect(self.launchCredentials)
 
     def launchPatient(self):
         self.patientActivity=patientActivity(self.credentials)
@@ -33,3 +34,7 @@ class launcherActivity(QMainWindow):
         self.exploitActivity=exploitActivity(self.credentials)
         self.exploitActivity.show()
         #self.hide()
+    
+    def launchCredentials(self):
+        self.credentials=credentialsActivity(self.credentials)
+        self.credentials.show()

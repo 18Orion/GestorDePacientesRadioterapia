@@ -2,6 +2,7 @@ from .dataToSQL import dataToSQL
 from PySide6.QtWidgets import QMainWindow, QTableWidgetItem
 from .patientUI import Ui_MainWindow
 from datetime import date
+from libs.funcs import toSpanishDate, toOrdinal, isValidNUSHA
 
 """
 This class contains all methods used when buttons are clicked in main window.
@@ -121,7 +122,7 @@ class patientActivity(QMainWindow, dataToSQL):
     def checkForClinicNumber(self):
         self.restartDemographicField()
         self.restartTreatmentField()
-        if(self.setHistory(self.ui.historyNumberEdit.text())):
+        if(isValidNUSHA(self.ui.historyNumberEdit.text())):
             self.ui.treatmentNumber.clear()
             self.ui.treatmentNumber.addItem("Nuevo tratamiento")
             obtainedTuple=self.sql.loadDemographicData(int(self.ui.historyNumberEdit.text()))
@@ -150,7 +151,7 @@ class patientActivity(QMainWindow, dataToSQL):
         self.writeFeedback("Cargando...")
         self.restartTreatmentField()
         self.setDatesVars()
-        if (self.ui.treatmentNumber.count()-1!=self.ui.treatmentNumber.currentIndex())and(self.setHistory(self.ui.historyNumberEdit.text())):
+        if (self.ui.treatmentNumber.count()-1!=self.ui.treatmentNumber.currentIndex())and(isValidNUSHA(self.ui.historyNumberEdit.text())):
             self.patientData.fromTupleToDataStructure(self.sql.loadPatientTreatment(self.patientData.patientClinicNumber, 
                 self.ui.treatmentNumber.currentIndex()))
             self.writeTreatmentVariables()
@@ -162,17 +163,19 @@ class patientActivity(QMainWindow, dataToSQL):
         self.ui.doctorObservationsEdit.setText(self.patientData.doctorsObservation)
         self.ui.physicianObservationsEdit.setText(self.patientData.physiciansObservation)
         self.ui.calcRetries.setText(str(self.patientData.numberOfCalcTries))
-        if self.patientData.attendingDoctor in self.doctorsList:
-            self.ui.doctorComboBox.setCurrentIndex(self.doctorsList.index(self.patientData.attendingDoctor))
-        else:
-            self.ui.doctorComboBox.addItem(self.patientData.attendingDoctor)
-            self.ui.doctorComboBox.setCurrentIndex(len(self.doctorsList))
-
-        if self.patientData.attendingRadiophysicist in self.techniciansList:
-            self.ui.technicianComboBox.setCurrentIndex(self.techniciansList.index(self.patientData.attendingRadiophysicist))
-        else:
-            self.ui.technicianComboBox.addItem(self.patientData.attendingRadiophysicist)
-            self.ui.technicianComboBox.setCurrentIndex(len(self.techniciansList))
+        if(self.patientData.attendingDoctor):
+            if self.patientData.attendingDoctor in self.doctorsList:
+                self.ui.doctorComboBox.setCurrentIndex(self.doctorsList.index(self.patientData.attendingDoctor))
+            else:
+                self.ui.doctorComboBox.addItem(self.patientData.attendingDoctor)
+                self.ui.doctorComboBox.setCurrentIndex(len(self.doctorsList))
+        
+        if(self.patientData.attendingRadiophysicist):
+            if self.patientData.attendingRadiophysicist in self.techniciansList:
+                self.ui.technicianComboBox.setCurrentIndex(self.techniciansList.index(self.patientData.attendingRadiophysicist))
+            else:
+                self.ui.technicianComboBox.addItem(self.patientData.attendingRadiophysicist)
+                self.ui.technicianComboBox.setCurrentIndex(len(self.techniciansList))
 
     def onBirthDayDateChanged(self):
         self.patientData.patientBirthday=date.fromisoformat(str(self.ui.birthdayEdit.date().toPython())).toordinal()
@@ -208,7 +211,7 @@ class patientActivity(QMainWindow, dataToSQL):
         dateList=[]
         for i in range(self.ui.dateTableView.rowCount()):
             dateTuple=(self.DATE_OPTIONS.index(self.ui.dateTableView.item(i,0).text()),
-                date.fromisoformat(self.ui.dateTableView.item(i,1).text()).toordinal(), 
+                toOrdinal(self.ui.dateTableView.item(i,1).text(), True), 
                 self.ui.dateTableView.item(i,2).text())
             dateList.append(dateTuple)
         return dateList
@@ -250,10 +253,7 @@ class patientActivity(QMainWindow, dataToSQL):
                     rowNumber=self.ui.dateTableView.rowCount()
                     self.ui.dateTableView.insertRow(rowNumber)
                     self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[typeOfDate]))
-                    if type(itemDate)==int:
-                        self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(date.fromordinal(itemDate))))
-                    else:
-                        self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(itemDate)))
+                    self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(itemDate)))
                     self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
                     self.previousDate=ordinalDate
                 else:
@@ -264,10 +264,7 @@ class patientActivity(QMainWindow, dataToSQL):
             rowNumber=self.ui.dateTableView.rowCount()
             self.ui.dateTableView.insertRow(rowNumber)
             self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[typeOfDate]))
-            if type(itemDate)==int:
-                self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(date.fromordinal(itemDate))))
-            else:
-                self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(str(itemDate)))
+            self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(itemDate)))
             self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
 
 
@@ -283,7 +280,7 @@ class patientActivity(QMainWindow, dataToSQL):
         if self.ui.doctorComboBox.currentIndex()!=0:
             self.patientData.attendingDoctor=self.doctorsList[self.ui.doctorComboBox.currentIndex()]
         else:
-            self.patientData.attendingRadiophysicist=""
+            self.patientData.attendingDoctor=""
 
     def restartTreatmentField(self):
         #Resets all treatment related widgets

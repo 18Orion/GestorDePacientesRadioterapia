@@ -172,16 +172,11 @@ class MySQLdb(object):
         self.treatmentInterface.execute("INSERT INTO "+self.treatmentDBTuple[1]+" VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)", treatmentTuple)
         self.treatmentDB.commit()
     
-    def overwriteTreatmentData(self, treatmentTuple, AN, treatmentNumber):
-        self.treatmentInterface.execute("UPDATE "+self.treatmentDBTuple[1]+ "SET\
-            Clinic_Number=%s, \
-            Treatment_Number=%s, \
-            Dates=%s, \
-            Calc_Time=%s, \
-            Treatment_Option=%s, \
-            Attending_Doctor=%s, \
-            Attending_Physician=%s, \
-            Doctors_Observation=%s, \
-            Physicians_Observation=%s,\
-            Calc_Tries=%s)", treatmentTuple)
-        self.treatmentDB.commit()
+    #Define user end functions
+
+    def changePassword(self, newPassword):
+        DB=mysql.connector.connect(host=self.host,  #Creates the DB class
+            user=self.user,
+            password=self.password)
+        cursor=DB.cursor()  #Creates the cursor
+        cursor.execute("SET PASSWORD = %s", newPassword)

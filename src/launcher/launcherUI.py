@@ -23,14 +23,10 @@ class Ui_launcher(object):
         if not launcher.objectName():
             launcher.setObjectName(u"launcher")
         launcher.resize(672, 639)
-        self.centralwidget = QWidget(launcher)
-        self.centralwidget.setObjectName(u"centralwidget")
-        self.formLayoutWidget = QWidget(self.centralwidget)
+        self.formLayoutWidget = QWidget(launcher)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
-        self.formLayoutWidget.setGeometry(QRect(0, 0, 671, 621))
         self.formLayout = QFormLayout(self.formLayoutWidget)
         self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setContentsMargins(0, 0, 0, 0)
         self.label = QLabel(self.formLayoutWidget)
         self.label.setObjectName(u"label")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
@@ -69,7 +65,7 @@ class Ui_launcher(object):
 
         self.changeCredentialsUILaunch = QPushButton(self.formLayoutWidget)
         self.changeCredentialsUILaunch.setObjectName(u"changeCredentialsUILaunch")
-        self.changeCredentialsUILaunch.setEnabled(False)
+        self.changeCredentialsUILaunch.setEnabled(True)
 
         self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.changeCredentialsUILaunch)
 
@@ -78,7 +74,7 @@ class Ui_launcher(object):
 
         self.formLayout.setWidget(5, QFormLayout.SpanningRole, self.label_3)
 
-        launcher.setCentralWidget(self.centralwidget)
+        launcher.setCentralWidget(self.formLayoutWidget)
         self.statusbar = QStatusBar(launcher)
         self.statusbar.setObjectName(u"statusbar")
         launcher.setStatusBar(self.statusbar)
