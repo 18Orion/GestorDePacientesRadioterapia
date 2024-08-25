@@ -11,11 +11,14 @@ ui: UI/patientUI.ui UI/exploitUI.ui UI/launcherUI.ui UI/credentialsUI.ui UI/logi
 clean:
 	rm -rfv dist/
 	rm -rfv build/
+	rm -rfv package/
+	rm -rfv suite.spec
+	rm -rfv importExcel.spec
 
 executables: clean ui
-	pyinstaller --onefile --windowed main.py
+	pyinstaller --onefile --windowed suite.py
 	pyinstaller --onefile scripts/importExcel.py
-	wine ./Scripts/pyinstaller.exe --windowed --onefile main.py
+	wine ./Scripts/pyinstaller.exe --windowed --onefile suite.py
 	wine ./Scripts/pyinstaller.exe --onefile scripts/importExcel.py
 
 dependencies:
@@ -23,3 +26,10 @@ dependencies:
 win:
 	wine ./Scripts/pyinstaller.exe --windowed --onefile main.py
 	wine ./Scripts/pyinstaller.exe --onefile scripts/importExcel.py
+
+package: executables
+	mkdir package
+	mkdir package/assets
+	cp dist/* package
+	cp assets/* package/assets
+	zip package.zip package -r

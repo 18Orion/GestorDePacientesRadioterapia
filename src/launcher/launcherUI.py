@@ -85,11 +85,6 @@ class Ui_launcher(object):
 
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label_3 = QLabel(self.formLayoutWidget)
-        self.label_3.setObjectName(u"label_3")
-
-        self.verticalLayout.addWidget(self.label_3)
-
         self.label_2 = QLabel(self.formLayoutWidget)
         self.label_2.setObjectName(u"label_2")
 
@@ -115,6 +110,11 @@ class Ui_launcher(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
+        self.label_3 = QLabel(self.formLayoutWidget)
+        self.label_3.setObjectName(u"label_3")
+
+        self.verticalLayout.addWidget(self.label_3)
+
 
         self.formLayout.setLayout(0, QFormLayout.FieldRole, self.verticalLayout)
 
@@ -136,9 +136,9 @@ class Ui_launcher(object):
         self.exportUILaunch.setText(QCoreApplication.translate("launcher", u"Exportar datos", None))
         self.importUILaunch.setText(QCoreApplication.translate("launcher", u"Importar datos", None))
         self.changeCredentialsUILaunch.setText(QCoreApplication.translate("launcher", u"Cambiar credenciales", None))
-        self.label_3.setText(QCoreApplication.translate("launcher", u"Creado por Sergio Mi\u00f1ano Ramos", None))
         self.label_2.setText(QCoreApplication.translate("launcher", u"Servicio de radiof\u00edsica, hospital Reina Sof\u00eda", None))
         self.label_5.setText(QCoreApplication.translate("launcher", u"Versi\u00f3n:", None))
         self.version.setText("")
+        self.label_3.setText(QCoreApplication.translate("launcher", u"Creado por Sergio Mi\u00f1ano Ramos", None))
     # retranslateUi
 
