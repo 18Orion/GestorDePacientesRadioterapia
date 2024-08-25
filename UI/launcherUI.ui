@@ -76,15 +76,24 @@
      </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="juntaAnd">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="maximumSize">
        <size>
-        <width>100</width>
-        <height>100</height>
+        <width>150</width>
+        <height>150</height>
        </size>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
       <property name="text">
-       <string/>
+       <string notr="true"/>
       </property>
       <property name="pixmap">
        <pixmap>../assets/logo.jpg</pixmap>
@@ -92,14 +101,17 @@
       <property name="scaledContents">
        <bool>true</bool>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
     <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label_3">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Creado por Sergio Miñano Ramos</string>
+         <string>Servicio de radiofísica, hospital Reina Sofía</string>
         </property>
        </widget>
       </item>
@@ -126,6 +138,13 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Creado por Sergio Miñano Ramos</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

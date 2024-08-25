@@ -14,13 +14,14 @@ class loginActivity(QMainWindow):
         self.ui.password.returnPressed.connect(self.loginClicked)
 
     def loginClicked(self):
+        DB=mysql.connector.connect(host='localhost',
+            user=self.ui.user.text(),
+            password=self.ui.password.text())
+        self.launcher=launcherActivity(credentials=(self.ui.user.text(),self.ui.password.text()))
+        self.launcher.show()
+        self.hide()
         try:
-            DB=mysql.connector.connect(host='localhost',
-                user=self.ui.user.text(),
-                password=self.ui.password.text())
-            self.launcher=launcherActivity(credentials=(self.ui.user.text(),self.ui.password.text()))
-            self.launcher.show()
-            self.hide()
+            pass
         except:
             self.ui.password.setText("")
             self.dialog=dialogActivity("Usuario o contraseña incorrecta.")

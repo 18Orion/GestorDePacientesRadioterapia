@@ -6,14 +6,11 @@ class MySQLdb(object):
     A class to manage the conections to MySQL stablish connections to both databases and tables.
     It manages the initial connections and the creation of databases and tables
     """
-    def __init__(self, credentials):
+    def __init__(self, credentials, host='localhost'):
         #Define host, user and name for connections
-        if not(credentials):
-            self.loadJsonConf()
-        else:
-            self.host='localhost'
-            self.user=credentials[0]
-            self.password=credentials[1]
+        self.host=host
+        self.user=credentials[0]
+        self.password=credentials[1]
         #Defining databases and their subsequent tables
         self.demographicDBTuple=("demographicDB", "demographicData")        #DB, table
         self.treatmentDBTuple=("treatmentDB","treatmentData")               #DB, table

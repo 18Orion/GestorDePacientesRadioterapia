@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFormLayout, QHBoxLayout, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QStatusBar,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QHBoxLayout,
+    QLabel, QMainWindow, QPushButton, QSizePolicy,
+    QStatusBar, QVBoxLayout, QWidget)
 
 class Ui_launcher(object):
     def setupUi(self, launcher):
@@ -70,13 +70,18 @@ class Ui_launcher(object):
 
         self.formLayout.setWidget(5, QFormLayout.SpanningRole, self.changeCredentialsUILaunch)
 
-        self.label_2 = QLabel(self.formLayoutWidget)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setMaximumSize(QSize(100, 100))
-        self.label_2.setPixmap(QPixmap(u"../assets/logo.jpg"))
-        self.label_2.setScaledContents(True)
+        self.juntaAnd = QLabel(self.formLayoutWidget)
+        self.juntaAnd.setObjectName(u"juntaAnd")
+        sizePolicy1.setHeightForWidth(self.juntaAnd.sizePolicy().hasHeightForWidth())
+        self.juntaAnd.setSizePolicy(sizePolicy1)
+        self.juntaAnd.setMaximumSize(QSize(150, 150))
+        self.juntaAnd.setFrameShape(QFrame.Box)
+        self.juntaAnd.setText(u"")
+        self.juntaAnd.setPixmap(QPixmap(u"../assets/logo.jpg"))
+        self.juntaAnd.setScaledContents(True)
+        self.juntaAnd.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_2)
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.juntaAnd)
 
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -84,6 +89,11 @@ class Ui_launcher(object):
         self.label_3.setObjectName(u"label_3")
 
         self.verticalLayout.addWidget(self.label_3)
+
+        self.label_2 = QLabel(self.formLayoutWidget)
+        self.label_2.setObjectName(u"label_2")
+
+        self.verticalLayout.addWidget(self.label_2)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -126,8 +136,8 @@ class Ui_launcher(object):
         self.exportUILaunch.setText(QCoreApplication.translate("launcher", u"Exportar datos", None))
         self.importUILaunch.setText(QCoreApplication.translate("launcher", u"Importar datos", None))
         self.changeCredentialsUILaunch.setText(QCoreApplication.translate("launcher", u"Cambiar credenciales", None))
-        self.label_2.setText("")
         self.label_3.setText(QCoreApplication.translate("launcher", u"Creado por Sergio Mi\u00f1ano Ramos", None))
+        self.label_2.setText(QCoreApplication.translate("launcher", u"Servicio de radiof\u00edsica, hospital Reina Sof\u00eda", None))
         self.label_5.setText(QCoreApplication.translate("launcher", u"Versi\u00f3n:", None))
         self.version.setText("")
     # retranslateUi
