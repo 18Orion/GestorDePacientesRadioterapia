@@ -30,6 +30,8 @@ win:
 package: executables
 	mkdir package
 	mkdir package/assets
+	cp configuration.json package
+	cp README.md package
 	cp dist/* package
 	cp assets/* package/assets
 	zip package.zip package -r
