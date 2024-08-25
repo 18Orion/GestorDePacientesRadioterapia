@@ -8,7 +8,6 @@ errores.txt
 *.cfg
 problemas.txt
 *.pyproject*
-*.json
 *xls*
 main
 importExcel

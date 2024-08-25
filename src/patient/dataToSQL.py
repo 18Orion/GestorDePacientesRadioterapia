@@ -2,6 +2,7 @@ from datetime import date
 from libs.MySQLdb import MySQLdb
 from libs.patientDataStructure import patientDataStructure
 from libs.globalVars import *
+from libs.confReader import confReader
 
 class dataToSQL(object):
     def __init__(self):
@@ -9,6 +10,7 @@ class dataToSQL(object):
         #Connect to databases
         self.sql.connectToDemographicDB()
         self.sql.connectToTreatmentDB()
+        self.conf=confReader()
         #Create patient data structure        
         self.patientData=patientDataStructure()
         #Create lists
@@ -29,18 +31,28 @@ class dataToSQL(object):
         self.hasEmision=False
 
     def getTechniciansList(self):
-        f=open("tecnicos.cfg","r")
         self.techniciansList=["Sin escoger"]
-        for line in f:
-            if line[0]!='#':
-                self.techniciansList.append(line.replace("\n",""))
+        try:
+            f=open(self.conf.physicistFile,"r")
+            for line in f:
+                if line[0]!='#':
+                    self.techniciansList.append(line.replace("\n",""))
+        except:
+            f=open(self.conf.physicistFile,"w")
+            f.write("#En este archivo se definen los nombres de los radiofísicos que figuran en el programa\n")
+            f.close()
 
     def getDoctorsList(self):
-        f=open("medicos.cfg","r")
         self.doctorsList=["Sin escoger"]
-        for line in f:
-            if line[0]!='#':
-                self.doctorsList.append(line.replace("\n",""))
+        try:
+            f=open(self.conf.doctorsFile,"r")
+            for line in f:
+                if line[0]!='#':
+                    self.doctorsList.append(line.replace("\n",""))
+        except:
+            f=open(self.conf.doctorsFile,"w")
+            f.write("#En este archivo se definen los nombres de los doctores que figuran en el programa\n")
+            f.close()
 
     def writeSQL(self):
         self.sql.saveDemographicData(self.patientData.fromVarToDemographicTuple())

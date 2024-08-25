@@ -1,0 +1,21 @@
+{
+    "program":[
+        {
+            "version": "1.0.0",
+            "pythonVersion": "3.12",
+            "mysql": "9.0.1"
+        }
+    ],
+    "files":[
+        {
+            "medicos": "medicos.cfg",
+            "radiofísicos": "radiofisicos.cfg"
+        }
+    ], 
+    "SQL":[
+        {
+            "host": "localhost"
+        }
+    ]
+
+}
