@@ -6,6 +6,7 @@ ui: UI/patientUI.ui UI/exploitUI.ui UI/launcherUI.ui UI/credentialsUI.ui UI/logi
 	pyside6-uic UI/launcherUI.ui -o src/launcher/launcherUI.py
 	pyside6-uic UI/exploitUI.ui -o src/exploit/exploitUI.py
 	pyside6-uic UI/credentialsUI.ui -o src/credentials/credentialsUI.py
+	pyside6-uic UI/dialogUI.ui -o src/dialog/dialogUI.py
 
 clean:
 	rm -rfv dist/
@@ -14,3 +15,11 @@ clean:
 executables: clean ui
 	pyinstaller --onefile --windowed main.py
 	pyinstaller --onefile scripts/importExcel.py
+	wine ./Scripts/pyinstaller.exe --windowed --onefile main.py
+	wine ./Scripts/pyinstaller.exe --onefile scripts/importExcel.py
+
+dependencies:
+	pip3 install -r requirements.txt --break-system-packages
+win:
+	wine ./Scripts/pyinstaller.exe --windowed --onefile main.py
+	wine ./Scripts/pyinstaller.exe --onefile scripts/importExcel.py
