@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="formLayoutWidget">
    <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="0">
+    <item row="1" column="0">
      <widget class="QLabel" name="label">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -28,7 +28,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
+    <item row="1" column="1">
      <widget class="QLabel" name="name">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -37,25 +37,25 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string>user</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="2">
+    <item row="2" column="0" colspan="2">
      <widget class="QPushButton" name="patientUILaunch">
       <property name="text">
        <string>Introducir/Editar tratamiento</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
+    <item row="3" column="0" colspan="2">
      <widget class="QPushButton" name="exportUILaunch">
       <property name="text">
        <string>Exportar datos</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="2">
+    <item row="4" column="0" colspan="2">
      <widget class="QPushButton" name="importUILaunch">
       <property name="enabled">
        <bool>false</bool>
@@ -65,7 +65,7 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0" colspan="2">
+    <item row="5" column="0" colspan="2">
      <widget class="QPushButton" name="changeCredentialsUILaunch">
       <property name="enabled">
        <bool>true</bool>
@@ -75,12 +75,59 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="0" colspan="2">
-     <widget class="QLabel" name="label_3">
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>100</height>
+       </size>
+      </property>
       <property name="text">
-       <string>Creado por Sergio Miñano Ramos</string>
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>../assets/logo.jpg</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
      </widget>
+    </item>
+    <item row="0" column="1">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Creado por Sergio Miñano Ramos</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Versión:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="version">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

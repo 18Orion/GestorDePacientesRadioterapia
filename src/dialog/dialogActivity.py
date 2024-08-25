@@ -1,6 +1,5 @@
 # This Python file uses the following encoding: utf-8
 import sys
-
 from PySide6.QtWidgets import QApplication, QDialog
 from src.dialog.dialogUI import Ui_Dialog
 
@@ -16,5 +15,5 @@ class dialogActivity(QDialog):
 
     def closeDialog(self):
         if self.onCloseFunc:
-            self.onCloseFunc()
+            self.onCloseFunc()  #executes a function passed by the constructor
         self.close()

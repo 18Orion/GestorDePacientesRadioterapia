@@ -1,7 +1,7 @@
 from .loginUI import Ui_login
 from PySide6.QtWidgets import QApplication, QMainWindow
 import mysql.connector
-#from src.patient.patientActivity import patientActivity
+from src.dialog.dialogActivity import dialogActivity
 from src.launcher.launcherActivity import launcherActivity
 
 class loginActivity(QMainWindow):
@@ -23,7 +23,7 @@ class loginActivity(QMainWindow):
             self.hide()
         except:
             self.ui.password.setText("")
-            print("Error")
+            self.dialog=dialogActivity("Usuario o contraseña incorrecta.")
     
     def moveOnToPassword(self):
         self.ui.password.setFocus()

@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QMainWindow, QTableWidgetItem
 from .patientUI import Ui_MainWindow
 from datetime import date
 from libs.funcs import toSpanishDate, toOrdinal, isValidNUSHA
+from src.dialog.dialogActivity import dialogActivity
 
 """
 This class contains all methods used when buttons are clicked in main window.
@@ -16,7 +17,6 @@ class patientActivity(QMainWindow, dataToSQL):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.autofillEventDate()        #Set current date to today
-        self.writeFeedback("Programa creado por Sergio Miñano Ramos")
 
         #Populate combo boxes
         self.ui.treatmentOptions.addItems(self.TREATMENT_OPTIONS)     #added list to treatment options comboBox 
@@ -69,25 +69,35 @@ class patientActivity(QMainWindow, dataToSQL):
             self.ui.dateType.setCurrentIndex(0)
             self.readDatesOfDateComboBox()
         self.patientData.datesList=self.readDatesOfDateComboBox()
-        print(self.patientData.fromSQLStringToDateList(self.patientData.fromDateListToSQLString()))
     
     def nameOnEdit(self):
         if self.isNameValid(self.ui.nameEdit.text()):
             self.patientData.patientName=self.ui.nameEdit.text()
         else:
-            self.writeFeedback("Nombre no válido", True)
+            if self.ui.nameEdit.text():
+                self.writeFeedback("Nombre no válido", True, True)
+            else:
+                self.writeFeedback("Nombre no válido", True)
+
     
     def firstSurnameOnEdit(self):
         if self.isNameValid(self.ui.firstSurnameEdit.text()):
             self.patientData.patientFirstSurname=self.ui.firstSurnameEdit.text()
         else:
-            self.writeFeedback("Primer apellido no válido", True)
+            if self.ui.firstSurnameEdit.text():
+                self.writeFeedback("Primer apellido no válido", True, True)
+            else:
+                self.writeFeedback("Primer apellido no válido", True)
+
     
     def secondSurnameOnEdit(self):
         if self.isNameValid(self.ui.secondSurnameEdit.text()):
             self.patientData.patientSecondSurname=self.ui.secondSurnameEdit.text()
         else:
-            self.writeFeedback("Segundo apellido no válido", True)
+            if self.ui.secondSurnameEdit.text():
+                self.writeFeedback("Segundo apellido no válido", True, True)
+            else:
+                self.writeFeedback("Segundo apellido no válido", True)
 
     #On treatment type changed
     def treatmentIndexChangedSlot(self):
@@ -117,7 +127,7 @@ class patientActivity(QMainWindow, dataToSQL):
             self.loadMatchingTreatments()
             self.ui.treatmentNumber.setCurrentIndex(self.patientData.treatmentNumber)
         else:
-            self.writeFeedback("Rellene el número de historial clínico", True)
+            self.writeFeedback("Rellene el número de historial clínico",True, True)
 
     def checkForClinicNumber(self):
         self.restartDemographicField()
@@ -200,7 +210,7 @@ class patientActivity(QMainWindow, dataToSQL):
             self.ui.dateType.setCurrentIndex(0)
             self.readDatesOfDateComboBox()
         else:
-            self.writeFeedback("Tipo de fecha no escogida", True)
+            self.writeFeedback("Tipo de fecha no escogida",True , True)
         self.patientData.datesList=self.readDatesOfDateComboBox()
     
     def writeDateListOnComboBox(self, dateList):
@@ -257,9 +267,9 @@ class patientActivity(QMainWindow, dataToSQL):
                     self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
                     self.previousDate=ordinalDate
                 else:
-                    self.writeFeedback("No se puede escribir la fecha, compruebe el orden de las fechas",True)
+                    self.writeFeedback("No se puede escribir la fecha, compruebe el orden de las fechas",True,True)
             else:
-                self.writeFeedback("La nueva fecha no puede ser más antigua que la previa",True)
+                self.writeFeedback("La nueva fecha no puede ser más antigua que la previa",True,True)
         else:
             rowNumber=self.ui.dateTableView.rowCount()
             self.ui.dateTableView.insertRow(rowNumber)
@@ -316,7 +326,7 @@ class patientActivity(QMainWindow, dataToSQL):
         self.ui.treatmentNumber.addItem("Nuevo tratamiento")
         self.ui.treatmentNumber.setCurrentIndex(numberOfMatchingTreatments)
 
-    def writeFeedback(self, message, error=False):
+    def writeFeedback(self, message, error=False, dialog=False):
         #Writes feedback in feedback label and adds color and "ERROR:"
         if error:
             self.ui.feedBackLabel.setText("ERROR: ¡"+message+"!")
@@ -324,3 +334,5 @@ class patientActivity(QMainWindow, dataToSQL):
         else:
             self.ui.feedBackLabel.setText(message)
             self.ui.feedBackLabel.setStyleSheet("color: black")
+        if dialog:
+            self.dialog=dialogActivity(message)

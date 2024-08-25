@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFormLayout, QLabel, QMainWindow,
-    QPushButton, QSizePolicy, QStatusBar, QWidget)
+from PySide6.QtWidgets import (QApplication, QFormLayout, QHBoxLayout, QLabel,
+    QMainWindow, QPushButton, QSizePolicy, QStatusBar,
+    QVBoxLayout, QWidget)
 
 class Ui_launcher(object):
     def setupUi(self, launcher):
@@ -35,7 +36,7 @@ class Ui_launcher(object):
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy)
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label)
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label)
 
         self.name = QLabel(self.formLayoutWidget)
         self.name.setObjectName(u"name")
@@ -45,34 +46,67 @@ class Ui_launcher(object):
         sizePolicy1.setHeightForWidth(self.name.sizePolicy().hasHeightForWidth())
         self.name.setSizePolicy(sizePolicy1)
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.name)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.name)
 
         self.patientUILaunch = QPushButton(self.formLayoutWidget)
         self.patientUILaunch.setObjectName(u"patientUILaunch")
 
-        self.formLayout.setWidget(1, QFormLayout.SpanningRole, self.patientUILaunch)
+        self.formLayout.setWidget(2, QFormLayout.SpanningRole, self.patientUILaunch)
 
         self.exportUILaunch = QPushButton(self.formLayoutWidget)
         self.exportUILaunch.setObjectName(u"exportUILaunch")
 
-        self.formLayout.setWidget(2, QFormLayout.SpanningRole, self.exportUILaunch)
+        self.formLayout.setWidget(3, QFormLayout.SpanningRole, self.exportUILaunch)
 
         self.importUILaunch = QPushButton(self.formLayoutWidget)
         self.importUILaunch.setObjectName(u"importUILaunch")
         self.importUILaunch.setEnabled(False)
 
-        self.formLayout.setWidget(3, QFormLayout.SpanningRole, self.importUILaunch)
+        self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.importUILaunch)
 
         self.changeCredentialsUILaunch = QPushButton(self.formLayoutWidget)
         self.changeCredentialsUILaunch.setObjectName(u"changeCredentialsUILaunch")
         self.changeCredentialsUILaunch.setEnabled(True)
 
-        self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.changeCredentialsUILaunch)
+        self.formLayout.setWidget(5, QFormLayout.SpanningRole, self.changeCredentialsUILaunch)
 
+        self.label_2 = QLabel(self.formLayoutWidget)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setMaximumSize(QSize(100, 100))
+        self.label_2.setPixmap(QPixmap(u"../assets/logo.jpg"))
+        self.label_2.setScaledContents(True)
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_2)
+
+        self.verticalLayout = QVBoxLayout()
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.label_3 = QLabel(self.formLayoutWidget)
         self.label_3.setObjectName(u"label_3")
 
-        self.formLayout.setWidget(5, QFormLayout.SpanningRole, self.label_3)
+        self.verticalLayout.addWidget(self.label_3)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.label_5 = QLabel(self.formLayoutWidget)
+        self.label_5.setObjectName(u"label_5")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
+        self.label_5.setSizePolicy(sizePolicy2)
+
+        self.horizontalLayout.addWidget(self.label_5)
+
+        self.version = QLabel(self.formLayoutWidget)
+        self.version.setObjectName(u"version")
+
+        self.horizontalLayout.addWidget(self.version)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout)
+
+
+        self.formLayout.setLayout(0, QFormLayout.FieldRole, self.verticalLayout)
 
         launcher.setCentralWidget(self.formLayoutWidget)
         self.statusbar = QStatusBar(launcher)
@@ -87,11 +121,14 @@ class Ui_launcher(object):
     def retranslateUi(self, launcher):
         launcher.setWindowTitle(QCoreApplication.translate("launcher", u"launcher", None))
         self.label.setText(QCoreApplication.translate("launcher", u"Has iniciado sesi\u00f3n como:", None))
-        self.name.setText(QCoreApplication.translate("launcher", u"TextLabel", None))
+        self.name.setText(QCoreApplication.translate("launcher", u"user", None))
         self.patientUILaunch.setText(QCoreApplication.translate("launcher", u"Introducir/Editar tratamiento", None))
         self.exportUILaunch.setText(QCoreApplication.translate("launcher", u"Exportar datos", None))
         self.importUILaunch.setText(QCoreApplication.translate("launcher", u"Importar datos", None))
         self.changeCredentialsUILaunch.setText(QCoreApplication.translate("launcher", u"Cambiar credenciales", None))
+        self.label_2.setText("")
         self.label_3.setText(QCoreApplication.translate("launcher", u"Creado por Sergio Mi\u00f1ano Ramos", None))
+        self.label_5.setText(QCoreApplication.translate("launcher", u"Versi\u00f3n:", None))
+        self.version.setText("")
     # retranslateUi
 
