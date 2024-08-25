@@ -13,3 +13,5 @@ main
 importExcel
 *.bak*
 Scripts
+package
+*.zip
