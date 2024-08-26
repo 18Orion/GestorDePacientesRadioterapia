@@ -1,7 +1,7 @@
 {
     "program":[
         {
-            "version": "1.0.0",
+            "version": "1.0.2",
             "pythonVersion": "3.12",
             "mysql": "9.0.1"
         }
@@ -9,7 +9,7 @@
     "files":[
         {
             "medicos": "medicos.cfg",
-            "radiofísicos": "radiofisicos.cfg"
+            "radiofisicos": "radiofisicos.cfg"
         }
     ], 
     "SQL":[
