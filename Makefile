@@ -14,8 +14,9 @@ clean:
 	rm -rfv package/
 	rm -rfv suite.spec
 	rm -rfv importExcel.spec
+	rm -rfv package.zip
 
-executables: clean ui
+executables: ui
 	pyinstaller --onefile --windowed suite.py
 	pyinstaller --onefile scripts/importExcel.py
 	wine ./Scripts/pyinstaller.exe --windowed --onefile suite.py
@@ -23,15 +24,25 @@ executables: clean ui
 
 dependencies:
 	pip3 install -r requirements.txt --break-system-packages
+
 win:
 	wine ./Scripts/pyinstaller.exe --windowed --onefile main.py
 	wine ./Scripts/pyinstaller.exe --onefile scripts/importExcel.py
 
-package: executables
+package: 
 	mkdir package
 	mkdir package/assets
+	cp assets/* package/assets
 	cp configuration.json package
 	cp README.md package
-	cp dist/* package
-	cp assets/* package/assets
-	zip package.zip package -r
+	cp package winPackage
+	cp package linuxPackage
+	cp dist/*.exe winPackage
+	cp dist/suite linuxPackage
+	cp dist/importExcel linuxPackage
+	zip linuxRelease.zip linuxPackage -r
+	zip winRelease.zip winPackage -r
+	rm -rfv package winPackage linuxPackage
+
+
+all: executables package
