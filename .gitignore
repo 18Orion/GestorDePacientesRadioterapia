@@ -9,7 +9,9 @@ errores.txt
 problemas.txt
 *.pyproject*
 *xls*
-main
+suite.exe
+importExcel.exe
+suite
 importExcel
 *.bak*
 Scripts

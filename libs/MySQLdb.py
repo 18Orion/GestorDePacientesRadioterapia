@@ -177,3 +177,12 @@ class MySQLdb(object):
             password=self.password)
         cursor=DB.cursor()  #Creates the cursor
         cursor.execute("SET PASSWORD = %s", newPassword)
+    
+    def createUser(self, user, password):
+        DB=mysql.connector.connect(host=self.host,  #Creates the DB class
+            user=self.user,
+            password=self.password)
+        cursor=DB.cursor()  #Creates the cursor
+        cursor.execute("CREATE USER %s@%s IDENTIFIED BY %s", (user, self.host, password))
+        cursor.execute("GRANT INSERT, DELETE, CREATE  ON *.* TO %s@%s", (user, self.host))
+

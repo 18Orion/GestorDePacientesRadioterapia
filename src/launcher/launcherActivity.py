@@ -13,6 +13,7 @@ from .launcherUI import Ui_launcher
 from src.patient.patientActivity import patientActivity     #Introducing patient data
 from src.exploit.exploitActivity import exploitActivity     #Exporting data
 from src.credentials.credentialsActivity import credentialsActivity
+from src.userCreator.userCreatorActivity import userCreatorActivity
 from PySide6.QtGui import QPixmap
 
 class launcherActivity(QMainWindow):
@@ -25,9 +26,12 @@ class launcherActivity(QMainWindow):
         self.ui.patientUILaunch.clicked.connect(self.launchPatient)
         self.ui.exportUILaunch.clicked.connect(self.launchExport)
         self.ui.changeCredentialsUILaunch.clicked.connect(self.launchCredentials)
+        self.ui.userCreatorLaunch.clicked.connect(self.launchUserCreator)
+
         self.conf=confReader()
         self.ui.version.setText(self.conf.version)
         self.ui.juntaAnd.setPixmap(QPixmap(u"./assets/logo.jpg"))
+        self.ui.userCreatorLaunch.setEnabled(credentials[0]=="root")
 
 
     def launchPatient(self):
@@ -43,3 +47,7 @@ class launcherActivity(QMainWindow):
     def launchCredentials(self):
         self.credentials=credentialsActivity(self.credentials)
         self.credentials.show()
+    
+    def launchUserCreator(self):
+        self.userCreator=userCreatorActivity(self.credentials)
+        self.userCreator.show()
