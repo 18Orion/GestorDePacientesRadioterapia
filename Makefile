@@ -35,11 +35,11 @@ package:
 	cp assets/* package/assets
 	cp configuration.json package
 	cp README.md package
-	cp package winPackage
-	cp package linuxPackage
+	cp package winPackage -r
+	cp package linuxPackage -r
 	cp dist/*.exe winPackage
-	cp dist/suite linuxPackage
-	cp dist/importExcel linuxPackage
+	cp dist/suite linuxPackage -r
+	cp dist/importExcel linuxPackage -r
 	zip linuxRelease.zip linuxPackage -r
 	zip winRelease.zip winPackage -r
 	rm -rfv package winPackage linuxPackage
