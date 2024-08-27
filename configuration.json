@@ -1,7 +1,7 @@
 {
     "program":[
         {
-            "version": "1.0.3",
+            "version": "1.0.4",
             "pythonVersion": "3.12",
             "mysql": "9.0.1"
         }
