@@ -57,14 +57,6 @@ class dataToSQL(object):
     def writeSQL(self):
         self.sql.saveDemographicData(self.patientData.fromVarToDemographicTuple())
         self.sql.saveTreatmentData(self.patientData.fromVarToTreatmentTuple())
-
-    def calculateTimeElapsed(self):
-        if (self.patientData.endCalcDate!=0)and(self.patientData.beginCalcDate!=0):
-            timeElapsed=self.patientData.endCalcDate-self.patientData.beginCalcDate
-            if(timeElapsed>=0):
-                self.patientData.calcTime=timeElapsed
-            else:
-                print("Error: Time cannot be negative")
     
     def setHistory(self, clinicNumber=""):              #Returns wether the number is valid or not and saves it
         if (len(clinicNumber)==10)and(clinicNumber.isnumeric()):

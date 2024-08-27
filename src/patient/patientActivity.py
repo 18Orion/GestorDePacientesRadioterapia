@@ -189,15 +189,8 @@ class patientActivity(QMainWindow, dataToSQL):
         self.writeFeedback("Añadiendo fecha...")
         #Adds a date when clicked
         if self.ui.dateType.currentIndex()!=0:      #Checks a type of date was chosen
-            if self.ui.dateType.currentIndex()==2:
-                self.patientData.beginCalcDate=date.toordinal(self.ui.keyDateEdit.date().toPython())
-            if (self.ui.dateType.currentIndex()!=1)and(self.ui.dateType.currentIndex()!=2)and(self.ui.dateType.currentIndex()!=3):
-                timeElapsed=date.toordinal(self.ui.keyDateEdit.date().toPython())-self.patientData.beginCalcDate
-            else:
-                timeElapsed=0
             self.writeDateItem(self.ui.dateType.currentIndex(), 
-                self.ui.keyDateEdit.date().toPython(), 
-                timeElapsed)
+                self.ui.keyDateEdit.date().toPython())
             self.ui.dateType.setCurrentIndex(0)
             self.writeFeedback("Fecha añadida")
         else:
@@ -207,7 +200,7 @@ class patientActivity(QMainWindow, dataToSQL):
     def writeDateListOnTable(self, dateList):
         #Writes datelist in the table
         for i in dateList:
-            self.writeDateItem(i[0], i[1], i[2], False)
+            self.writeDateItem(i[0], i[1], False)
 
     def readDatesOfDateComboBox(self):
         #Reads the combobox and creates a list of tuples containing the dates
@@ -219,7 +212,7 @@ class patientActivity(QMainWindow, dataToSQL):
             dateList.append(dateTuple)
         return dateList
 
-    def writeDateItem(self, typeOfDate, itemDate, daysFromReception=0, validate=True):
+    def writeDateItem(self, typeOfDate, itemDate, validate=True):
         #Check whether the dates are introduced in good order and writes them
         writeable=False
         if (type(itemDate)==int):
@@ -227,6 +220,7 @@ class patientActivity(QMainWindow, dataToSQL):
         else:
             ordinalDate=date.fromisoformat(str(itemDate)).toordinal()
         #Checks that user doesn't add a date in an erroneus order
+        daysFromReception=0
         match typeOfDate:       #Writes the variables storing the different dates
             case 1:
                 if not(self.hasRequest):
@@ -236,20 +230,26 @@ class patientActivity(QMainWindow, dataToSQL):
                 if (self.hasRequest)and(not(self.hasCompleteReception)):
                     writeable=True
                     self.hasCompleteReception=True
+                    self.patientData.beginCalcDate=ordinalDate
             case 3:
                 if (self.hasRequest)and(not(self.hasCompleteReception)):
                     writeable=True
+                    daysFromReception=self.calculateTimeElapsed(ordinalDate)
             case 4:
                 if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
                     writeable=True
+                    daysFromReception=self.calculateTimeElapsed(ordinalDate)
             case 5:
                 if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
                     writeable=True
                     self.hasCalcEnd=True
+                    daysFromReception=self.calculateTimeElapsed(ordinalDate)
             case 6:
                 if (self.hasCalcEnd):
                     writeable=True
                     self.hasEmision=True
+                    daysFromReception=self.calculateTimeElapsed(ordinalDate)
+
         if validate:
             if ordinalDate>=self.previousDate:          #Checks if the new date is as recent or more than the previous one
                 if writeable:
@@ -333,3 +333,6 @@ class patientActivity(QMainWindow, dataToSQL):
         if dialog:
             #Creates a dialog if necessary
             self.dialog=dialogActivity(message)
+
+    def calculateTimeElapsed(self, ordinalDate):
+        return ordinalDate-self.patientData.beginCalcDate
