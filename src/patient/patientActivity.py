@@ -122,12 +122,14 @@ class patientActivity(QMainWindow, dataToSQL):
             self.writeFeedback("Rellene el número de historial clínico",True, True)
 
     def checkForClinicNumber(self):
+        #Checks if the clinic number is correct
         self.restartDemographicField()
         self.restartTreatmentField()
         if(isValidNUSHA(self.ui.historyNumberEdit.text())):
             self.ui.treatmentNumber.clear()
             self.ui.treatmentNumber.addItem("Nuevo tratamiento")
             obtainedTuple=self.sql.loadDemographicData(int(self.ui.historyNumberEdit.text()))
+            #Loads a patient if possible
             if(obtainedTuple):
                 self.patientData.fromTupleToDataStructure(obtainedTuple)
                 self.writeDemographicVariables()
@@ -143,6 +145,7 @@ class patientActivity(QMainWindow, dataToSQL):
             self.ui.personalDataFame.setEnabled(False)
 
     def writeDemographicVariables(self):
+        #Writes the variables associated to a AN
         self.ui.nameEdit.setText(self.patientData.patientName)
         self.ui.firstSurnameEdit.setText(self.patientData.patientFirstSurname)
         self.ui.secondSurnameEdit.setText(self.patientData.patientSecondSurname)
@@ -160,12 +163,14 @@ class patientActivity(QMainWindow, dataToSQL):
         self.writeFeedback("Tratamiento cargado")
 
     def writeTreatmentVariables(self):
+        #Writes the variables into the gaps
         self.ui.treatmentOptions.setCurrentIndex(self.patientData.treatmentOption)
         self.writeDateListOnTable(self.patientData.datesList)
         self.ui.doctorObservationsEdit.setText(self.patientData.doctorsObservation)
         self.ui.physicianObservationsEdit.setText(self.patientData.physiciansObservation)
         self.ui.calcRetries.setText(str(self.patientData.numberOfCalcTries))
         if(self.patientData.attendingDoctor):
+            #Checks for the doctor, and if it is not in the list adds it and sets it as the attending
             if self.patientData.attendingDoctor in self.doctorsList:
                 self.ui.doctorComboBox.setCurrentIndex(self.doctorsList.index(self.patientData.attendingDoctor))
             else:
@@ -173,6 +178,7 @@ class patientActivity(QMainWindow, dataToSQL):
                 self.ui.doctorComboBox.setCurrentIndex(len(self.doctorsList))
         
         if(self.patientData.attendingRadiophysicist):
+            #Checks for the radiophysicist, and if it is not in the list adds it and sets it as the attending
             if self.patientData.attendingRadiophysicist in self.techniciansList:
                 self.ui.technicianComboBox.setCurrentIndex(self.techniciansList.index(self.patientData.attendingRadiophysicist))
             else:
@@ -220,16 +226,17 @@ class patientActivity(QMainWindow, dataToSQL):
         else:
             ordinalDate=date.fromisoformat(str(itemDate)).toordinal()
         #Checks that user doesn't add a date in an erroneus order
-        daysFromReception=0
         match typeOfDate:       #Writes the variables storing the different dates
             case 1:
                 if not(self.hasRequest):
                     writeable=True
                     self.hasRequest=True
+                    daysFromReception=0
             case 2:
                 if (self.hasRequest)and(not(self.hasCompleteReception)):
                     writeable=True
                     self.hasCompleteReception=True
+                    daysFromReception=0
                     self.patientData.beginCalcDate=ordinalDate
             case 3:
                 if (self.hasRequest)and(not(self.hasCompleteReception)):
@@ -334,5 +341,3 @@ class patientActivity(QMainWindow, dataToSQL):
             #Creates a dialog if necessary
             self.dialog=dialogActivity(message)
 
-    def calculateTimeElapsed(self, ordinalDate):
-        return ordinalDate-self.patientData.beginCalcDate

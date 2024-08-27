@@ -71,3 +71,6 @@ class dataToSQL(object):
         else: 
             print("Error: Name or surname not valid")
             return False
+
+    def calculateTimeElapsed(self, ordinalDate):
+        return ordinalDate-self.patientData.beginCalcDate
