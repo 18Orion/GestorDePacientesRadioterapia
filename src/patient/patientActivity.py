@@ -48,8 +48,7 @@ class patientActivity(QMainWindow, dataToSQL):
 
         #Date events
         self.ui.autofillDate.clicked.connect(self.autofillEventDate)
-        self.ui.addDate.clicked.connect(self.onAddDateclicked)
-        self.ui.addDate.clicked.connect
+        self.ui.addDate.clicked.connect(self.onAddDateClicked)
 
         #Set focus Slots for quicker filling times
         self.ui.historyNumberEdit.returnPressed.connect(self.ui.nameEdit.setFocus)
@@ -62,13 +61,6 @@ class patientActivity(QMainWindow, dataToSQL):
         self.ui.calcRetries.textEdited.connect(self.onCalcRetriesEdited)
 
     #Defining slots functions
-    def onAddDateclicked(self):
-        #Adds a date when clicked
-        if self.ui.dateType.currentIndex()!=0:
-            self.writeDateItem(self.ui.dateType.currentIndex(), self.ui.keyDateEdit.date().toPython())
-            self.ui.dateType.setCurrentIndex(0)
-            self.readDatesOfDateComboBox()
-        self.patientData.datesList=self.readDatesOfDateComboBox()
     
     def nameOnEdit(self):
         if self.isNameValid(self.ui.nameEdit.text()):
@@ -169,7 +161,7 @@ class patientActivity(QMainWindow, dataToSQL):
 
     def writeTreatmentVariables(self):
         self.ui.treatmentOptions.setCurrentIndex(self.patientData.treatmentOption)
-        self.writeDateListOnComboBox(self.patientData.datesList)
+        self.writeDateListOnTable(self.patientData.datesList)
         self.ui.doctorObservationsEdit.setText(self.patientData.doctorsObservation)
         self.ui.physicianObservationsEdit.setText(self.patientData.physiciansObservation)
         self.ui.calcRetries.setText(str(self.patientData.numberOfCalcTries))
@@ -193,31 +185,32 @@ class patientActivity(QMainWindow, dataToSQL):
     def autofillEventDate(self):
         self.ui.keyDateEdit.setDate(date.today())
     
-    def onAddDateclicked(self):
+    def onAddDateClicked(self):
         self.writeFeedback("Añadiendo fecha...")
         #Adds a date when clicked
-        if self.ui.dateType.currentIndex()!=0:
+        if self.ui.dateType.currentIndex()!=0:      #Checks a type of date was chosen
             if self.ui.dateType.currentIndex()==2:
                 self.patientData.beginCalcDate=date.toordinal(self.ui.keyDateEdit.date().toPython())
             if (self.ui.dateType.currentIndex()!=1)and(self.ui.dateType.currentIndex()!=2)and(self.ui.dateType.currentIndex()!=3):
                 timeElapsed=date.toordinal(self.ui.keyDateEdit.date().toPython())-self.patientData.beginCalcDate
             else:
                 timeElapsed=0
-            self.writeFeedback("Fecha añadida")
             self.writeDateItem(self.ui.dateType.currentIndex(), 
                 self.ui.keyDateEdit.date().toPython(), 
                 timeElapsed)
             self.ui.dateType.setCurrentIndex(0)
-            self.readDatesOfDateComboBox()
+            self.writeFeedback("Fecha añadida")
         else:
             self.writeFeedback("Tipo de fecha no escogida",True , True)
         self.patientData.datesList=self.readDatesOfDateComboBox()
     
-    def writeDateListOnComboBox(self, dateList):
+    def writeDateListOnTable(self, dateList):
+        #Writes datelist in the table
         for i in dateList:
             self.writeDateItem(i[0], i[1], i[2], False)
 
     def readDatesOfDateComboBox(self):
+        #Reads the combobox and creates a list of tuples containing the dates
         dateList=[]
         for i in range(self.ui.dateTableView.rowCount()):
             dateTuple=(self.DATE_OPTIONS.index(self.ui.dateTableView.item(i,0).text()),
@@ -233,32 +226,32 @@ class patientActivity(QMainWindow, dataToSQL):
             ordinalDate=itemDate
         else:
             ordinalDate=date.fromisoformat(str(itemDate)).toordinal()
+        #Checks that user doesn't add a date in an erroneus order
+        match typeOfDate:       #Writes the variables storing the different dates
+            case 1:
+                if not(self.hasRequest):
+                    writeable=True
+                    self.hasRequest=True
+            case 2:
+                if (self.hasRequest)and(not(self.hasCompleteReception)):
+                    writeable=True
+                    self.hasCompleteReception=True
+            case 3:
+                if (self.hasRequest)and(not(self.hasCompleteReception)):
+                    writeable=True
+            case 4:
+                if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
+                    writeable=True
+            case 5:
+                if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
+                    writeable=True
+                    self.hasCalcEnd=True
+            case 6:
+                if (self.hasCalcEnd):
+                    writeable=True
+                    self.hasEmision=True
         if validate:
             if ordinalDate>=self.previousDate:          #Checks if the new date is as recent or more than the previous one
-                #Checks that user doesn't add a date in an erroneus order
-                match typeOfDate:
-                    case 1:
-                        if not(self.hasRequest):
-                            writeable=True
-                        self.hasRequest=True
-                    case 2:
-                        if (self.hasRequest)and(not(self.hasCompleteReception)):
-                            writeable=True
-                            self.hasCompleteReception=True
-                    case 3:
-                        if (self.hasRequest)and(not(self.hasCompleteReception)):
-                            writeable=True
-                    case 4:
-                        if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
-                            writeable=True
-                    case 5:
-                        if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
-                            writeable=True
-                            self.hasCalcEnd=True
-                    case 6:
-                        if (self.hasCalcEnd):
-                            writeable=True
-                            self.hasEmision=True
                 if writeable:
                     rowNumber=self.ui.dateTableView.rowCount()
                     self.ui.dateTableView.insertRow(rowNumber)
@@ -313,16 +306,19 @@ class patientActivity(QMainWindow, dataToSQL):
         self.ui.secondSurnameEdit.clear()
 
     def onCalcRetriesEdited(self):
+        #Checks if the calc retries is a number and sets it in the patient data
         if(self.ui.calcRetries.text().isnumeric()):
             self.patientData.numberOfCalcTries=int(self.ui.calcRetries.text())
         else:
             self.ui.calcRetries.clear()
 
     def loadMatchingTreatments(self):
+        #Loads all the matching treatments for a AN number for user to choose the treatment
         numberOfMatchingTreatments=len(self.sql.loadPatientTreatment(self.ui.historyNumberEdit.text()))
         self.ui.treatmentNumber.clear()
         for i in range(1, numberOfMatchingTreatments+1):
             self.ui.treatmentNumber.addItem(str(i))
+            #Adds the options to combobox
         self.ui.treatmentNumber.addItem("Nuevo tratamiento")
         self.ui.treatmentNumber.setCurrentIndex(numberOfMatchingTreatments)
 
@@ -335,4 +331,5 @@ class patientActivity(QMainWindow, dataToSQL):
             self.ui.feedBackLabel.setText(message)
             self.ui.feedBackLabel.setStyleSheet("color: black")
         if dialog:
+            #Creates a dialog if necessary
             self.dialog=dialogActivity(message)
