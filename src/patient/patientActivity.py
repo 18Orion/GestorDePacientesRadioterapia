@@ -34,7 +34,7 @@ class patientActivity(QMainWindow, dataToSQL):
         self.ui.nameEdit.textEdited.connect(self.nameOnEdit)
         self.ui.firstSurnameEdit.textEdited.connect(self.firstSurnameOnEdit)
         self.ui.secondSurnameEdit.textEdited.connect(self.secondSurnameOnEdit)
-        self.ui.birthdayEdit.dateChanged.connect(self.onBirthDayDateChanged)
+        #self.ui.birthdayEdit.dateChanged.connect(self.onBirthDayDateChanged)
         #Buttonbox slots
         self.resetButton.clicked.connect(self.onResetPressed)
         self.saveButton.clicked.connect(self.onSavePressed)
@@ -113,11 +113,14 @@ class patientActivity(QMainWindow, dataToSQL):
             self.patientData.doctorsObservation=self.ui.doctorObservationsEdit.toPlainText()
             self.patientData.physiciansObservation=self.ui.physicianObservationsEdit.toPlainText()
             self.patientData.treatmentNumber=self.ui.treatmentNumber.currentIndex()
+            self.patientData.patientBirthday=date.fromisoformat(str(self.ui.birthdayEdit.date().toPython())).toordinal()
             self.writeSQL()
             self.writeFeedback("Guardado, recargando base de datos...")
             self.sql.loadTreatmentTable()
+            self.sql.loadDemographicTable()
             self.loadMatchingTreatments()
             self.ui.treatmentNumber.setCurrentIndex(self.patientData.treatmentNumber)
+            self.ui.personalDataFame.setEnabled(False)
         else:
             self.writeFeedback("Rellene el número de historial clínico",True, True)
 
@@ -151,7 +154,10 @@ class patientActivity(QMainWindow, dataToSQL):
         self.ui.firstSurnameEdit.setText(self.patientData.patientFirstSurname)
         self.ui.secondSurnameEdit.setText(self.patientData.patientSecondSurname)
         self.ui.genderComboBox.setCurrentIndex(self.patientData.patientGender)
-        self.ui.birthdayEdit.setDate(date.fromordinal(self.patientData.patientBirthday))
+        try:
+            self.ui.birthdayEdit.setDate(date.fromordinal(self.patientData.patientBirthday))
+        except:
+            pass
 
     def retrieveTreatmentAndWrite(self):
         self.writeFeedback("Cargando...")
@@ -185,9 +191,6 @@ class patientActivity(QMainWindow, dataToSQL):
             else:
                 self.ui.technicianComboBox.addItem(self.patientData.attendingRadiophysicist)
                 self.ui.technicianComboBox.setCurrentIndex(len(self.techniciansList))
-
-    def onBirthDayDateChanged(self):
-        self.patientData.patientBirthday=date.fromisoformat(str(self.ui.birthdayEdit.date().toPython())).toordinal()
     
     def autofillEventDate(self):
         self.ui.keyDateEdit.setDate(date.today())
