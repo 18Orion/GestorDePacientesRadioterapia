@@ -184,5 +184,5 @@ class MySQLdb(object):
             password=self.password)
         cursor=DB.cursor()  #Creates the cursor
         cursor.execute("CREATE USER %s@%s IDENTIFIED BY %s", (user, self.host, password))
-        cursor.execute("GRANT INSERT, DELETE, CREATE  ON *.* TO %s@%s", (user, self.host))
+        cursor.execute("GRANT INSERT, DELETE, CREATE, SELECT  ON *.* TO %s@%s", (user, self.host))
 
