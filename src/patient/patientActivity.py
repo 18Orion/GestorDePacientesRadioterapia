@@ -137,7 +137,8 @@ class patientActivity(QMainWindow, dataToSQL):
                 self.loadMatchingTreatments()
                 self.writeFeedback("Usuario existente, cargando...")
             else:
-                self.writeFeedback("Usuario nuevo, cargando...")
+                self.patientData.patientClinicNumber=int(self.ui.historyNumberEdit.text())
+                self.writeFeedback("Usuario nuevo...")
                 self.ui.personalDataFame.setEnabled(True)
             self.setDatesVars()
         else:
