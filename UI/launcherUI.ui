@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>launcher</string>
+   <string>Menú</string>
   </property>
   <widget class="QWidget" name="formLayoutWidget">
    <layout class="QFormLayout" name="formLayout">

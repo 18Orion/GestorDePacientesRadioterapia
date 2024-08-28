@@ -173,7 +173,7 @@ class Ui_launcher(object):
     # setupUi
 
     def retranslateUi(self, launcher):
-        launcher.setWindowTitle(QCoreApplication.translate("launcher", u"launcher", None))
+        launcher.setWindowTitle(QCoreApplication.translate("launcher", u"Men\u00fa", None))
         self.label_2.setText(QCoreApplication.translate("launcher", u"Servicio de radiof\u00edsica, hospital Reina Sof\u00eda", None))
         self.label_5.setText(QCoreApplication.translate("launcher", u"Versi\u00f3n:", None))
         self.version.setText("")

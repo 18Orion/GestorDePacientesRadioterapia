@@ -66,7 +66,7 @@ class Ui_login(object):
     # setupUi
 
     def retranslateUi(self, login):
-        login.setWindowTitle(QCoreApplication.translate("login", u"login", None))
+        login.setWindowTitle(QCoreApplication.translate("login", u"Inicio de sesi\u00f3n", None))
         self.label_3.setText(QCoreApplication.translate("login", u"Inicio de sesi\u00f3n en el sistema", None))
         self.label.setText(QCoreApplication.translate("login", u"Usuario", None))
         self.label_2.setText(QCoreApplication.translate("login", u"Contrase\u00f1a: ", None))

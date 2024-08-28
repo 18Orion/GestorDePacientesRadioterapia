@@ -101,7 +101,7 @@ class Ui_Credentials(object):
     # setupUi
 
     def retranslateUi(self, Credentials):
-        Credentials.setWindowTitle(QCoreApplication.translate("Credentials", u"Credentials", None))
+        Credentials.setWindowTitle(QCoreApplication.translate("Credentials", u"Cambio de contrase\u00f1a", None))
         self.label_5.setText(QCoreApplication.translate("Credentials", u"La aplicaci\u00f3n se cerrara al cambiar la contrase\u00f1a", None))
         self.label.setText(QCoreApplication.translate("Credentials", u"Usuario:", None))
         self.label_2.setText(QCoreApplication.translate("Credentials", u"Contrase\u00f1a:", None))

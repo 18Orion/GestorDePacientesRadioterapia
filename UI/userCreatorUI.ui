@@ -11,14 +11,14 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>userCreatorActivity</string>
+   <string>Creador de usuarios</string>
   </property>
   <widget class="QWidget" name="formLayoutWidget">
    <layout class="QFormLayout" name="formLayout">
     <item row="0" column="0" colspan="2">
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>Introiduzca las credenciales de usuario</string>
+       <string>Introduzca las credenciales de usuario</string>
       </property>
      </widget>
     </item>

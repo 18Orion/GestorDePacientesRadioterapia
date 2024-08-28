@@ -85,8 +85,8 @@ class Ui_userCreatorActivity(object):
     # setupUi
 
     def retranslateUi(self, userCreatorActivity):
-        userCreatorActivity.setWindowTitle(QCoreApplication.translate("userCreatorActivity", u"userCreatorActivity", None))
-        self.label_4.setText(QCoreApplication.translate("userCreatorActivity", u"Introiduzca las credenciales de usuario", None))
+        userCreatorActivity.setWindowTitle(QCoreApplication.translate("userCreatorActivity", u"Creador de usuarios", None))
+        self.label_4.setText(QCoreApplication.translate("userCreatorActivity", u"Introduzca las credenciales de usuario", None))
         self.label.setText(QCoreApplication.translate("userCreatorActivity", u"Usuario", None))
         self.label_2.setText(QCoreApplication.translate("userCreatorActivity", u"Contrase\u00f1a", None))
         self.label_3.setText(QCoreApplication.translate("userCreatorActivity", u"Contrase\u00f1a", None))

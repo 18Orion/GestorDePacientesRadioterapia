@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>login</string>
+   <string>Inicio de sesión</string>
   </property>
   <widget class="QWidget" name="formLayoutWidget">
    <layout class="QFormLayout" name="formLayout">
