@@ -90,12 +90,15 @@ class MySQLdb(object):
         self.demographicDB=next(connectionTry)
         self.demographicInterface=next(connectionTry)
         if not(next(connectionTry)):      #Checks if the DB was created and if not populates it with a table  
-            self.demographicInterface.execute("CREATE TABLE "+self.demographicDBTuple[1]+" (AN INT UNSIGNED,\
-                Name VARCHAR(50), \
-                First_Surname VARCHAR(50), \
-                Second_Surname VARCHAR(50), \
-                Birthday INT UNSIGNED, \
-                Gender TINYINT UNSIGNED)")
+            try:
+                self.demographicInterface.execute("CREATE TABLE "+self.demographicDBTuple[1]+" (AN INT UNSIGNED,\
+                    Name VARCHAR(50), \
+                    First_Surname VARCHAR(50), \
+                    Second_Surname VARCHAR(50), \
+                    Birthday INT UNSIGNED, \
+                    Gender TINYINT UNSIGNED)")
+            except Exception as err:
+                print(str(err))
         self.loadDemographicTable()
 
     def loadDemographicTable(self):
@@ -129,16 +132,19 @@ class MySQLdb(object):
         self.treatmentDB=next(connectionTry)
         self.treatmentInterface=next(connectionTry)
         if not(next(connectionTry)):      #Checks if the DB was created and if not populates it with a table  
-            self.treatmentInterface.execute("CREATE TABLE "+self.treatmentDBTuple[1]+" (\
-                Clinic_Number INT UNSIGNED, \
-                Treatment_Number TINYINT UNSIGNED, \
-                Dates TEXT, \
-                Treatment_Option TINYINT UNSIGNED, \
-                Attending_Doctor VARCHAR(100), \
-                Attending_Physician VARCHAR(100), \
-                Doctors_Observation LONGTEXT, \
-                Physicians_Observation LONGTEXT,\
-                Calc_Tries TINYINT UNSIGNED)")
+            try:
+                self.treatmentInterface.execute("CREATE TABLE "+self.treatmentDBTuple[1]+" (\
+                    Clinic_Number INT UNSIGNED, \
+                    Treatment_Number TINYINT UNSIGNED, \
+                    Dates TEXT, \
+                    Treatment_Option TINYINT UNSIGNED, \
+                    Attending_Doctor VARCHAR(100), \
+                    Attending_Physician VARCHAR(100), \
+                    Doctors_Observation LONGTEXT, \
+                    Physicians_Observation LONGTEXT,\
+                    Calc_Tries TINYINT UNSIGNED)")
+            except Exception as err:
+                print(str(err))
         self.loadTreatmentTable()
 
     def loadTreatmentTable(self):
