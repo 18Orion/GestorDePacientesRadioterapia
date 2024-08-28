@@ -65,7 +65,7 @@ def update(packageType, version="latest"):
         case "source":
             sourceName="GestorDePacientesRadioterapia"+"-"+version[0].replace("v", "")+".zip"
             #urlretrieve("https://github.com/18Orion/GestorDePacientesRadioterapia/archive/refs/tags/"+version[0]+".zip", "source.zip")
-            urlretrieve("https://github.com/18Orion/GestorDePacientesRadioterapia/archive/refs/heads/main.zip")
+            urlretrieve("https://github.com/18Orion/GestorDePacientesRadioterapia/archive/refs/heads/main.zip", "release.zip")
         case "compiled":
             if version[1]=="Linux":
                 urlretrieve("https://github.com/18Orion/GestorDePacientesRadioterapia/releases/latest/download/linuxRelease.zip", "release.zip")
