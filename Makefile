@@ -39,7 +39,7 @@ package:
 	cp assets/* package/assets
 	cp configuration.json package
 	cp README.md package
-	cp *.txt package -r
+	cp scripts/*.txt package -r
 	cp package winPackage -r
 	cp package linuxPackage -r
 	cp dist/*.exe winPackage
