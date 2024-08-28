@@ -18,7 +18,7 @@ clean:
 	rm -rfv winRelease.zip
 	rm -rfv linuxRelease.zip
 
-linux: ui
+linux:
 	pyinstaller --onefile --windowed suite.py
 	pyinstaller --onefile scripts/importExcel.py
 	pyinstaller --onefile scripts/update.py
@@ -28,7 +28,7 @@ dependencies:
 	pip3 install -r requirements.txt --break-system-packages
 
 win:
-	wine ./Scripts/pyinstaller.exe --windowed --onefile main.py
+	wine ./Scripts/pyinstaller.exe --windowed --onefile suite.py
 	wine ./Scripts/pyinstaller.exe --onefile scripts/importExcel.py
 	wine ./Scripts/pyinstaller.exe --onefile scripts/createDummyDB.py
 	wine ./Scripts/pyinstaller.exe --onefile scripts/update.py
@@ -52,4 +52,4 @@ package:
 	rm -rfv package winPackage linuxPackage
 
 
-all: linux win package
+all: ui linux win package
