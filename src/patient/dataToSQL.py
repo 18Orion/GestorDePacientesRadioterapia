@@ -31,12 +31,12 @@ class dataToSQL(object):
         self.hasEmision=False
 
     def getTechniciansList(self):
-        self.techniciansList=["Sin escoger"]
+        self.radiophysicistList=["Sin escoger"]
         try:
             f=open(self.conf.physicistFile,"r")
             for line in f:
                 if line[0]!='#':
-                    self.techniciansList.append(line.replace("\n",""))
+                    self.radiophysicistList.append(line.replace("\n",""))
         except:
             f=open(self.conf.physicistFile,"w")
             f.write("#En este archivo se definen los nombres de los radiofísicos que figuran en el programa\n")
