@@ -3,10 +3,6 @@ import sys
 
 from PySide6.QtWidgets import QApplication, QMainWindow
 from libs.confReader import confReader
-# Important:
-# You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
-#     pyside2-uic form.ui -o ui_form.py
 from .launcherUI import Ui_launcher
 
 #Import all activities
@@ -15,7 +11,7 @@ from src.exploit.exploitActivity import exploitActivity     #Exporting data
 from src.credentials.credentialsActivity import credentialsActivity
 from src.userCreator.userCreatorActivity import userCreatorActivity
 from PySide6.QtGui import QPixmap
-from libs.funcs import update, getLatestVersion
+from libs.funcs import update, getLatestVersion, getVersionInt
 from src.dialog.dialogActivity import dialogActivity
 from multiprocessing import Process
 from os import listdir
@@ -57,7 +53,7 @@ class launcherActivity(QMainWindow):
     
     def launchUpdate(self):
         if self.updatable==0:
-            if(getLatestVersion()!=("v"+self.conf.version)):
+            if(getVersionInt(getLatestVersion())>getVersionInt(self.conf.version)):
                 self.updatable=1
                 self.ui.update.setText("Descargar actualización")
             else:
