@@ -15,13 +15,14 @@ clean:
 	rm -rfv package/
 	rm -rfv suite.spec
 	rm -rfv importExcel.spec
-	rm -rfv package.zip
+	rm -rfv winRelease.zip
+	rm -rfv linuxRelease.zip
 
-executables: ui
+linux: ui
 	pyinstaller --onefile --windowed suite.py
 	pyinstaller --onefile scripts/importExcel.py
-	wine ./Scripts/pyinstaller.exe --windowed --onefile suite.py
-	wine ./Scripts/pyinstaller.exe --onefile scripts/importExcel.py
+	pyinstaller --onefile scripts/update.py
+	pyinstaller --onefile scripts/createDummyDB.py
 
 dependencies:
 	pip3 install -r requirements.txt --break-system-packages
@@ -29,6 +30,8 @@ dependencies:
 win:
 	wine ./Scripts/pyinstaller.exe --windowed --onefile main.py
 	wine ./Scripts/pyinstaller.exe --onefile scripts/importExcel.py
+	wine ./Scripts/pyinstaller.exe --onefile scripts/createDummyDB.py
+	wine ./Scripts/pyinstaller.exe --onefile scripts/update.py
 
 package: 
 	mkdir package
@@ -36,14 +39,17 @@ package:
 	cp assets/* package/assets
 	cp configuration.json package
 	cp README.md package
+	cp *.txt package -r
 	cp package winPackage -r
 	cp package linuxPackage -r
 	cp dist/*.exe winPackage
 	cp dist/suite linuxPackage -r
 	cp dist/importExcel linuxPackage -r
+	cp dist/update linuxPackage -r
+	cp dist/createDummyDB linuxPackage -r
 	zip linuxRelease.zip linuxPackage -r
 	zip winRelease.zip winPackage -r
 	rm -rfv package winPackage linuxPackage
 
 
-all: executables package
+all: linux win package
