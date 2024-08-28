@@ -41,8 +41,10 @@ if __name__ == "__main__":
         #Treatment
         patientData.attendingDoctor=getRandomName(names, surnames)
         patientData.attendingRadiophysicist=getRandomName(names, surnames)
-        patientData.treatmentOption=randint(0, len(TREATMENT_OPTIONS))
+        patientData.treatmentOption=randint(0, len(TREATMENT_OPTIONS)-1)
         patientData.numberOfCalcTries=randint(1, 10)
+        patientData.doctorsObservation=""
+        patientData.physiciansObservation=""
         actualDate=randint(date.today().toordinal()-10*365, date.today().toordinal())
         patientData.datesList.append((1, actualDate, 0))
         actualDate+=randint(0, 5)
