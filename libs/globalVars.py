@@ -29,3 +29,9 @@ DATE_OPTIONS=["Sin escoger",
 
 GENDER_OPTIONS=["Masculino", 
     "Femenino"]
+
+GENDER_GUESSER_DICT={"male":0, 
+    "unknown":0,
+    "mostly_male":0,
+    "mostly_female":1, 
+    "female": 1}

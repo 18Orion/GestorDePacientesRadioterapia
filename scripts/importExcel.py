@@ -1,9 +1,10 @@
 import openpyxl
-from libs.globalVars import TREATMENT_DICT
+from libs.globalVars import TREATMENT_DICT, GENDER_GUESSER_DICT
 from time import time
 from datetime import date, datetime 
 import gender_guesser.detector as gender
 from libs.MySQLdb import MySQLdb
+from libs.funcs import printProgressBar, inputLogin
 
 def getNUSHA(nusha):
     if nusha:
@@ -24,11 +25,10 @@ def getNameAndSurnames(columnValue):
         yield ""
 
 def getGender(columnValue):
-    genderOptions={"male":0, "unknown":0,"mostly_male":0,"mostly_female":1, "female": 1}
     name=formatNameStr(columnValue.split(",")[1])
     if " " in name:
         name=name.split(" ")[0]        
-    return genderOptions[str(d.get_gender(name))]
+    return GENDER_GUESSER_DICT[str(d.get_gender(name))]
 
 def formatNameStr(nameStr):
     words=[]
@@ -104,36 +104,10 @@ def getCalcTries(rowNumber):
             tries+=int(content)
     return tries
 
-# Print iterations progress
-def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
-    """
-    Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
-        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
-    """
-    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
-    filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
-    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
-    # Print New Line on Complete
-    if iteration == total: 
-        print()
-
 if __name__ == "__main__":
     d=gender.Detector(False)
-    #Get MySQL credentials
-    user=input("Usuario: ")
-    passwd=input("Contraseña: ")
-    cred=(user, passwd)
     #Stablish connection to db
-    sql=MySQLdb(cred)
+    sql=MySQLdb(inputLogin())
     sql.connectToDemographicDB()
     sql.connectToTreatmentDB()
     sql.loadDemographicTable()
