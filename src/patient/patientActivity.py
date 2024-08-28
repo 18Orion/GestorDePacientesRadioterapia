@@ -183,7 +183,7 @@ class patientActivity(QMainWindow, dataToSQL):
             else:
                 self.ui.doctorComboBox.addItem(self.patientData.attendingDoctor)
                 self.doctorsList.append(self.patientData.attendingDoctor)
-                self.ui.doctorComboBox.setCurrentIndex(len(self.doctorsList))
+                self.ui.doctorComboBox.setCurrentIndex(len(self.doctorsList)-1)
         
         if(self.patientData.attendingRadiophysicist):
             #Checks for the radiophysicist, and if it is not in the list adds it and sets it as the attending
@@ -192,7 +192,7 @@ class patientActivity(QMainWindow, dataToSQL):
             else:
                 self.ui.technicianComboBox.addItem(self.patientData.attendingRadiophysicist)
                 self.radiophysicistList.append(self.patientData.attendingRadiophysicist)
-                self.ui.technicianComboBox.setCurrentIndex(len(self.radiophysicistList))
+                self.ui.technicianComboBox.setCurrentIndex(len(self.radiophysicistList)-1)
     
     def autofillEventDate(self):
         self.ui.keyDateEdit.setDate(date.today())
