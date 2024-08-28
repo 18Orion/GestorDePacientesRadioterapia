@@ -3,3 +3,4 @@ gender-guesser
 mysql-connector-python
 openpyxl
 pyinstaller
+requests
