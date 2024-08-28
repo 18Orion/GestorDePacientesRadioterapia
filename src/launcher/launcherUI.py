@@ -152,7 +152,7 @@ class Ui_launcher(object):
 
         self.update = QPushButton(self.formLayoutWidget)
         self.update.setObjectName(u"update")
-        self.update.setEnabled(False)
+        self.update.setEnabled(True)
 
         self.formLayout.setWidget(13, QFormLayout.SpanningRole, self.update)
 
@@ -188,7 +188,7 @@ class Ui_launcher(object):
         self.changeCredentialsUILaunch.setText(QCoreApplication.translate("launcher", u"Cambiar credenciales", None))
         self.userCreatorLaunch.setText(QCoreApplication.translate("launcher", u"Creador de usuario", None))
         self.label_7.setText(QCoreApplication.translate("launcher", u"Herramientas del programa", None))
-        self.update.setText(QCoreApplication.translate("launcher", u"Actualizar", None))
+        self.update.setText(QCoreApplication.translate("launcher", u"Buscar \u00faltima versi\u00f3n", None))
         self.about.setText(QCoreApplication.translate("launcher", u"Sobre el programa", None))
     # retranslateUi
 

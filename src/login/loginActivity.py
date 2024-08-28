@@ -24,8 +24,8 @@ class loginActivity(QMainWindow):
         except mysql.connector.errors.ProgrammingError:
             self.ui.password.setText("")
             self.dialog=dialogActivity("Usuario o contraseña incorrecta.")
-        except:
-            self.dialog=dialogActivity("Fallo en la conexión")
+        except Exception as err:
+            self.dialog=dialogActivity("Fallo inesperado: "+str(err))
     
     def moveOnToPassword(self):
         self.ui.password.setFocus()

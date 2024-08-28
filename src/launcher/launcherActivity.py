@@ -15,6 +15,10 @@ from src.exploit.exploitActivity import exploitActivity     #Exporting data
 from src.credentials.credentialsActivity import credentialsActivity
 from src.userCreator.userCreatorActivity import userCreatorActivity
 from PySide6.QtGui import QPixmap
+from libs.funcs import update, getLatestVersion
+from src.dialog.dialogActivity import dialogActivity
+from multiprocessing import Process
+from os import listdir
 
 class launcherActivity(QMainWindow):
     def __init__(self, credentials, parent=None):
@@ -27,22 +31,21 @@ class launcherActivity(QMainWindow):
         self.ui.exportUILaunch.clicked.connect(self.launchExport)
         self.ui.changeCredentialsUILaunch.clicked.connect(self.launchCredentials)
         self.ui.userCreatorLaunch.clicked.connect(self.launchUserCreator)
-
         self.conf=confReader()
         self.ui.version.setText(self.conf.version)
         self.ui.juntaAnd.setPixmap(QPixmap(u"./assets/logo.jpg"))
         self.ui.userCreatorLaunch.setEnabled(credentials[0]=="root")
+        self.ui.update.clicked.connect(self.launchUpdate)
+        self.updatable=0
 
 
     def launchPatient(self):
         self.patientActivity=patientActivity(self.credentials)
         self.patientActivity.show()
-        #self.hide()
 
     def launchExport(self):
         self.exploitActivity=exploitActivity(self.credentials)
         self.exploitActivity.show()
-        #self.hide()
     
     def launchCredentials(self):
         self.credentials=credentialsActivity(self.credentials)
@@ -51,3 +54,24 @@ class launcherActivity(QMainWindow):
     def launchUserCreator(self):
         self.userCreator=userCreatorActivity(self.credentials)
         self.userCreator.show()
+    
+    def launchUpdate(self):
+        if self.updatable==0:
+            if(getLatestVersion()!=("v"+self.conf.version)):
+                self.updatable=1
+                self.ui.update.setText("Descargar actualización")
+            else:
+                self.ui.update.setText("No hay actaulizaciones")
+                self.ui.update.setEnabled(False)
+        elif self.updatable==1:
+            self.dialog=dialogActivity("La actualización se descargará en segundo plano, no cierre el programa", 
+                buttonMessage="Descargar", 
+                onCloseFunc=self.download)
+            self.ui.update.setEnabled(False)
+            self.ui.update.setText("Descargado")
+        
+    def download(self):
+        if "suite.py" in listdir():
+            update("source")
+        else:
+            update("compiled")

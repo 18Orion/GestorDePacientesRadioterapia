@@ -1,5 +1,8 @@
 from datetime import date
 from datetime import datetime
+import requests
+from platform import system
+from urllib.request import urlretrieve
 
 def toSpanishDate(unformattedDate):
     if type(unformattedDate) is int:
@@ -54,7 +57,7 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 
 def update(packageType, version="latest"):
     if version=="latest":
-        version = (requests.get("https://github.com/18Orion/GestorDePacientesRadioterapia/releases/latest").url.split("/").pop(), system())
+        version = (getLatestVersion(), system())
     else:
         version = (version, system())
     print("Descargando version "+version[0]+" para la plataforma "+version[1])
@@ -67,3 +70,6 @@ def update(packageType, version="latest"):
                 urlretrieve("https://github.com/18Orion/GestorDePacientesRadioterapia/releases/latest/download/linuxRelease.zip", "release.zip")
             elif version[1]=="Windows":
                 urlretrieve("https://github.com/18Orion/GestorDePacientesRadioterapia/releases/latest/download/winRelease.zip", "release.zip")
+
+def getLatestVersion():
+    return requests.get("https://github.com/18Orion/GestorDePacientesRadioterapia/releases/latest").url.split("/").pop()

@@ -1,6 +1,3 @@
-import requests
-from platform import system
-from urllib.request import urlretrieve
 from libs.funcs import update
 
 if __name__=="__main__":
