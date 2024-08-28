@@ -22,10 +22,11 @@ def isValidNUSHA(nusha):
     return (len(nusha)==10)and(nusha.isnumeric())
 
 def formatNUSHA(nusha):
-    if len(nusha)==9:
-        return "0"+nusha
-    else:
-        return nusha
+    formattedNusha=""
+    for i in range(10-len(str(nusha))):
+        formattedNusha+="0"
+    formattedNusha+=str(nusha)
+    return formattedNusha
 
 def inputLogin():
     user=input("Usuario: ")
