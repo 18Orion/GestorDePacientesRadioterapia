@@ -49,6 +49,7 @@ class patientActivity(QMainWindow, dataToSQL):
         #Date events
         self.ui.autofillDate.clicked.connect(self.autofillEventDate)
         self.ui.addDate.clicked.connect(self.onAddDateClicked)
+        self.ui.removeDate.clicked.connect(self.removeDateFromTable)
 
         #Set focus Slots for quicker filling times
         self.ui.historyNumberEdit.returnPressed.connect(self.ui.nameEdit.setFocus)
@@ -207,14 +208,14 @@ class patientActivity(QMainWindow, dataToSQL):
             self.writeFeedback("Fecha añadida")
         else:
             self.writeFeedback("Tipo de fecha no escogida",True , True)
-        self.patientData.datesList=self.readDatesOfDateComboBox()
+        self.patientData.datesList=self.readDatesOfDateTable()
     
     def writeDateListOnTable(self, dateList):
         #Writes datelist in the table
         for i in dateList:
             self.writeDateItem(i[0], i[1], False)
 
-    def readDatesOfDateComboBox(self):
+    def readDatesOfDateTable(self):
         #Reads the combobox and creates a list of tuples containing the dates
         dateList=[]
         for i in range(self.ui.dateTableView.rowCount()):
@@ -272,6 +273,10 @@ class patientActivity(QMainWindow, dataToSQL):
                     self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(itemDate)))
                     self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
                     self.previousDate=ordinalDate
+                    self.patientData.datesList.append(typeOfDate, itemDate, daysFromReception)
+                    dateTuple=(typeOfDate, itemDate, daysFromReception)
+                    if not(dateTuple in self.patientData.datesList):
+                        self.patientData.datesList.append
                 else:
                     self.writeFeedback("No se puede escribir la fecha, compruebe el orden de las fechas",True,True)
             else:
@@ -282,6 +287,9 @@ class patientActivity(QMainWindow, dataToSQL):
             self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[typeOfDate]))
             self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(itemDate)))
             self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
+            dateTuple=(typeOfDate, itemDate, daysFromReception)
+            if not(dateTuple in self.patientData.datesList):
+                self.patientData.datesList.append
 
 
     def setPhysicistNames(self):
@@ -347,3 +355,9 @@ class patientActivity(QMainWindow, dataToSQL):
             #Creates a dialog if necessary
             self.dialog=dialogActivity(message)
 
+    def removeDateFromTable(self):
+        self.ui.dateTableView.setRowCount(0)
+        self.patientData.datesList.pop()
+        self.setDatesVars()
+        if(self.patientData.datesList):
+            self.writeDateListOnTable(self.patientData.datesList)

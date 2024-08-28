@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         self.tab.setObjectName(u"tab")
         self.layoutWidget = QWidget(self.tab)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 0, 1471, 661))
+        self.layoutWidget.setGeometry(QRect(10, 0, 1461, 695))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setSpacing(6)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -148,7 +148,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.birthdayEdit)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.horizontalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer)
 
@@ -190,7 +190,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.treatmentOptions)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.horizontalSpacer_2 = QSpacerItem(0, 40, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer_2)
 
@@ -254,6 +254,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.gridLayout)
 
+        self.verticalSpacer_3 = QSpacerItem(20, 30, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout.addItem(self.verticalSpacer_3)
+
         self.dateLayout = QHBoxLayout()
         self.dateLayout.setSpacing(6)
         self.dateLayout.setObjectName(u"dateLayout")
@@ -287,7 +291,7 @@ class Ui_MainWindow(object):
 
         self.dateLayout.addWidget(self.addDate)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(400, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.dateLayout.addItem(self.horizontalSpacer_3)
 
