@@ -1,33 +1,24 @@
 import mysql.connector
 import json
+from libs.confReader import confReader
 
 class MySQLdb(object):
     """
     A class to manage the conections to MySQL stablish connections to both databases and tables.
     It manages the initial connections and the creation of databases and tables
     """
-    def __init__(self, credentials, host='localhost'):
+    def __init__(self, credentials):
         #Define host, user and name for connections
-        self.host=host
+        conf=confReader()
+        self.host=conf.host
         self.user=credentials[0]
         self.password=credentials[1]
         #Defining databases and their subsequent tables
-        self.demographicDBTuple=("demographicDB", "demographicData")        #DB, table
-        self.treatmentDBTuple=("treatmentDB","treatmentData")               #DB, table
+        self.demographicDBTuple=conf.demographicDBTuple           #DB, table
+        self.treatmentDBTuple=conf.treatmentDBTuple               #DB, table
 
     def __del__(self):
         pass
-    
-    #Defining json reading function for loading configuration
-    def loadJsonConf(self):
-        #loads the configuration under SQL.json
-        f=open("SQL.json")
-        data=json.load(f)
-        for i in data["sql_connection"]:
-            self.host=i["host"]
-            self.user=i["user"]
-            self.password=i["password"]
-        f.close()
 
     #Defining standard and database independent functions
 
@@ -39,6 +30,12 @@ class MySQLdb(object):
         listDB=checkConnection.cursor()
         listDB.execute("SHOW DATABASES")
         for i in listDB:
+            yield i[0]
+
+    def listAvaiableTables(self, DBcursor):
+        #FLists avaiable tables
+        DBcursor.execute("SHOW TABLES")
+        for i in DBcursor:
             yield i[0]
 
     def databaseExists(self, dataBaseName):
@@ -89,7 +86,7 @@ class MySQLdb(object):
         connectionTry=self.connectToDB(self.demographicDBTuple[0])
         self.demographicDB=next(connectionTry)
         self.demographicInterface=next(connectionTry)
-        if not(next(connectionTry)):      #Checks if the DB was created and if not populates it with a table  
+        if not(next(connectionTry))or(not((self.demographicDBTuple[1])in(self.listAvaiableTables(self.demographicInterface)))):      #Checks if the DB was created and if not populates it with a table  
             try:
                 self.demographicInterface.execute("CREATE TABLE "+self.demographicDBTuple[1]+" (AN INT UNSIGNED,\
                     Name VARCHAR(50), \
@@ -131,7 +128,7 @@ class MySQLdb(object):
         connectionTry=self.connectToDB(self.treatmentDBTuple[0])
         self.treatmentDB=next(connectionTry)
         self.treatmentInterface=next(connectionTry)
-        if not(next(connectionTry)):      #Checks if the DB was created and if not populates it with a table  
+        if not(next(connectionTry))or(not((self.treatmentDBTuple[1])in(self.listAvaiableTables(self.treatmentInterface)))):      #Checks if the DB was created and if not populates it with a table  
             try:
                 self.treatmentInterface.execute("CREATE TABLE "+self.treatmentDBTuple[1]+" (\
                     Clinic_Number INT UNSIGNED, \

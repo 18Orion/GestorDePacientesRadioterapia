@@ -8,6 +8,7 @@ class confReader(object):
         #loads the configuration under SQL.json
         f=open("configuration.json")
         data=json.load(f)
+        f.close()
         for programData in data["program"]:
             self.version=programData["version"]
             self.pythonVersion=programData["pythonVersion"]
@@ -19,4 +20,5 @@ class confReader(object):
 
         for sqlData in data["SQL"]:
             self.host=sqlData["host"]
-        f.close()
+            self.demographicDBTuple=(sqlData["baseDatosDemografica"], sqlData["tablaDemografica"])
+            self.treatmentDBTuple=(sqlData["baseDatosTratamiento"], sqlData["tablaTratamiento"])

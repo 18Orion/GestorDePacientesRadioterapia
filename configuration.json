@@ -14,7 +14,11 @@
     ], 
     "SQL":[
         {
-            "host": "localhost"
+            "host": "localhost",
+            "baseDatosDemografica":"demographicDB",
+            "tablaDemografica":"demographicData",
+            "baseDatosTratamiento":"treatmentDB",
+            "tablaTratamiento":"treatmentData"
         }
     ]
 
