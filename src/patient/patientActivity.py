@@ -276,7 +276,7 @@ class patientActivity(QMainWindow, dataToSQL):
                     self.patientData.datesList.append(typeOfDate, itemDate, daysFromReception)
                     dateTuple=(typeOfDate, itemDate, daysFromReception)
                     if not(dateTuple in self.patientData.datesList):
-                        self.patientData.datesList.append
+                        self.patientData.datesList.append(dateTuple)
                 else:
                     self.writeFeedback("No se puede escribir la fecha, compruebe el orden de las fechas",True,True)
             else:
@@ -289,7 +289,7 @@ class patientActivity(QMainWindow, dataToSQL):
             self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
             dateTuple=(typeOfDate, itemDate, daysFromReception)
             if not(dateTuple in self.patientData.datesList):
-                self.patientData.datesList.append
+                self.patientData.datesList.append(dateTuple)
 
 
     def setPhysicistNames(self):
