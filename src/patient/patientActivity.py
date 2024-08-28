@@ -273,7 +273,6 @@ class patientActivity(QMainWindow, dataToSQL):
                     self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(itemDate)))
                     self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
                     self.previousDate=ordinalDate
-                    self.patientData.datesList.append(typeOfDate, itemDate, daysFromReception)
                     dateTuple=(typeOfDate, itemDate, daysFromReception)
                     if not(dateTuple in self.patientData.datesList):
                         self.patientData.datesList.append(dateTuple)
