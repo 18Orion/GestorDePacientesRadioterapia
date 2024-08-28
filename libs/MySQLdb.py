@@ -43,10 +43,7 @@ class MySQLdb(object):
 
     def databaseExists(self, dataBaseName):
         #Checks wether a database exists or not given a list of DBs provided by self.listAvaiableDB()
-        for yieldedDB in self.listAvaiableDB():
-            if yieldedDB==dataBaseName:
-                return True
-        return False
+        return dataBaseName in self.listAvaiableDB()
     
     def connectToDB(self, nameDB):
         """
