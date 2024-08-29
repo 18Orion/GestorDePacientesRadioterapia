@@ -20,5 +20,5 @@ class confReader(object):
 
         for sqlData in data["SQL"]:
             self.host=sqlData["host"]
-            self.demographicDBTuple=(sqlData["baseDatosDemografica"], sqlData["tablaDemografica"])
-            self.treatmentDBTuple=(sqlData["baseDatosTratamiento"], sqlData["tablaTratamiento"])
+            self.demographicDBTuple=(str(sqlData["baseDatosDemografica"]), str(sqlData["tablaDemografica"]))
+            self.treatmentDBTuple=(str(sqlData["baseDatosTratamiento"]), str(sqlData["tablaTratamiento"]))

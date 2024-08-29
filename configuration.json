@@ -16,9 +16,9 @@
         {
             "host": "localhost",
             "baseDatosDemografica":"demographicDB",
-            "tablaDemografica":"demographicData",
+            "tablaDemografica":"demographicTable",
             "baseDatosTratamiento":"treatmentDB",
-            "tablaTratamiento":"treatmentData"
+            "tablaTratamiento":"treatmentTable"
         }
     ]
 

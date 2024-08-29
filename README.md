@@ -10,7 +10,16 @@ En la primera encontramos todos los datos a rellenar de un paciente tomando el t
 En la segunda encontramos una serie de filtros para encontrar los datos que se necesiten y exportarlos a un excel con el objetivo de usarlos.
 Ambas herramientas se han desarrollado con el error humano en mente de tal forma que evitan errores de mecanizado en la medida de lo posible.
 ## **Uso**
-Al desempaquetar encontramos un archivo main.py. Al ejecutarlo accedemos al login y después al launcher.
-Para compilar se usa make executables.
+Al desempaquetar encontramos un archivo suite.py o su equivalente compilado en el caso de descragar los paquetes para Windows o Linux. Al ejecutarlo accedemos al login y después al launcher.
+Antes de compilarlo o ejecutarlo hay que descargar los requisitos que se especifican en requirements.txt con:
+```
+pip install -r requirements.txt --break-system-packages
+```
+Para compilar se usa ```
+make all
+```.
+Para ejecutarlo se usa ```
+python suite.py
+```
 ## **Scripts**
-Este programa viene con varios scripts con el objetivo de migrar o simular las diferentes bases de datos para comprobar su funcionamiento. Estos se encuentran bajo la carpeta scripts y es importExcel.py
+Este programa viene con varios scripts con el objetivo de migrar o simular las diferentes bases de datos para comprobar su funcionamiento. Estos se encuentran bajo la carpeta scripts y es importExcel.py y createDummyDB.py. Estas funcionan con el estándar de conexión que proporciona la libreria MySQLdb.py. Además necesita la configuración de configuration.json por lo que tanto la carpeta libs y el configuration.json deben ser copiados antes de usar los scripts.

@@ -38,6 +38,9 @@ class MySQLdb(object):
         for i in DBcursor:
             yield i[0]
 
+    def tableExists(self, DBcursor ,tableName):
+        return (tableName in self.listAvaiableTables(DBcursor))or(tableName.lower() in self.listAvaiableTables(DBcursor))
+
     def databaseExists(self, dataBaseName):
         #Checks wether a database exists or not given a list of DBs provided by self.listAvaiableDB()
         return (dataBaseName in self.listAvaiableDB())or(dataBaseName.lower() in self.listAvaiableDB())
@@ -52,7 +55,8 @@ class MySQLdb(object):
             DB=mysql.connector.connect(host=self.host,  #Creates the DB class
                 user=self.user,
                 password=self.password, 
-                database=nameDB)
+                database=nameDB,
+                buffered=True)
             cursor=DB.cursor()  #Creates the cursor
         else:
             DB=mysql.connector.connect(host=self.host,
@@ -63,7 +67,8 @@ class MySQLdb(object):
             DB=mysql.connector.connect(host=self.host,  #Creates the DB class
                 user=self.user,
                 password=self.password, 
-                database=nameDB)
+                database=nameDB,
+                buffered=True)
             cursor=DB.cursor()          #Creates the cursor
         yield DB        #yields database
         yield cursor    #yields cursor
@@ -71,8 +76,11 @@ class MySQLdb(object):
     
     def loadTableFromDatabase(self, cursorClass, tableName):
         #Function to load a table froma a database, given the database's cursor class and the table name
-        cursorClass.execute("SELECT * FROM "+tableName)
-        return cursorClass.fetchall()
+        try:
+            cursorClass.execute("SELECT * FROM "+tableName)
+            return cursorClass.fetchall()
+        except Exception as err:
+            print(err)
 
     #End of definition of strandard functions
     #Defining demographic database specific functions, essentially wrappers
@@ -86,16 +94,16 @@ class MySQLdb(object):
         connectionTry=self.connectToDB(self.demographicDBTuple[0])
         self.demographicDB=next(connectionTry)
         self.demographicInterface=next(connectionTry)
-        if not(next(connectionTry))or(not((self.demographicDBTuple[1])in(self.listAvaiableTables(self.demographicInterface)))):      #Checks if the DB was created and if not populates it with a table  
-            try:
-                self.demographicInterface.execute("CREATE TABLE "+self.demographicDBTuple[1]+" (AN INT UNSIGNED,\
-                    Name VARCHAR(50), \
-                    First_Surname VARCHAR(50), \
-                    Second_Surname VARCHAR(50), \
-                    Birthday INT UNSIGNED, \
-                    Gender TINYINT UNSIGNED)")
-            except Exception as err:
-                print(str(err))
+        #if not(next(connectionTry))or(not(self.tableExists(self.demographicInterface, self.demographicDBTuple[1]))):      #Checks if the DB was created and if not populates it with a table  
+        try:
+            self.demographicInterface.execute("CREATE TABLE "+self.demographicDBTuple[1]+" (AN INT UNSIGNED,\
+                Name VARCHAR(50), \
+                First_Surname VARCHAR(50), \
+                Second_Surname VARCHAR(50), \
+                Birthday INT UNSIGNED, \
+                Gender TINYINT UNSIGNED)")
+        except:
+            pass
         self.loadDemographicTable()
 
     def loadDemographicTable(self):
@@ -128,20 +136,20 @@ class MySQLdb(object):
         connectionTry=self.connectToDB(self.treatmentDBTuple[0])
         self.treatmentDB=next(connectionTry)
         self.treatmentInterface=next(connectionTry)
-        if not(next(connectionTry))or(not((self.treatmentDBTuple[1])in(self.listAvaiableTables(self.treatmentInterface)))):      #Checks if the DB was created and if not populates it with a table  
-            try:
-                self.treatmentInterface.execute("CREATE TABLE "+self.treatmentDBTuple[1]+" (\
-                    Clinic_Number INT UNSIGNED, \
-                    Treatment_Number TINYINT UNSIGNED, \
-                    Dates TEXT, \
-                    Treatment_Option TINYINT UNSIGNED, \
-                    Attending_Doctor VARCHAR(100), \
-                    Attending_Physician VARCHAR(100), \
-                    Doctors_Observation LONGTEXT, \
-                    Physicians_Observation LONGTEXT,\
-                    Calc_Tries TINYINT UNSIGNED)")
-            except Exception as err:
-                print(str(err))
+        #if not(next(connectionTry))or(not(not(self.tableExists(self.treatmentInterface, self.treatmentDBTuple[1])))):      #Checks if the DB was created and if not populates it with a table  
+        try:
+            self.treatmentInterface.execute("CREATE TABLE "+self.treatmentDBTuple[1]+" (\
+                Clinic_Number INT UNSIGNED, \
+                Treatment_Number TINYINT UNSIGNED, \
+                Dates TEXT, \
+                Treatment_Option TINYINT UNSIGNED, \
+                Attending_Doctor VARCHAR(100), \
+                Attending_Physician VARCHAR(100), \
+                Doctors_Observation LONGTEXT, \
+                Physicians_Observation LONGTEXT,\
+                Calc_Tries TINYINT UNSIGNED)")
+        except:
+            pass
         self.loadTreatmentTable()
 
     def loadTreatmentTable(self):
