@@ -27,6 +27,5 @@ Para ejecutarlo se usa
 ```
 python suite.py
 ```
-
 ## **Scripts**
 Este programa viene con varios scripts con el objetivo de migrar o simular las diferentes bases de datos para comprobar su funcionamiento. Estos se encuentran bajo la carpeta scripts y es importExcel.py y createDummyDB.py. Estas funcionan con el estándar de conexión que proporciona la librería MySQLdb.py. Además necesita la configuración de configuration.json por lo que tanto la carpeta libs y el configuration.json deben ser copiados antes de usar los scripts.
