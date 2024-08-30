@@ -144,7 +144,6 @@ class patientActivity(QMainWindow, dataToSQL):
                 self.patientData.patientClinicNumber=int(self.ui.historyNumberEdit.text())
                 self.writeFeedback("Usuario nuevo...")
                 self.ui.personalDataFame.setEnabled(True)
-            self.setDatesVars()
         else:
             self.writeFeedback("Número de historia clínica no válido", True)
             self.ui.personalDataFame.setEnabled(False)
@@ -163,7 +162,6 @@ class patientActivity(QMainWindow, dataToSQL):
     def retrieveTreatmentAndWrite(self):
         self.writeFeedback("Cargando...")
         self.restartTreatmentField()
-        self.setDatesVars()
         if (self.ui.treatmentNumber.count()-1!=self.ui.treatmentNumber.currentIndex())and(isValidNUSHA(self.ui.historyNumberEdit.text())):
             self.patientData.fromTupleToDataStructure(self.sql.loadPatientTreatment(self.patientData.patientClinicNumber, 
                 self.ui.treatmentNumber.currentIndex()))
@@ -185,7 +183,6 @@ class patientActivity(QMainWindow, dataToSQL):
                 self.ui.doctorComboBox.addItem(self.patientData.attendingDoctor)
                 self.doctorsList.append(self.patientData.attendingDoctor)
                 self.ui.doctorComboBox.setCurrentIndex(len(self.doctorsList)-1)
-        
         if(self.patientData.attendingRadiophysicist):
             #Checks for the radiophysicist, and if it is not in the list adds it and sets it as the attending
             if self.patientData.attendingRadiophysicist in self.radiophysicistList:
@@ -194,102 +191,6 @@ class patientActivity(QMainWindow, dataToSQL):
                 self.ui.technicianComboBox.addItem(self.patientData.attendingRadiophysicist)
                 self.radiophysicistList.append(self.patientData.attendingRadiophysicist)
                 self.ui.technicianComboBox.setCurrentIndex(len(self.radiophysicistList)-1)
-    
-    def autofillEventDate(self):
-        self.ui.keyDateEdit.setDate(date.today())
-    
-    def onAddDateClicked(self):
-        self.writeFeedback("Añadiendo fecha...")
-        #Adds a date when clicked
-        if self.ui.dateType.currentIndex()!=0:      #Checks a type of date was chosen
-            self.writeDateItem(self.ui.dateType.currentIndex(), 
-                self.ui.keyDateEdit.date().toPython())
-            self.ui.dateType.setCurrentIndex(0)
-            self.writeFeedback("Fecha añadida")
-        else:
-            self.writeFeedback("Tipo de fecha no escogida",True , True)
-        self.patientData.datesList=self.readDatesOfDateTable()
-    
-    def writeDateListOnTable(self, dateList):
-        #Writes datelist in the table
-        for i in dateList:
-            self.writeDateItem(i[0], i[1], False)
-
-    def readDatesOfDateTable(self):
-        #Reads the combobox and creates a list of tuples containing the dates
-        dateList=[]
-        for i in range(self.ui.dateTableView.rowCount()):
-            dateTuple=(self.DATE_OPTIONS.index(self.ui.dateTableView.item(i,0).text()),
-                toOrdinal(self.ui.dateTableView.item(i,1).text(), True), 
-                self.ui.dateTableView.item(i,2).text())
-            dateList.append(dateTuple)
-        return dateList
-
-    def writeDateItem(self, typeOfDate, itemDate, validate=True):
-        #Check whether the dates are introduced in good order and writes them
-        writeable=False
-        if (type(itemDate)==int):
-            ordinalDate=itemDate
-        else:
-            ordinalDate=date.fromisoformat(str(itemDate)).toordinal()
-        #Checks that user doesn't add a date in an erroneus order
-        match typeOfDate:       #Writes the variables storing the different dates
-            case 1:
-                if not(self.hasRequest):
-                    writeable=True
-                    self.hasRequest=True
-                    daysFromReception=0
-            case 2:
-                if (self.hasRequest)and(not(self.hasCompleteReception)):
-                    writeable=True
-                    self.hasCompleteReception=True
-                    daysFromReception=0
-                    self.patientData.beginCalcDate=ordinalDate
-            case 3:
-                if (self.hasRequest)and(not(self.hasCompleteReception)):
-                    writeable=True
-                    daysFromReception=self.calculateTimeElapsed(ordinalDate)
-            case 4:
-                if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
-                    writeable=True
-                    daysFromReception=self.calculateTimeElapsed(ordinalDate)
-            case 5:
-                if (self.hasCompleteReception)and(not(self.hasCalcEnd)):
-                    writeable=True
-                    self.hasCalcEnd=True
-                    daysFromReception=self.calculateTimeElapsed(ordinalDate)
-            case 6:
-                if (self.hasCalcEnd):
-                    writeable=True
-                    self.hasEmision=True
-                    daysFromReception=self.calculateTimeElapsed(ordinalDate)
-
-        if validate:
-            if ordinalDate>=self.previousDate:          #Checks if the new date is as recent or more than the previous one
-                if writeable:
-                    rowNumber=self.ui.dateTableView.rowCount()
-                    self.ui.dateTableView.insertRow(rowNumber)
-                    self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[typeOfDate]))
-                    self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(itemDate)))
-                    self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
-                    self.previousDate=ordinalDate
-                    dateTuple=(typeOfDate, itemDate, daysFromReception)
-                    if not(dateTuple in self.patientData.datesList):
-                        self.patientData.datesList.append(dateTuple)
-                else:
-                    self.writeFeedback("No se puede escribir la fecha, compruebe el orden de las fechas",True,True)
-            else:
-                self.writeFeedback("La nueva fecha no puede ser más antigua que la previa",True,True)
-        else:
-            rowNumber=self.ui.dateTableView.rowCount()
-            self.ui.dateTableView.insertRow(rowNumber)
-            self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[typeOfDate]))
-            self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(itemDate)))
-            self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(daysFromReception)))
-            dateTuple=(typeOfDate, itemDate, daysFromReception)
-            if not(dateTuple in self.patientData.datesList):
-                self.patientData.datesList.append(dateTuple)
-
 
     def setPhysicistNames(self):
         #On change physicist set variable in patientData
@@ -354,9 +255,95 @@ class patientActivity(QMainWindow, dataToSQL):
             #Creates a dialog if necessary
             self.dialog=dialogActivity(message)
 
-    def removeDateFromTable(self):
+    """
+    Date related functions
+    """
+
+    def autofillEventDate(self):
+        self.ui.keyDateEdit.setDate(date.today())
+    
+    def onAddDateClicked(self):
+        if self.ui.dateTableView.rowCount()==0:
+            self.previousDate=0
+            self.patientData.datesList.clear()
+        #Adds a date when clicked
+        self.writeDateItem(self.ui.dateType.currentIndex(), 
+            self.ui.keyDateEdit.date().toPython())
+        self.ui.dateType.setCurrentIndex(0)
+    
+    def writeDateListOnTable(self, dateList):
         self.ui.dateTableView.setRowCount(0)
-        self.patientData.datesList.pop()
-        self.setDatesVars()
-        if(self.patientData.datesList):
+        #Writes datelist in the table
+        for i in dateList:
+            self.writeDateItem(i[0], i[1], False)
+
+    def readDatesOfDateTable(self):
+        #Reads the combobox and creates a list of tuples containing the dates
+        dateList=[]
+        for i in range(self.ui.dateTableView.rowCount()):
+            dateTuple=(self.DATE_OPTIONS.index(self.ui.dateTableView.item(i,0).text()),
+                toOrdinal(self.ui.dateTableView.item(i,1).text(), True), 
+                self.ui.dateTableView.item(i,2).text())
+            dateList.append(dateTuple)
+        return dateList
+
+    def writeDateItem(self, typeOfDate, itemDate, validate=True):
+        #Check whether the dates are introduced in good order and writes them
+        if (type(itemDate)==int):
+            ordinalDate=itemDate
+        else:
+            ordinalDate=date.fromisoformat(str(itemDate)).toordinal()
+        #Creates the date tuple
+        if typeOfDate==1 or typeOfDate==2 or typeOfDate == 3:
+            dateTuple=(typeOfDate, ordinalDate, 0)
+        else:
+            dateTuple=(typeOfDate, ordinalDate, int(self.calculateTimeElapsed(ordinalDate)))
+        #Gets the last date type            
+        if (self.patientData.datesList):
+            lastDateType=self.patientData.datesList[len(self.patientData.datesList)-1][0]
+        else:
+            lastDateType=0
+        #Checks that user doesn't add a date in an erroneus order
+        match typeOfDate:       #Writes the variables storing the different dates
+            case 0:     #Type not selected
+                self.writeFeedback("Tipo de fecha no escogida",True , True)
+            case 1:     #Request
+                self.appendDateInTable(validate, not(self.patientData.datesList), dateTuple)
+            case 2:     #Complete reception
+                self.appendDateInTable(validate, (lastDateType==1)or(lastDateType==3), dateTuple)
+                self.patientData.beginCalcDate=ordinalDate
+            case 3:     #Incomplete reception
+                self.appendDateInTable(validate, lastDateType==1, dateTuple)
+            case 4:     #End calc
+                if (self.appendDateInTable(validate, (lastDateType==2)or(lastDateType==5), dateTuple)):
+                    self.patientData.numberOfCalcTries+=1
+                    self.ui.calcRetries.setText(str(self.patientData.numberOfCalcTries))
+            case 5:     #QA
+                self.appendDateInTable(validate, lastDateType==4, dateTuple)
+            case 6:     #Emision
+                self.appendDateInTable(validate, (lastDateType==5)or(lastDateType==4), dateTuple)
+
+
+    def removeDateFromTable(self):
+        if self.patientData.datesList:
+            self.previousDate=0
+            self.patientData.datesList.pop()
             self.writeDateListOnTable(self.patientData.datesList)
+
+    def appendDateInTable(self, validate, condition, dateTuple):
+        if ((dateTuple[1]>=self.previousDate)and(validate)and(condition))or(not(validate)):          #Checks if the new date is as recent or more than the previous one
+            rowNumber=self.ui.dateTableView.rowCount()
+            self.previousDate=dateTuple[1]
+            self.ui.dateTableView.insertRow(rowNumber)
+            self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[dateTuple[0]]))
+            self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(dateTuple[1])))
+            self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(dateTuple[2])))
+            if (validate):      #If it's not validated it is because it has already been validated thus it already exists
+                self.patientData.datesList.append(dateTuple)
+            return True
+        elif not((dateTuple[1]>=self.previousDate)):
+            self.writeFeedback("La nueva fecha no puede ser más antigua que la previa",True,True)
+            return False
+        elif not(condition):
+            self.writeFeedback("El orden de las fechas es incorrecto, revíselo",True,True)
+            return False

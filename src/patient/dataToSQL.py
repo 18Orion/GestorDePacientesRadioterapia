@@ -21,14 +21,7 @@ class dataToSQL(object):
         self.getDoctorsList()           #Reads config for doctors' list
         self.matchingTreatmentOptions=["Nuevo tratamiento"]
         #Set booleans
-        self.setDatesVars()
-    
-    def setDatesVars(self):
         self.previousDate=0
-        self.hasRequest=False
-        self.hasCompleteReception=False
-        self.hasCalcEnd=False
-        self.hasEmision=False
 
     def getTechniciansList(self):
         self.radiophysicistList=["Sin escoger"]
@@ -73,4 +66,4 @@ class dataToSQL(object):
             return False
 
     def calculateTimeElapsed(self, ordinalDate):
-        return ordinalDate-self.patientData.beginCalcDate
+        return int(ordinalDate-self.patientData.beginCalcDate)

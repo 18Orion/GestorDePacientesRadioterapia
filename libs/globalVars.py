@@ -23,8 +23,8 @@ DATE_OPTIONS=["Sin escoger",
     "Solicitud", 
     "Recepción completa", 
     "Recepción incompleta",
-    "QA",
     "Fin del calculo (Fin DC)",
+    "QA",
     "Emisión"]
 
 GENDER_OPTIONS=["Masculino", 

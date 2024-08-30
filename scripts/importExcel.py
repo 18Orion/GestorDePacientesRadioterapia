@@ -1,5 +1,5 @@
 import openpyxl
-from libs.globalVars import TREATMENT_DICT, GENDER_GUESSER_DICT
+from libs.globalVars import TREATMENT_DICT, GENDER_GUESSER_DICT, DATE_OPTIONS
 from time import time
 from datetime import date, datetime 
 import gender_guesser.detector as gender
@@ -75,19 +75,19 @@ def getExtraStrings(rowNumber):
     yield spreadshit.cell(rowNumber, 38).value    #Radiofísico observation
 
 def getDates(rowNumber):
-    dates=dateDefiningString(1, spreadshit.cell(rowNumber, 28).value.toordinal(), 0)
-    dates+=","+dateDefiningString(2, spreadshit.cell(rowNumber, 34).value.toordinal(), 0)
+    dates=dateDefiningString(DATE_OPTIONS.index("Solicitud"), spreadshit.cell(rowNumber, 28).value.toordinal(), 0)    #Request
+    dates+=","+dateDefiningString(DATE_OPTIONS.index("Recepción completa"), spreadshit.cell(rowNumber, 34).value.toordinal(), 0)
     completeReception=spreadshit.cell(rowNumber, 34).value.toordinal()
     for i in qaColumns:
         qaDate=spreadshit.cell(rowNumber, i).value
         if qaDate:
-            dates+=","+dateDefiningString(4, qaDate.toordinal(), completeReception)
+            dates+=","+dateDefiningString(DATE_OPTIONS.index("QA"), qaDate.toordinal(), completeReception)
     rawDate=spreadshit.cell(rowNumber, 35).value
     if rawDate:
-        dates+=","+dateDefiningString(5, rawDate.toordinal(), completeReception)
+        dates+=","+dateDefiningString(DATE_OPTIONS.index("Fin del calculo (Fin DC)"), rawDate.toordinal(), completeReception)
         rawDate=spreadshit.cell(rowNumber, 36).value      
         if rawDate:  
-            dates+=","+dateDefiningString(6, rawDate.toordinal(), completeReception)
+            dates+=","+dateDefiningString(DATE_OPTIONS.index("Emisión"), rawDate.toordinal(), completeReception)
     return dates
 
 def dateDefiningString(dateType, indate, reception):

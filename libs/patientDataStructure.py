@@ -51,7 +51,7 @@ class patientDataStructure(object):
         self.attendingRadiophysicist=""
         self.doctorsObservation=""
         self.physiciansObservation=""
-        self.numberOfCalcTries=1
+        self.numberOfCalcTries=0
         #Demographic tuple consists in four variables whereas treatment tuple has six variables
         #Begin and end calc dates extracted
         self.beginCalcDate=0
