@@ -4,6 +4,8 @@ from .patientUI import Ui_MainWindow
 from datetime import date
 from libs.funcs import toSpanishDate, toOrdinal, isValidNUSHA
 from src.dialog.dialogActivity import dialogActivity
+from libs.globalVars import TREATMENT_OPTIONS, DATE_OPTIONS, GENDER_OPTIONS
+
 
 """
 This class contains all methods used when buttons are clicked in main window.
@@ -19,10 +21,10 @@ class patientActivity(QMainWindow, dataToSQL):
         self.autofillEventDate()        #Set current date to today
 
         #Populate combo boxes
-        self.ui.treatmentOptions.addItems(self.TREATMENT_OPTIONS)     #added list to treatment options comboBox 
-        self.ui.genderComboBox.addItems(self.GENDER_OPTIONS)
+        self.ui.treatmentOptions.addItems(TREATMENT_OPTIONS)     #added list to treatment options comboBox 
+        self.ui.genderComboBox.addItems(GENDER_OPTIONS)
         self.ui.technicianComboBox.addItems(self.radiophysicistList)
-        self.ui.dateType.addItems(self.DATE_OPTIONS)
+        self.ui.dateType.addItems(DATE_OPTIONS)
         self.ui.doctorComboBox.addItems(self.doctorsList)
         self.ui.treatmentNumber.addItem("Nuevo tratamiento")
         
@@ -281,7 +283,7 @@ class patientActivity(QMainWindow, dataToSQL):
         #Reads the combobox and creates a list of tuples containing the dates
         dateList=[]
         for i in range(self.ui.dateTableView.rowCount()):
-            dateTuple=(self.DATE_OPTIONS.index(self.ui.dateTableView.item(i,0).text()),
+            dateTuple=(DATE_OPTIONS.index(self.ui.dateTableView.item(i,0).text()),
                 toOrdinal(self.ui.dateTableView.item(i,1).text(), True), 
                 self.ui.dateTableView.item(i,2).text())
             dateList.append(dateTuple)
@@ -316,7 +318,6 @@ class patientActivity(QMainWindow, dataToSQL):
                 self.appendDateInTable(validate, lastDateType==1, dateTuple)
             case 4:     #End calc
                 if (self.appendDateInTable(validate, (lastDateType==2)or(lastDateType==5), dateTuple)):
-                    self.patientData.numberOfCalcTries+=1
                     self.ui.calcRetries.setText(str(self.patientData.numberOfCalcTries))
             case 5:     #QA
                 self.appendDateInTable(validate, lastDateType==4, dateTuple)
@@ -335,7 +336,7 @@ class patientActivity(QMainWindow, dataToSQL):
             rowNumber=self.ui.dateTableView.rowCount()
             self.previousDate=dateTuple[1]
             self.ui.dateTableView.insertRow(rowNumber)
-            self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(self.DATE_OPTIONS[dateTuple[0]]))
+            self.ui.dateTableView.setItem(rowNumber, 0, QTableWidgetItem(DATE_OPTIONS[dateTuple[0]]))
             self.ui.dateTableView.setItem(rowNumber, 1, QTableWidgetItem(toSpanishDate(dateTuple[1])))
             self.ui.dateTableView.setItem(rowNumber, 2, QTableWidgetItem(str(dateTuple[2])))
             if (validate):      #If it's not validated it is because it has already been validated thus it already exists

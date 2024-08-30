@@ -14,9 +14,6 @@ class dataToSQL(object):
         #Create patient data structure        
         self.patientData=patientDataStructure()
         #Create lists
-        self.TREATMENT_OPTIONS=TREATMENT_OPTIONS                                #Constant
-        self.GENDER_OPTIONS=GENDER_OPTIONS                                      #Constant
-        self.DATE_OPTIONS=DATE_OPTIONS                                          #Constant
         self.getTechniciansList()       #Reads config for physicians' list
         self.getDoctorsList()           #Reads config for doctors' list
         self.matchingTreatmentOptions=["Nuevo tratamiento"]

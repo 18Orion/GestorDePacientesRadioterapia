@@ -94,7 +94,10 @@ def dateDefiningString(dateType, indate, reception):
     if reception==0:
         return (str(dateType)+":"+str(indate)+":"+"0")
     else:
-        return (str(dateType)+":"+str(indate)+":"+str(indate-reception))
+        if str(indate-reception)==0:
+            return (str(dateType)+":"+str(indate)+":"+"0")
+        else:
+            return (str(dateType)+":"+str(indate)+":"+str(indate-reception))
 
 def getCalcTries(rowNumber):
     tries=0

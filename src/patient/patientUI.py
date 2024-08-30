@@ -201,6 +201,7 @@ class Ui_MainWindow(object):
 
         self.calcRetries = QLineEdit(self.layoutWidget)
         self.calcRetries.setObjectName(u"calcRetries")
+        self.calcRetries.setEnabled(True)
         sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
         sizePolicy3.setHorizontalStretch(0)
         sizePolicy3.setVerticalStretch(0)
