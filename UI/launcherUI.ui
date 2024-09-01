@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>672</width>
-    <height>639</height>
+    <height>692</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,7 +51,7 @@
       <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Servicio de radiofísica, hospital Reina Sofía</string>
+         <string>Servicio de Radiofísica, Hospital Reina Sofía</string>
         </property>
        </widget>
       </item>
@@ -79,113 +79,9 @@
         </item>
        </layout>
       </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Creado por Sergio Miñano Ramos</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Has iniciado sesión como:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLabel" name="name">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>user</string>
-      </property>
-     </widget>
-    </item>
     <item row="3" column="0" colspan="2">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Herramientas del paciente</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0" colspan="2">
-     <widget class="QPushButton" name="patientUILaunch">
-      <property name="text">
-       <string>Introducir/Editar tratamiento</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0" colspan="2">
-     <widget class="QPushButton" name="exportUILaunch">
-      <property name="text">
-       <string>Exportar datos</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0" colspan="2">
-     <widget class="QPushButton" name="importUILaunch">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string>Importar datos</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0" colspan="2">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Maximum</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="8" column="0" colspan="2">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Herramientas de administración</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0" colspan="2">
-     <widget class="QPushButton" name="changeCredentialsUILaunch">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>Cambiar credenciales</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="0" colspan="2">
-     <widget class="QPushButton" name="userCreatorLaunch">
-      <property name="text">
-       <string>Creador de usuario</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="2">
      <spacer name="verticalSpacer_2">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -201,8 +97,39 @@
       </property>
      </spacer>
     </item>
+    <item row="4" column="0" colspan="2">
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>Herramientas del paciente</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="2">
+     <widget class="QPushButton" name="patientUILaunch">
+      <property name="text">
+       <string>Introducir/Editar tratamiento</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="2">
+     <widget class="QPushButton" name="exportUILaunch">
+      <property name="text">
+       <string>Exportar datos</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0" colspan="2">
+     <widget class="QPushButton" name="equipmentLaunch">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>Seguimiento de equipos</string>
+      </property>
+     </widget>
+    </item>
     <item row="11" column="0" colspan="2">
-     <spacer name="verticalSpacer_3">
+     <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -218,13 +145,53 @@
      </spacer>
     </item>
     <item row="12" column="0" colspan="2">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Herramientas de administración</string>
+      </property>
+     </widget>
+    </item>
+    <item row="13" column="0" colspan="2">
+     <widget class="QPushButton" name="changeCredentialsUILaunch">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>Cambiar credenciales</string>
+      </property>
+     </widget>
+    </item>
+    <item row="14" column="0" colspan="2">
+     <widget class="QPushButton" name="userCreatorLaunch">
+      <property name="text">
+       <string>Creador de usuario</string>
+      </property>
+     </widget>
+    </item>
+    <item row="15" column="0" colspan="2">
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Maximum</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="16" column="0" colspan="2">
      <widget class="QLabel" name="label_7">
       <property name="text">
        <string>Herramientas del programa</string>
       </property>
      </widget>
     </item>
-    <item row="13" column="0" colspan="2">
+    <item row="17" column="0" colspan="2">
      <widget class="QPushButton" name="update">
       <property name="enabled">
        <bool>true</bool>
@@ -234,7 +201,7 @@
       </property>
      </widget>
     </item>
-    <item row="14" column="0" colspan="2">
+    <item row="18" column="0" colspan="2">
      <widget class="QPushButton" name="about">
       <property name="enabled">
        <bool>false</bool>
@@ -243,6 +210,83 @@
        <string>Sobre el programa</string>
       </property>
      </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="useInfo">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Has iniciado sesión como:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="name">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>user</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="logOut">
+        <property name="text">
+         <string>Cerrar sesión</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="8" column="0" colspan="2">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Administración de equipos</string>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0" colspan="2">
+     <widget class="QPushButton" name="launchEquipmentRegistration">
+      <property name="text">
+       <string>Registrar equipo</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0" colspan="2">
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>

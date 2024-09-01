@@ -8,6 +8,8 @@ ui: UI/patientUI.ui UI/exploitUI.ui UI/launcherUI.ui UI/credentialsUI.ui UI/logi
 	pyside6-uic UI/credentialsUI.ui -o src/credentials/credentialsUI.py
 	pyside6-uic UI/dialogUI.ui -o src/dialog/dialogUI.py
 	pyside6-uic UI/userCreatorUI.ui -o src/userCreator/userCreatorUI.py
+	pyside6-uic UI/equipmentUI.ui -o src/equipment/equipmentUI.py
+	pyside6-uic UI/equipmentRegistrationUI.ui -o src/equipmentRegistration/equipmentRegistrationUI.py
 
 clean:
 	rm -rfv dist/

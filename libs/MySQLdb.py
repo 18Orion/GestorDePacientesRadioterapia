@@ -136,7 +136,7 @@ class MySQLdb(object):
         connectionTry=self.connectToDB(self.treatmentDBTuple[0])
         self.treatmentDB=next(connectionTry)
         self.treatmentInterface=next(connectionTry)
-        #if not(next(connectionTry))or(not(not(self.tableExists(self.treatmentInterface, self.treatmentDBTuple[1])))):      #Checks if the DB was created and if not populates it with a table  
+        #Checks if the DB was created and if not populates it with a table  
         try:
             self.treatmentInterface.execute("CREATE TABLE "+self.treatmentDBTuple[1]+" (\
                 Clinic_Number INT UNSIGNED, \
@@ -177,6 +177,29 @@ class MySQLdb(object):
         self.treatmentInterface.execute("INSERT INTO "+self.treatmentDBTuple[1]+" VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)", treatmentTuple)
         self.treatmentDB.commit()
     
+    #End of definition of treatment database specific functions
+    #Defining equipment specific functions
+
+    def connectToEquipmentDB(self):
+        connectionTry=self.connectToDB("equipmentDB")
+        self.equipmentDB=next(connectionTry)
+        self.equipmentInterface=next(connectionTry)
+        try:
+            self.equipmentInterface.execute("CREATE TABLE equipmentTable (Brand VARCHAR(100),\
+            Model VARCHAR(100), \
+            Serial_Number VARCHAR(100),\
+            Comment TEXT)")
+        except:
+            pass
+        self.loadEquipmentTable()
+
+    def loadEquipmentTable(self):
+        self.equipmentTable=self.loadTableFromDatabase(self.equipmentInterface, "equipmentTable")
+
+    def saveEquipment(self, equipmentTuple):
+        self.equipmentInterface.execute("INSERT INTO "+"equipmentTable"+" VALUES (%s,%s,%s,%s)", equipmentTuple)
+        self.equipmentDB.commit()
+
     #Define user end functions
 
     def changePassword(self, newPassword):

@@ -23,7 +23,7 @@ class Ui_launcher(object):
     def setupUi(self, launcher):
         if not launcher.objectName():
             launcher.setObjectName(u"launcher")
-        launcher.resize(672, 639)
+        launcher.resize(672, 692)
         self.formLayoutWidget = QWidget(launcher)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
         self.formLayout = QFormLayout(self.formLayoutWidget)
@@ -71,14 +71,77 @@ class Ui_launcher(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.label_3 = QLabel(self.formLayoutWidget)
-        self.label_3.setObjectName(u"label_3")
-
-        self.verticalLayout.addWidget(self.label_3)
-
 
         self.formLayout.setLayout(0, QFormLayout.FieldRole, self.verticalLayout)
 
+        self.verticalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
+
+        self.formLayout.setItem(3, QFormLayout.SpanningRole, self.verticalSpacer_2)
+
+        self.label_6 = QLabel(self.formLayoutWidget)
+        self.label_6.setObjectName(u"label_6")
+
+        self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.label_6)
+
+        self.patientUILaunch = QPushButton(self.formLayoutWidget)
+        self.patientUILaunch.setObjectName(u"patientUILaunch")
+
+        self.formLayout.setWidget(5, QFormLayout.SpanningRole, self.patientUILaunch)
+
+        self.exportUILaunch = QPushButton(self.formLayoutWidget)
+        self.exportUILaunch.setObjectName(u"exportUILaunch")
+
+        self.formLayout.setWidget(6, QFormLayout.SpanningRole, self.exportUILaunch)
+
+        self.equipmentLaunch = QPushButton(self.formLayoutWidget)
+        self.equipmentLaunch.setObjectName(u"equipmentLaunch")
+        self.equipmentLaunch.setEnabled(True)
+
+        self.formLayout.setWidget(9, QFormLayout.SpanningRole, self.equipmentLaunch)
+
+        self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
+
+        self.formLayout.setItem(11, QFormLayout.SpanningRole, self.verticalSpacer)
+
+        self.label_4 = QLabel(self.formLayoutWidget)
+        self.label_4.setObjectName(u"label_4")
+
+        self.formLayout.setWidget(12, QFormLayout.SpanningRole, self.label_4)
+
+        self.changeCredentialsUILaunch = QPushButton(self.formLayoutWidget)
+        self.changeCredentialsUILaunch.setObjectName(u"changeCredentialsUILaunch")
+        self.changeCredentialsUILaunch.setEnabled(True)
+
+        self.formLayout.setWidget(13, QFormLayout.SpanningRole, self.changeCredentialsUILaunch)
+
+        self.userCreatorLaunch = QPushButton(self.formLayoutWidget)
+        self.userCreatorLaunch.setObjectName(u"userCreatorLaunch")
+
+        self.formLayout.setWidget(14, QFormLayout.SpanningRole, self.userCreatorLaunch)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
+
+        self.formLayout.setItem(15, QFormLayout.SpanningRole, self.verticalSpacer_3)
+
+        self.label_7 = QLabel(self.formLayoutWidget)
+        self.label_7.setObjectName(u"label_7")
+
+        self.formLayout.setWidget(16, QFormLayout.SpanningRole, self.label_7)
+
+        self.update = QPushButton(self.formLayoutWidget)
+        self.update.setObjectName(u"update")
+        self.update.setEnabled(True)
+
+        self.formLayout.setWidget(17, QFormLayout.SpanningRole, self.update)
+
+        self.about = QPushButton(self.formLayoutWidget)
+        self.about.setObjectName(u"about")
+        self.about.setEnabled(False)
+
+        self.formLayout.setWidget(18, QFormLayout.SpanningRole, self.about)
+
+        self.useInfo = QHBoxLayout()
+        self.useInfo.setObjectName(u"useInfo")
         self.label = QLabel(self.formLayoutWidget)
         self.label.setObjectName(u"label")
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Preferred)
@@ -87,80 +150,40 @@ class Ui_launcher(object):
         sizePolicy2.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy2)
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label)
+        self.useInfo.addWidget(self.label)
 
         self.name = QLabel(self.formLayoutWidget)
         self.name.setObjectName(u"name")
         sizePolicy.setHeightForWidth(self.name.sizePolicy().hasHeightForWidth())
         self.name.setSizePolicy(sizePolicy)
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.name)
+        self.useInfo.addWidget(self.name)
 
-        self.label_6 = QLabel(self.formLayoutWidget)
-        self.label_6.setObjectName(u"label_6")
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.formLayout.setWidget(3, QFormLayout.SpanningRole, self.label_6)
+        self.useInfo.addItem(self.horizontalSpacer)
 
-        self.patientUILaunch = QPushButton(self.formLayoutWidget)
-        self.patientUILaunch.setObjectName(u"patientUILaunch")
+        self.logOut = QPushButton(self.formLayoutWidget)
+        self.logOut.setObjectName(u"logOut")
 
-        self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.patientUILaunch)
+        self.useInfo.addWidget(self.logOut)
 
-        self.exportUILaunch = QPushButton(self.formLayoutWidget)
-        self.exportUILaunch.setObjectName(u"exportUILaunch")
 
-        self.formLayout.setWidget(5, QFormLayout.SpanningRole, self.exportUILaunch)
+        self.formLayout.setLayout(1, QFormLayout.SpanningRole, self.useInfo)
 
-        self.importUILaunch = QPushButton(self.formLayoutWidget)
-        self.importUILaunch.setObjectName(u"importUILaunch")
-        self.importUILaunch.setEnabled(False)
+        self.label_3 = QLabel(self.formLayoutWidget)
+        self.label_3.setObjectName(u"label_3")
 
-        self.formLayout.setWidget(6, QFormLayout.SpanningRole, self.importUILaunch)
+        self.formLayout.setWidget(8, QFormLayout.SpanningRole, self.label_3)
 
-        self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
+        self.launchEquipmentRegistration = QPushButton(self.formLayoutWidget)
+        self.launchEquipmentRegistration.setObjectName(u"launchEquipmentRegistration")
 
-        self.formLayout.setItem(7, QFormLayout.SpanningRole, self.verticalSpacer)
+        self.formLayout.setWidget(10, QFormLayout.SpanningRole, self.launchEquipmentRegistration)
 
-        self.label_4 = QLabel(self.formLayoutWidget)
-        self.label_4.setObjectName(u"label_4")
+        self.verticalSpacer_4 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.formLayout.setWidget(8, QFormLayout.SpanningRole, self.label_4)
-
-        self.changeCredentialsUILaunch = QPushButton(self.formLayoutWidget)
-        self.changeCredentialsUILaunch.setObjectName(u"changeCredentialsUILaunch")
-        self.changeCredentialsUILaunch.setEnabled(True)
-
-        self.formLayout.setWidget(9, QFormLayout.SpanningRole, self.changeCredentialsUILaunch)
-
-        self.userCreatorLaunch = QPushButton(self.formLayoutWidget)
-        self.userCreatorLaunch.setObjectName(u"userCreatorLaunch")
-
-        self.formLayout.setWidget(10, QFormLayout.SpanningRole, self.userCreatorLaunch)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
-
-        self.formLayout.setItem(2, QFormLayout.SpanningRole, self.verticalSpacer_2)
-
-        self.verticalSpacer_3 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
-
-        self.formLayout.setItem(11, QFormLayout.SpanningRole, self.verticalSpacer_3)
-
-        self.label_7 = QLabel(self.formLayoutWidget)
-        self.label_7.setObjectName(u"label_7")
-
-        self.formLayout.setWidget(12, QFormLayout.SpanningRole, self.label_7)
-
-        self.update = QPushButton(self.formLayoutWidget)
-        self.update.setObjectName(u"update")
-        self.update.setEnabled(True)
-
-        self.formLayout.setWidget(13, QFormLayout.SpanningRole, self.update)
-
-        self.about = QPushButton(self.formLayoutWidget)
-        self.about.setObjectName(u"about")
-        self.about.setEnabled(False)
-
-        self.formLayout.setWidget(14, QFormLayout.SpanningRole, self.about)
+        self.formLayout.setItem(7, QFormLayout.SpanningRole, self.verticalSpacer_4)
 
         launcher.setCentralWidget(self.formLayoutWidget)
         self.statusbar = QStatusBar(launcher)
@@ -174,21 +197,23 @@ class Ui_launcher(object):
 
     def retranslateUi(self, launcher):
         launcher.setWindowTitle(QCoreApplication.translate("launcher", u"Men\u00fa", None))
-        self.label_2.setText(QCoreApplication.translate("launcher", u"Servicio de radiof\u00edsica, hospital Reina Sof\u00eda", None))
+        self.label_2.setText(QCoreApplication.translate("launcher", u"Servicio de Radiof\u00edsica, Hospital Reina Sof\u00eda", None))
         self.label_5.setText(QCoreApplication.translate("launcher", u"Versi\u00f3n:", None))
         self.version.setText("")
-        self.label_3.setText(QCoreApplication.translate("launcher", u"Creado por Sergio Mi\u00f1ano Ramos", None))
-        self.label.setText(QCoreApplication.translate("launcher", u"Has iniciado sesi\u00f3n como:", None))
-        self.name.setText(QCoreApplication.translate("launcher", u"user", None))
         self.label_6.setText(QCoreApplication.translate("launcher", u"Herramientas del paciente", None))
         self.patientUILaunch.setText(QCoreApplication.translate("launcher", u"Introducir/Editar tratamiento", None))
         self.exportUILaunch.setText(QCoreApplication.translate("launcher", u"Exportar datos", None))
-        self.importUILaunch.setText(QCoreApplication.translate("launcher", u"Importar datos", None))
+        self.equipmentLaunch.setText(QCoreApplication.translate("launcher", u"Seguimiento de equipos", None))
         self.label_4.setText(QCoreApplication.translate("launcher", u"Herramientas de administraci\u00f3n", None))
         self.changeCredentialsUILaunch.setText(QCoreApplication.translate("launcher", u"Cambiar credenciales", None))
         self.userCreatorLaunch.setText(QCoreApplication.translate("launcher", u"Creador de usuario", None))
         self.label_7.setText(QCoreApplication.translate("launcher", u"Herramientas del programa", None))
         self.update.setText(QCoreApplication.translate("launcher", u"Buscar \u00faltima versi\u00f3n", None))
         self.about.setText(QCoreApplication.translate("launcher", u"Sobre el programa", None))
+        self.label.setText(QCoreApplication.translate("launcher", u"Has iniciado sesi\u00f3n como:", None))
+        self.name.setText(QCoreApplication.translate("launcher", u"user", None))
+        self.logOut.setText(QCoreApplication.translate("launcher", u"Cerrar sesi\u00f3n", None))
+        self.label_3.setText(QCoreApplication.translate("launcher", u"Administraci\u00f3n de equipos", None))
+        self.launchEquipmentRegistration.setText(QCoreApplication.translate("launcher", u"Registrar equipo", None))
     # retranslateUi
 

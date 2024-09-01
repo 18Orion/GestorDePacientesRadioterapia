@@ -15,6 +15,9 @@ from libs.funcs import update, getLatestVersion, getVersionInt
 from src.dialog.dialogActivity import dialogActivity
 from multiprocessing import Process
 from os import listdir
+from src.equipment.equipmentActivity import equipmentActivity
+from src.equipmentRegistration.equipmentRegistrationActivity import equipmentRegistrationActivity
+
 
 class launcherActivity(QMainWindow):
     def __init__(self, credentials, parent=None):
@@ -27,11 +30,13 @@ class launcherActivity(QMainWindow):
         self.ui.exportUILaunch.clicked.connect(self.launchExport)
         self.ui.changeCredentialsUILaunch.clicked.connect(self.launchCredentials)
         self.ui.userCreatorLaunch.clicked.connect(self.launchUserCreator)
+        self.ui.equipmentLaunch.clicked.connect(self.launchEquipment)
         self.conf=confReader()
         self.ui.version.setText(self.conf.version)
         self.ui.juntaAnd.setPixmap(QPixmap(u"./assets/logo.jpg"))
         self.ui.userCreatorLaunch.setEnabled(credentials[0]=="root")
         self.ui.update.clicked.connect(self.launchUpdate)
+        self.ui.launchEquipmentRegistration.clicked.connect(self.launchEquipmentRegistration)
         self.updatable=0
 
 
@@ -51,6 +56,14 @@ class launcherActivity(QMainWindow):
         self.userCreator=userCreatorActivity(self.credentials)
         self.userCreator.show()
     
+    def launchEquipment(self):
+        self.equipmentFollow=equipmentActivity(self.credentials)
+        self.equipmentFollow.show()
+
+    def launchEquipmentRegistration(self):
+        self.equipmentRegistration=equipmentRegistrationActivity(self.credentials)
+        self.equipmentRegistration.show()
+
     def launchUpdate(self):
         if self.updatable==0:
             if(getVersionInt(getLatestVersion())>getVersionInt(self.conf.version)):
