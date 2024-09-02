@@ -1,6 +1,5 @@
 from datetime import date
 from libs.MySQLdb import MySQLdb
-#from libs.patientSQL import patientSQL
 from libs.patientDataStructure import patientDataStructure
 from libs.globalVars import *
 from libs.confReader import confReader
