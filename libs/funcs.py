@@ -78,3 +78,17 @@ def getLatestVersion():
 
 def getVersionInt(version):
     return int(version.replace("v","").replace(".",""))
+
+def getNameListFromFile(file, error):
+    nameList=["Sin escoger"]
+    try:
+        f=open(file,"r")
+        for line in f:
+            if line[0]!='#':
+               nameList.append(line.replace("\n",""))
+        f.close()
+        return nameList
+    except:
+        f=open(file,"w")
+        f.write(error)
+        f.close()

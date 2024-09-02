@@ -16,6 +16,8 @@ class MySQLdb(object):
         #Defining databases and their subsequent tables
         self.demographicDBTuple=conf.demographicDBTuple           #DB, table
         self.treatmentDBTuple=conf.treatmentDBTuple               #DB, table
+        self.equipmentDBTuple=conf.equipmentDBTuple
+        self.mantainementDBTuple=conf.mantainementDBTuple
 
     def __del__(self):
         pass
@@ -181,11 +183,11 @@ class MySQLdb(object):
     #Defining equipment specific functions
 
     def connectToEquipmentDB(self):
-        connectionTry=self.connectToDB("equipmentDB")
+        connectionTry=self.connectToDB(self.equipmentDBTuple[0])
         self.equipmentDB=next(connectionTry)
         self.equipmentInterface=next(connectionTry)
         try:
-            self.equipmentInterface.execute("CREATE TABLE equipmentTable (Brand VARCHAR(100),\
+            self.equipmentInterface.execute("CREATE TABLE "+self.equipmentDBTuple[1]+" (Brand VARCHAR(100),\
             Model VARCHAR(100), \
             Serial_Number VARCHAR(100),\
             Comment TEXT)")
@@ -194,10 +196,10 @@ class MySQLdb(object):
         self.loadEquipmentTable()
 
     def loadEquipmentTable(self):
-        self.equipmentTable=self.loadTableFromDatabase(self.equipmentInterface, "equipmentTable")
+        self.equipmentTable=self.loadTableFromDatabase(self.equipmentInterface, self.equipmentDBTuple[1])
 
     def saveEquipment(self, equipmentTuple):
-        self.equipmentInterface.execute("INSERT INTO "+"equipmentTable"+" VALUES (%s,%s,%s,%s)", equipmentTuple)
+        self.equipmentInterface.execute("INSERT INTO "+self.equipmentDBTuple[1]+" VALUES (%s,%s,%s,%s)", equipmentTuple)
         self.equipmentDB.commit()
 
     #Define user end functions

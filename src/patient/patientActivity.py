@@ -215,7 +215,7 @@ class patientActivity(QMainWindow, dataToSQL):
         self.getDoctorsList()
         self.ui.doctorComboBox.addItems(self.doctorsList)
         self.ui.technicianComboBox.clear()
-        self.getTechniciansList()
+        self.getPhysicistsList()
         self.ui.technicianComboBox.addItems(self.radiophysicistList)
         self.ui.treatmentOptions.setCurrentIndex(0)
         self.ui.doctorObservationsEdit.clear()

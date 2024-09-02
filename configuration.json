@@ -18,7 +18,11 @@
             "baseDatosDemografica":"demographicDB",
             "tablaDemografica":"demographicTable",
             "baseDatosTratamiento":"treatmentDB",
-            "tablaTratamiento":"treatmentTable"
+            "tablaTratamiento":"treatmentTable",
+            "baseDatosEquipos":"equipmentDB",
+            "tablaEquipos":"equipmentTable",
+            "baseDatosMantenimiento":"mantainementDB",
+            "tablaMantenimiento":"mantainementTable"
         }
     ]
 

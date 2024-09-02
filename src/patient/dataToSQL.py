@@ -1,8 +1,10 @@
 from datetime import date
 from libs.MySQLdb import MySQLdb
+#from libs.patientSQL import patientSQL
 from libs.patientDataStructure import patientDataStructure
 from libs.globalVars import *
 from libs.confReader import confReader
+from libs.funcs import getNameListFromFile
 
 class dataToSQL(object):
     def __init__(self):
@@ -14,46 +16,23 @@ class dataToSQL(object):
         #Create patient data structure        
         self.patientData=patientDataStructure()
         #Create lists
-        self.getTechniciansList()       #Reads config for physicians' list
+        self.getPhysicistsList()       #Reads config for physicians' list
         self.getDoctorsList()           #Reads config for doctors' list
         self.matchingTreatmentOptions=["Nuevo tratamiento"]
         #Set booleans
         self.previousDate=0
 
-    def getTechniciansList(self):
-        self.radiophysicistList=["Sin escoger"]
-        try:
-            f=open(self.conf.physicistFile,"r")
-            for line in f:
-                if line[0]!='#':
-                    self.radiophysicistList.append(line.replace("\n",""))
-        except:
-            f=open(self.conf.physicistFile,"w")
-            f.write("#En este archivo se definen los nombres de los radiofísicos que figuran en el programa\n")
-            f.close()
+    def getPhysicistsList(self):
+        self.radiophysicistList=getNameListFromFile(self.conf.physicistFile, 
+            "#En este archivo se definen los nombres de los radiofísicos que figuran en el programa\n")
 
     def getDoctorsList(self):
-        self.doctorsList=["Sin escoger"]
-        try:
-            f=open(self.conf.doctorsFile,"r")
-            for line in f:
-                if line[0]!='#':
-                    self.doctorsList.append(line.replace("\n",""))
-        except:
-            f=open(self.conf.doctorsFile,"w")
-            f.write("#En este archivo se definen los nombres de los doctores que figuran en el programa\n")
-            f.close()
+        self.doctorsList=getNameListFromFile(self.conf.doctorsFile,
+            "#En este archivo se definen los nombres de los doctores que figuran en el programa\n")
 
     def writeSQL(self):
         self.sql.saveDemographicData(self.patientData.fromVarToDemographicTuple())
         self.sql.saveTreatmentData(self.patientData.fromVarToTreatmentTuple())
-    
-    def setHistory(self, clinicNumber=""):              #Returns wether the number is valid or not and saves it
-        if (len(clinicNumber)==10)and(clinicNumber.isnumeric()):
-            self.patientData.patientClinicNumber=int(clinicNumber)
-            return True
-        else:
-            return False
     
     def isNameValid(self, name=""):
         if (name!="")and(name.replace(" ", "").isalpha()):

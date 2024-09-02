@@ -4,14 +4,17 @@ import mysql.connector
 from src.dialog.dialogActivity import dialogActivity
 from src.launcher.launcherActivity import launcherActivity
 
+
 class loginActivity(QMainWindow):
     def __init__(self, parent=None):
+        global logIn
         super().__init__(parent)
         self.ui = Ui_login()
         self.ui.setupUi(self)
         self.ui.logIn.clicked.connect(self.loginClicked)
         self.ui.user.returnPressed.connect(self.moveOnToPassword)
         self.ui.password.returnPressed.connect(self.loginClicked)
+        logIn=self
 
     def loginClicked(self):
         try:

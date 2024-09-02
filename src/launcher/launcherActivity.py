@@ -37,6 +37,7 @@ class launcherActivity(QMainWindow):
         self.ui.userCreatorLaunch.setEnabled(credentials[0]=="root")
         self.ui.update.clicked.connect(self.launchUpdate)
         self.ui.launchEquipmentRegistration.clicked.connect(self.launchEquipmentRegistration)
+        self.ui.logOut.clicked.connect(exit)
         self.updatable=0
 
 
