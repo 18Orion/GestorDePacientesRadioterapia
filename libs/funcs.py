@@ -3,6 +3,8 @@ from datetime import datetime
 import requests
 from platform import system
 from urllib.request import urlretrieve
+from subprocess import check_call
+import sys
 
 def toSpanishDate(unformattedDate):
     if type(unformattedDate) is int:
@@ -92,3 +94,19 @@ def getNameListFromFile(file, error):
         f=open(file,"w")
         f.write(error)
         f.close()
+
+def installDependencies(requirementsFile):
+    packages=[]
+    f=open(requirementsFile,"r")
+    for package in f:
+        packages.append(package)
+    f.close()
+    print("Instalando dependencias...")
+    for i in range(len(packages)):
+        printProgressBar(i, len(packages), suffix=packages[i])
+        pipInstall(package=packages[i])
+    printProgressBar(len(packages), len(packages), suffix="Todo instalado")
+    print("\n")
+
+def pipInstall(package):
+    check_call([sys.executable, "-m", "pip", "install", package, "--break-system-packages", "--quiet"])
