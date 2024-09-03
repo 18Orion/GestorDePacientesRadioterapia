@@ -35,3 +35,7 @@ GENDER_GUESSER_DICT={"male":0,
     "mostly_male":0,
     "mostly_female":1, 
     "female": 1}
+
+MANTAINEMENT_TYPE=["Sin escoger",
+    "Cambio de tubo",
+    "Mantenimiento"]

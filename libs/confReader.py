@@ -17,6 +17,7 @@ class confReader(object):
         for filesData in data["files"]:
             self.doctorsFile=filesData["medicos"]
             self.physicistFile=filesData["radiofisicos"]
+            self.techniciansFile=filesData["tecnicos"]
 
         for sqlData in data["SQL"]:
             self.host=sqlData["host"]

@@ -17,7 +17,7 @@ from multiprocessing import Process
 from os import listdir
 from src.equipment.equipmentActivity import equipmentActivity
 from src.equipmentRegistration.equipmentRegistrationActivity import equipmentRegistrationActivity
-
+from src.about.aboutActivity import aboutActivity
 
 class launcherActivity(QMainWindow):
     def __init__(self, credentials, parent=None):
@@ -38,6 +38,7 @@ class launcherActivity(QMainWindow):
         self.ui.update.clicked.connect(self.launchUpdate)
         self.ui.launchEquipmentRegistration.clicked.connect(self.launchEquipmentRegistration)
         self.ui.logOut.clicked.connect(exit)
+        self.ui.about.clicked.connect(self.launchAbout)
         self.updatable=0
 
 
@@ -64,6 +65,10 @@ class launcherActivity(QMainWindow):
     def launchEquipmentRegistration(self):
         self.equipmentRegistration=equipmentRegistrationActivity(self.credentials)
         self.equipmentRegistration.show()
+
+    def launchAbout(self):
+        self.about=aboutActivity()
+        self.about.show()
 
     def launchUpdate(self):
         if self.updatable==0:

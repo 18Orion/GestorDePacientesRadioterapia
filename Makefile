@@ -10,6 +10,7 @@ ui: UI/patientUI.ui UI/exploitUI.ui UI/launcherUI.ui UI/credentialsUI.ui UI/logi
 	pyside6-uic UI/userCreatorUI.ui -o src/userCreator/userCreatorUI.py
 	pyside6-uic UI/equipmentUI.ui -o src/equipment/equipmentUI.py
 	pyside6-uic UI/equipmentRegistrationUI.ui -o src/equipmentRegistration/equipmentRegistrationUI.py
+	pyside6-uic UI/aboutUI.ui -o src/about/aboutUI.py
 
 clean:
 	rm -rfv dist/
@@ -25,9 +26,6 @@ linux:
 	pyinstaller --onefile scripts/importExcel.py
 	pyinstaller --onefile scripts/update.py
 	pyinstaller --onefile scripts/createDummyDB.py
-
-dependencies:
-	pip3 install -r requirements.txt --break-system-packages
 
 win:
 	wine ./Scripts/pyinstaller.exe --windowed --onefile suite.py

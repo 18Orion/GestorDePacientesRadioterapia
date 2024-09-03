@@ -18,7 +18,7 @@ class loginActivity(QMainWindow):
 
     def loginClicked(self):
         try:
-            DB=mysql.connector.connect(host='localhost',
+            DB=mysql.connector.connect(host='192.168.1.141',
                 user=self.ui.user.text(),
                 password=self.ui.password.text())
             self.launcher=launcherActivity(credentials=(self.ui.user.text(),self.ui.password.text()))

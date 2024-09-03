@@ -188,11 +188,11 @@ class MySQLdb(object):
         self.equipmentInterface=next(connectionTry)
         try:
             self.equipmentInterface.execute("CREATE TABLE "+self.equipmentDBTuple[1]+" (Brand VARCHAR(100),\
-            Model VARCHAR(100), \
-            Serial_Number VARCHAR(100),\
-            Comment TEXT)")
-        except:
-            pass
+                Model VARCHAR(100), \
+                Serial_Number VARCHAR(100),\
+                Comment TEXT)")
+        except Exception as err:
+            print(err)
         self.loadEquipmentTable()
 
     def loadEquipmentTable(self):
@@ -201,7 +201,29 @@ class MySQLdb(object):
     def saveEquipment(self, equipmentTuple):
         self.equipmentInterface.execute("INSERT INTO "+self.equipmentDBTuple[1]+" VALUES (%s,%s,%s,%s)", equipmentTuple)
         self.equipmentDB.commit()
+    
+    #End of definition of equipment database specific functions
+    def connectToMantainenementDB(self):
+        connectionTry=self.connectToDB(self.mantainementDBTuple[0])
+        self.mantainementDB=next(connectionTry)
+        self.mantainementInterface=next(connectionTry)
+        try:
+            self.equipmentInterface.execute("CREATE TABLE "+self.mantainementDBTuple[1]+" (Serial_Number VARCHAR(100), \
+                Type TINYINT,\
+                Physician VARCHAR(100), \
+                Technician VARCHAR(100),\
+                Begin_Date DATE,\
+                End_Date DATE)")
+        except:
+            pass
+        self.loadMantainementTable()
 
+    def loadMantainementTable(self):
+        self.mantainementTable=self.loadTableFromDatabase(self.mantainementInterface, self.mantainementDBTuple[1])
+
+    def saveMantainement(self, mantainementTuple):
+        self.mantainementInterface.execute("INSERT INTO "+self.mantainementDBTuple[1]+" VALUES (%s,%s,%s,%s,%s,%s)", mantainementTuple)
+        self.mantainementDB.commit()
     #Define user end functions
 
     def changePassword(self, newPassword):

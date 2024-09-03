@@ -26,7 +26,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1496, 790)
+        MainWindow.resize(1496, 827)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -40,15 +40,9 @@ class Ui_MainWindow(object):
         self.tabWidget.setObjectName(u"tabWidget")
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
-        self.layoutWidget = QWidget(self.tab)
-        self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(10, 0, 1461, 695))
-        self.verticalLayout = QVBoxLayout(self.layoutWidget)
-        self.verticalLayout.setSpacing(6)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(self.layoutWidget)
+        self.verticalLayout_3 = QVBoxLayout(self.tab)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.frame = QFrame(self.tab)
         self.frame.setObjectName(u"frame")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
         sizePolicy1.setHorizontalStretch(0)
@@ -72,13 +66,13 @@ class Ui_MainWindow(object):
         self.historyLayout.addWidget(self.historyNumberEdit)
 
 
-        self.verticalLayout.addWidget(self.frame)
+        self.verticalLayout_3.addWidget(self.frame)
 
         self.verticalSpacer = QSpacerItem(20, 25, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
-        self.verticalLayout.addItem(self.verticalSpacer)
+        self.verticalLayout_3.addItem(self.verticalSpacer)
 
-        self.personalDataFame = QFrame(self.layoutWidget)
+        self.personalDataFame = QFrame(self.tab)
         self.personalDataFame.setObjectName(u"personalDataFame")
         self.personalDataFame.setEnabled(False)
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
@@ -166,26 +160,26 @@ class Ui_MainWindow(object):
         self.personalDataLayout.addLayout(self.horizontalLayout_3)
 
 
-        self.verticalLayout.addWidget(self.personalDataFame)
+        self.verticalLayout_3.addWidget(self.personalDataFame)
 
         self.verticalSpacer_2 = QSpacerItem(20, 30, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
-        self.verticalLayout.addItem(self.verticalSpacer_2)
+        self.verticalLayout_3.addItem(self.verticalSpacer_2)
 
-        self.treatmentNumber = QComboBox(self.layoutWidget)
+        self.treatmentNumber = QComboBox(self.tab)
         self.treatmentNumber.setObjectName(u"treatmentNumber")
 
-        self.verticalLayout.addWidget(self.treatmentNumber)
+        self.verticalLayout_3.addWidget(self.treatmentNumber)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.label_11 = QLabel(self.layoutWidget)
+        self.label_11 = QLabel(self.tab)
         self.label_11.setObjectName(u"label_11")
         self.label_11.setMaximumSize(QSize(125, 16777215))
 
         self.horizontalLayout.addWidget(self.label_11)
 
-        self.treatmentOptions = QComboBox(self.layoutWidget)
+        self.treatmentOptions = QComboBox(self.tab)
         self.treatmentOptions.setObjectName(u"treatmentOptions")
 
         self.horizontalLayout.addWidget(self.treatmentOptions)
@@ -194,12 +188,12 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addItem(self.horizontalSpacer_2)
 
-        self.label_7 = QLabel(self.layoutWidget)
+        self.label_7 = QLabel(self.tab)
         self.label_7.setObjectName(u"label_7")
 
         self.horizontalLayout.addWidget(self.label_7)
 
-        self.calcRetries = QLineEdit(self.layoutWidget)
+        self.calcRetries = QLineEdit(self.tab)
         self.calcRetries.setObjectName(u"calcRetries")
         self.calcRetries.setEnabled(True)
         sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
@@ -211,17 +205,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.calcRetries)
 
 
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
 
         self.verticalSpacer_5 = QSpacerItem(20, 30, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
-        self.verticalLayout.addItem(self.verticalSpacer_5)
+        self.verticalLayout_3.addItem(self.verticalSpacer_5)
 
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.gridLayout.setContentsMargins(-1, 0, -1, 0)
-        self.label_14 = QLabel(self.layoutWidget)
+        self.label_14 = QLabel(self.tab)
         self.label_14.setObjectName(u"label_14")
         sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         sizePolicy4.setHorizontalStretch(0)
@@ -231,21 +225,21 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.label_14, 1, 0, 1, 1)
 
-        self.technicianComboBox = QComboBox(self.layoutWidget)
+        self.technicianComboBox = QComboBox(self.tab)
         self.technicianComboBox.setObjectName(u"technicianComboBox")
         sizePolicy1.setHeightForWidth(self.technicianComboBox.sizePolicy().hasHeightForWidth())
         self.technicianComboBox.setSizePolicy(sizePolicy1)
 
         self.gridLayout.addWidget(self.technicianComboBox, 1, 1, 1, 1)
 
-        self.label_15 = QLabel(self.layoutWidget)
+        self.label_15 = QLabel(self.tab)
         self.label_15.setObjectName(u"label_15")
         sizePolicy4.setHeightForWidth(self.label_15.sizePolicy().hasHeightForWidth())
         self.label_15.setSizePolicy(sizePolicy4)
 
         self.gridLayout.addWidget(self.label_15, 0, 0, 1, 1)
 
-        self.doctorComboBox = QComboBox(self.layoutWidget)
+        self.doctorComboBox = QComboBox(self.tab)
         self.doctorComboBox.setObjectName(u"doctorComboBox")
         sizePolicy1.setHeightForWidth(self.doctorComboBox.sizePolicy().hasHeightForWidth())
         self.doctorComboBox.setSizePolicy(sizePolicy1)
@@ -253,17 +247,17 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.doctorComboBox, 0, 1, 1, 1)
 
 
-        self.verticalLayout.addLayout(self.gridLayout)
+        self.verticalLayout_3.addLayout(self.gridLayout)
 
         self.verticalSpacer_3 = QSpacerItem(20, 30, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
-        self.verticalLayout.addItem(self.verticalSpacer_3)
+        self.verticalLayout_3.addItem(self.verticalSpacer_3)
 
         self.dateLayout = QHBoxLayout()
         self.dateLayout.setSpacing(6)
         self.dateLayout.setObjectName(u"dateLayout")
         self.dateLayout.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.keyDateEdit = QDateEdit(self.layoutWidget)
+        self.keyDateEdit = QDateEdit(self.tab)
         self.keyDateEdit.setObjectName(u"keyDateEdit")
         sizePolicy2.setHeightForWidth(self.keyDateEdit.sizePolicy().hasHeightForWidth())
         self.keyDateEdit.setSizePolicy(sizePolicy2)
@@ -271,21 +265,21 @@ class Ui_MainWindow(object):
 
         self.dateLayout.addWidget(self.keyDateEdit)
 
-        self.dateType = QComboBox(self.layoutWidget)
+        self.dateType = QComboBox(self.tab)
         self.dateType.setObjectName(u"dateType")
         sizePolicy4.setHeightForWidth(self.dateType.sizePolicy().hasHeightForWidth())
         self.dateType.setSizePolicy(sizePolicy4)
 
         self.dateLayout.addWidget(self.dateType)
 
-        self.autofillDate = QPushButton(self.layoutWidget)
+        self.autofillDate = QPushButton(self.tab)
         self.autofillDate.setObjectName(u"autofillDate")
         sizePolicy3.setHeightForWidth(self.autofillDate.sizePolicy().hasHeightForWidth())
         self.autofillDate.setSizePolicy(sizePolicy3)
 
         self.dateLayout.addWidget(self.autofillDate)
 
-        self.addDate = QPushButton(self.layoutWidget)
+        self.addDate = QPushButton(self.tab)
         self.addDate.setObjectName(u"addDate")
         sizePolicy3.setHeightForWidth(self.addDate.sizePolicy().hasHeightForWidth())
         self.addDate.setSizePolicy(sizePolicy3)
@@ -296,15 +290,15 @@ class Ui_MainWindow(object):
 
         self.dateLayout.addItem(self.horizontalSpacer_3)
 
-        self.removeDate = QPushButton(self.layoutWidget)
+        self.removeDate = QPushButton(self.tab)
         self.removeDate.setObjectName(u"removeDate")
 
         self.dateLayout.addWidget(self.removeDate)
 
 
-        self.verticalLayout.addLayout(self.dateLayout)
+        self.verticalLayout_3.addLayout(self.dateLayout)
 
-        self.dateTableView = QTableWidget(self.layoutWidget)
+        self.dateTableView = QTableWidget(self.tab)
         if (self.dateTableView.columnCount() < 3):
             self.dateTableView.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
@@ -329,20 +323,28 @@ class Ui_MainWindow(object):
         self.dateTableView.horizontalHeader().setStretchLastSection(True)
         self.dateTableView.verticalHeader().setStretchLastSection(False)
 
-        self.verticalLayout.addWidget(self.dateTableView)
+        self.verticalLayout_3.addWidget(self.dateTableView)
 
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
+        self.verticalLayout_4 = QVBoxLayout(self.tab_2)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.doctorObservationsEdit = QTextEdit(self.tab_2)
         self.doctorObservationsEdit.setObjectName(u"doctorObservationsEdit")
-        self.doctorObservationsEdit.setGeometry(QRect(0, 0, 1491, 701))
+
+        self.verticalLayout_4.addWidget(self.doctorObservationsEdit)
+
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
+        self.verticalLayout_5 = QVBoxLayout(self.tab_3)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.physicianObservationsEdit = QTextEdit(self.tab_3)
         self.physicianObservationsEdit.setObjectName(u"physicianObservationsEdit")
-        self.physicianObservationsEdit.setGeometry(QRect(0, 0, 1491, 701))
+
+        self.verticalLayout_5.addWidget(self.physicianObservationsEdit)
+
         self.tabWidget.addTab(self.tab_3, "")
 
         self.verticalLayout_2.addWidget(self.tabWidget)

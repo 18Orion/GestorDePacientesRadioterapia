@@ -136,7 +136,7 @@ class Ui_launcher(object):
 
         self.about = QPushButton(self.formLayoutWidget)
         self.about.setObjectName(u"about")
-        self.about.setEnabled(False)
+        self.about.setEnabled(True)
 
         self.formLayout.setWidget(18, QFormLayout.SpanningRole, self.about)
 

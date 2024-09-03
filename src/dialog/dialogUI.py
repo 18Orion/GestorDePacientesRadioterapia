@@ -23,13 +23,9 @@ class Ui_Dialog(object):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
         Dialog.resize(586, 139)
-        self.verticalLayoutWidget = QWidget(Dialog)
-        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(10, 10, 571, 121))
-        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.advise = QLabel(self.verticalLayoutWidget)
+        self.verticalLayout_2 = QVBoxLayout(Dialog)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.advise = QLabel(Dialog)
         self.advise.setObjectName(u"advise")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -38,12 +34,12 @@ class Ui_Dialog(object):
         self.advise.setSizePolicy(sizePolicy)
         self.advise.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout.addWidget(self.advise)
+        self.verticalLayout_2.addWidget(self.advise)
 
-        self.okButton = QPushButton(self.verticalLayoutWidget)
+        self.okButton = QPushButton(Dialog)
         self.okButton.setObjectName(u"okButton")
 
-        self.verticalLayout.addWidget(self.okButton)
+        self.verticalLayout_2.addWidget(self.okButton)
 
 
         self.retranslateUi(Dialog)

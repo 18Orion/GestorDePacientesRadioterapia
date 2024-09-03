@@ -9,7 +9,8 @@
     "files":[
         {
             "medicos": "medicos.cfg",
-            "radiofisicos": "radiofisicos.cfg"
+            "radiofisicos": "radiofisicos.cfg",
+            "tecnicos": "technicians.cfg"
         }
     ], 
     "SQL":[
