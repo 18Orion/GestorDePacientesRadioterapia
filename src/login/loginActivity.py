@@ -3,11 +3,13 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 import mysql.connector
 from src.dialog.dialogActivity import dialogActivity
 from src.launcher.launcherActivity import launcherActivity
+from libs.confReader import confReader
 
 
 class loginActivity(QMainWindow):
     def __init__(self, parent=None):
         global logIn
+        self.conf=confReader()
         super().__init__(parent)
         self.ui = Ui_login()
         self.ui.setupUi(self)
@@ -18,7 +20,7 @@ class loginActivity(QMainWindow):
 
     def loginClicked(self):
         try:
-            DB=mysql.connector.connect(host='192.168.1.141',
+            DB=mysql.connector.connect(host=self.conf.host,
                 user=self.ui.user.text(),
                 password=self.ui.password.text())
             self.launcher=launcherActivity(credentials=(self.ui.user.text(),self.ui.password.text()))
