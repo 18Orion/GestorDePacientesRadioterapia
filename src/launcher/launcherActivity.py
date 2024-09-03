@@ -18,7 +18,7 @@ from os import listdir
 from src.equipment.equipmentActivity import equipmentActivity
 from src.equipmentRegistration.equipmentRegistrationActivity import equipmentRegistrationActivity
 from src.about.aboutActivity import aboutActivity
-
+from sys import exit
 class launcherActivity(QMainWindow):
     def __init__(self, credentials, parent=None):
         super().__init__(parent)
@@ -37,7 +37,7 @@ class launcherActivity(QMainWindow):
         self.ui.userCreatorLaunch.setEnabled(credentials[0]=="root")
         self.ui.update.clicked.connect(self.launchUpdate)
         self.ui.launchEquipmentRegistration.clicked.connect(self.launchEquipmentRegistration)
-        self.ui.logOut.clicked.connect(exit)
+        #self.ui.logOut.clicked.connect(exit)
         self.ui.about.clicked.connect(self.launchAbout)
         self.updatable=0
 
