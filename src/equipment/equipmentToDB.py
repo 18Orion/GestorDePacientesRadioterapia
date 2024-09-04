@@ -10,6 +10,7 @@ class equipmentToDB(object):
         self.sql.connectToEquipmentDB()
         self.sql.connectToMantainenementDB()
         self.brands=self.getBrandList()
+        self.operationNumber=0
         self.models=[]
         self.serialNumbers=[]
         self.technicians=getNameListFromFile(conf.techniciansFile, 

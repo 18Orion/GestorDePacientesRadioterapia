@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 try:
     from src.login.loginActivity import loginActivity
     from PySide6.QtWidgets import QApplication

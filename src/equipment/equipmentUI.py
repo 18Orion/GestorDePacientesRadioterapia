@@ -15,24 +15,24 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDateEdit, QFormLayout,
-    QFrame, QHBoxLayout, QHeaderView, QLabel,
-    QLayout, QMainWindow, QPushButton, QSizePolicy,
-    QSpacerItem, QTabWidget, QTableWidget, QTableWidgetItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QDateEdit,
+    QFormLayout, QFrame, QHBoxLayout, QHeaderView,
+    QLabel, QLayout, QMainWindow, QPushButton,
+    QSizePolicy, QSpacerItem, QTabWidget, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_equipmentActivity(object):
     def setupUi(self, equipmentActivity):
         if not equipmentActivity.objectName():
             equipmentActivity.setObjectName(u"equipmentActivity")
-        equipmentActivity.resize(880, 558)
+        equipmentActivity.resize(932, 559)
         self.verticalLayoutWidget = QWidget(equipmentActivity)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.formLayout_2 = QFormLayout()
         self.formLayout_2.setObjectName(u"formLayout_2")
-        self.formLayout_2.setSizeConstraint(QLayout.SetMinimumSize)
+        self.formLayout_2.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
         self.label = QLabel(self.verticalLayoutWidget)
         self.label.setObjectName(u"label")
 
@@ -109,8 +109,8 @@ class Ui_equipmentActivity(object):
         self.data = QFrame(self.filling)
         self.data.setObjectName(u"data")
         self.data.setEnabled(False)
-        self.data.setFrameShape(QFrame.StyledPanel)
-        self.data.setFrameShadow(QFrame.Raised)
+        self.data.setFrameShape(QFrame.Shape.StyledPanel)
+        self.data.setFrameShadow(QFrame.Shadow.Raised)
         self.formLayout = QFormLayout(self.data)
         self.formLayout.setObjectName(u"formLayout")
         self.radiophysicianComboBox = QComboBox(self.data)
@@ -179,8 +179,8 @@ class Ui_equipmentActivity(object):
         self.verticalLayout_3 = QVBoxLayout(self.history)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.historyTable = QTableWidget(self.history)
-        if (self.historyTable.columnCount() < 5):
-            self.historyTable.setColumnCount(5)
+        if (self.historyTable.columnCount() < 6):
+            self.historyTable.setColumnCount(6)
         __qtablewidgetitem = QTableWidgetItem()
         self.historyTable.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
@@ -191,7 +191,22 @@ class Ui_equipmentActivity(object):
         self.historyTable.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         __qtablewidgetitem4 = QTableWidgetItem()
         self.historyTable.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.historyTable.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         self.historyTable.setObjectName(u"historyTable")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.historyTable.sizePolicy().hasHeightForWidth())
+        self.historyTable.setSizePolicy(sizePolicy1)
+        self.historyTable.setFrameShape(QFrame.Shape.VLine)
+        self.historyTable.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        self.historyTable.horizontalHeader().setCascadingSectionResizes(False)
+        self.historyTable.horizontalHeader().setMinimumSectionSize(60)
+        self.historyTable.horizontalHeader().setDefaultSectionSize(140)
+        self.historyTable.horizontalHeader().setStretchLastSection(True)
+        self.historyTable.verticalHeader().setVisible(False)
+        self.historyTable.verticalHeader().setStretchLastSection(False)
 
         self.verticalLayout_3.addWidget(self.historyTable)
 
@@ -230,15 +245,17 @@ class Ui_equipmentActivity(object):
         self.save.setText(QCoreApplication.translate("equipmentActivity", u"Guardar", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.filling), QCoreApplication.translate("equipmentActivity", u"Edici\u00f3n de operaciones", None))
         ___qtablewidgetitem = self.historyTable.horizontalHeaderItem(0)
-        ___qtablewidgetitem.setText(QCoreApplication.translate("equipmentActivity", u"Tipo de operaci\u00f3n", None));
+        ___qtablewidgetitem.setText(QCoreApplication.translate("equipmentActivity", u"N\u00famero de operaci\u00f3n", None));
         ___qtablewidgetitem1 = self.historyTable.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("equipmentActivity", u"Radiof\u00edsico", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("equipmentActivity", u"Tipo de operaci\u00f3n", None));
         ___qtablewidgetitem2 = self.historyTable.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("equipmentActivity", u"T\u00e9cnico", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("equipmentActivity", u"Radiof\u00edsico", None));
         ___qtablewidgetitem3 = self.historyTable.horizontalHeaderItem(3)
-        ___qtablewidgetitem3.setText(QCoreApplication.translate("equipmentActivity", u"Fecha de inicio", None));
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("equipmentActivity", u"T\u00e9cnico", None));
         ___qtablewidgetitem4 = self.historyTable.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("equipmentActivity", u"Fecha de final", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("equipmentActivity", u"Fecha de inicio", None));
+        ___qtablewidgetitem5 = self.historyTable.horizontalHeaderItem(5)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("equipmentActivity", u"Fecha de final", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.history), QCoreApplication.translate("equipmentActivity", u"Historial", None))
     # retranslateUi
 

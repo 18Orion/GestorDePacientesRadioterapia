@@ -173,7 +173,6 @@ class MySQLdb(object):
         try:
             self.treatmentInterface.execute("DELETE FROM "+self.treatmentDBTuple[1]+" WHERE Clinic_Number=%s AND Treatment_Number=%s", (treatmentTuple[0], treatmentTuple[1]))
             self.treatmentDB.commit()
-            #print("Overwriting")
         except:
             pass
         self.treatmentInterface.execute("INSERT INTO "+self.treatmentDBTuple[1]+" VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)", treatmentTuple)
@@ -192,7 +191,7 @@ class MySQLdb(object):
                 Serial_Number VARCHAR(100),\
                 Comment TEXT)")
         except Exception as err:
-            print(err)
+            pass
         self.loadEquipmentTable()
 
     def loadEquipmentTable(self):
@@ -208,7 +207,8 @@ class MySQLdb(object):
         self.mantainementDB=next(connectionTry)
         self.mantainementInterface=next(connectionTry)
         try:
-            self.equipmentInterface.execute("CREATE TABLE "+self.mantainementDBTuple[1]+" (Serial_Number VARCHAR(100), \
+            self.mantainementInterface.execute("CREATE TABLE "+self.mantainementDBTuple[1]+" (Serial_Number VARCHAR(100), \
+                Operation_Number INT,\
                 Type TINYINT,\
                 Physician VARCHAR(100), \
                 Technician VARCHAR(100),\
@@ -221,9 +221,28 @@ class MySQLdb(object):
     def loadMantainementTable(self):
         self.mantainementTable=self.loadTableFromDatabase(self.mantainementInterface, self.mantainementDBTuple[1])
 
-    def saveMantainement(self, mantainementTuple):
-        self.mantainementInterface.execute("INSERT INTO "+self.mantainementDBTuple[1]+" VALUES (%s,%s,%s,%s,%s,%s)", mantainementTuple)
-        self.mantainementDB.commit()
+    def saveMantainement(self, mantainementTuple, overwrite):
+        try:
+            if overwrite:
+                sqlArgs=[]
+                for i in range(2,len(mantainementTuple)):
+                    sqlArgs.append(mantainementTuple[i])
+                sqlArgs.append(mantainementTuple[0])
+                sqlArgs.append(mantainementTuple[1])
+                self.mantainementInterface.execute("UPDATE "+self.mantainementDBTuple[1]+" SET \
+                    Type = %s, \
+                    Physician = %s, \
+                    Technician = %s, \
+                    Begin_Date = %s, \
+                    End_Date = %s \
+                    WHERE Serial_Number = %s AND Operation_Number = %s", tuple(sqlArgs))
+                self.mantainementDB.commit()
+            else:
+                self.mantainementInterface.execute("INSERT INTO "+self.mantainementDBTuple[1]+" VALUES (%s,%s,%s,%s,%s,%s,%s)", mantainementTuple)
+                self.mantainementDB.commit()
+        except Exception as err:
+            print(str(err))
+            
     #Define user end functions
 
     def logIn(self, credentials):
