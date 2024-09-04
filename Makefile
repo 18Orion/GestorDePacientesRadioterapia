@@ -17,6 +17,8 @@ clean:
 	rm -rfv build/
 	rm -rfv package/
 	rm -rfv suite.spec
+	rm -rfv createDummyDB.spec
+	rm -rfv update.spec
 	rm -rfv importExcel.spec
 	rm -rfv winRelease.zip
 	rm -rfv linuxRelease.zip
