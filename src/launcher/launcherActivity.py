@@ -19,6 +19,7 @@ from src.equipment.equipmentActivity import equipmentActivity
 from src.equipmentRegistration.equipmentRegistrationActivity import equipmentRegistrationActivity
 from src.about.aboutActivity import aboutActivity
 from sys import exit
+
 class launcherActivity(QMainWindow):
     def __init__(self, credentials, parent=None):
         super().__init__(parent)

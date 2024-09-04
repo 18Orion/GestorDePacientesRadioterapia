@@ -226,6 +226,9 @@ class MySQLdb(object):
         self.mantainementDB.commit()
     #Define user end functions
 
+    def logIn(self, credentials):
+        pass
+
     def changePassword(self, newPassword):
         DB=mysql.connector.connect(host=self.host,  #Creates the DB class
             user=self.user,

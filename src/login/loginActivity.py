@@ -8,7 +8,6 @@ from libs.confReader import confReader
 
 class loginActivity(QMainWindow):
     def __init__(self, parent=None):
-        global logIn
         self.conf=confReader()
         super().__init__(parent)
         self.ui = Ui_login()
@@ -16,7 +15,6 @@ class loginActivity(QMainWindow):
         self.ui.logIn.clicked.connect(self.loginClicked)
         self.ui.user.returnPressed.connect(self.moveOnToPassword)
         self.ui.password.returnPressed.connect(self.loginClicked)
-        logIn=self
 
     def loginClicked(self):
         try:
