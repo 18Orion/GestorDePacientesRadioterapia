@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
 try:
+    #Try imports
     from src.login.loginActivity import loginActivity
     from PySide6.QtWidgets import QApplication
     import sys
 except:
+    #In case of exception install dependencies
     from libs.funcs import installDependencies
     installDependencies("requirements.txt")
 finally:
+    #Retry import
     from src.login.loginActivity import loginActivity
     from PySide6.QtWidgets import QApplication
     import sys

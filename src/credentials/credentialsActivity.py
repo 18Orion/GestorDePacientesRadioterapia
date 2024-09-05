@@ -16,6 +16,7 @@ class credentialsActivity(QMainWindow):
         self.ui.changePassword.clicked.connect(self.changePasswordClicked)
 
     def changePasswordClicked(self):
+        #Changes the password if they coincide
         if (self.ui.confPassword.text()==self.ui.newPassword.text())and(self.ui.oldPassword.text()==self.credentials[1]):
             passwd=[self.ui.newPassword.text()]
             self.sql.changePassword(passwd)

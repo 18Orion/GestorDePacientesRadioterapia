@@ -22,18 +22,22 @@ class dataToSQL(object):
         self.previousDate=0
 
     def getPhysicistsList(self):
+        #Get physicist name list
         self.radiophysicistList=getNameListFromFile(self.conf.physicistFile, 
             "#En este archivo se definen los nombres de los radiofísicos que figuran en el programa\n")
 
     def getDoctorsList(self):
+        #Get doctor name list
         self.doctorsList=getNameListFromFile(self.conf.doctorsFile,
             "#En este archivo se definen los nombres de los doctores que figuran en el programa\n")
 
     def writeSQL(self):
+        #Writes the sql data
         self.sql.saveDemographicData(self.patientData.fromVarToDemographicTuple())
         self.sql.saveTreatmentData(self.patientData.fromVarToTreatmentTuple())
     
     def isNameValid(self, name=""):
+        #Checks if the name is acceptable
         if (name!="")and(name.replace(" ", "").isalpha()):
             return True
         else: 
@@ -41,4 +45,5 @@ class dataToSQL(object):
             return False
 
     def calculateTimeElapsed(self, ordinalDate):
+        #Calculates the elapsed time from complete reception
         return int(ordinalDate-self.patientData.beginCalcDate)

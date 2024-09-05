@@ -25,49 +25,52 @@ class launcherActivity(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_launcher()
         self.ui.setupUi(self)
-        self.ui.name.setText(credentials[0])
+        #SQL conf
         self.credentials=credentials
+        #UI configuration
+        self.conf=confReader()
+        self.ui.name.setText(credentials[0])                            #Set user
+        self.ui.version.setText(self.conf.version)                      #Set version in label
+        self.ui.juntaAnd.setPixmap(QPixmap(u"./assets/logo.jpg"))       #Put logo in launcher
+        self.ui.userCreatorLaunch.setEnabled(credentials[0]=="root")    #Only allow root to create a new user
+        self.updatable=0
+        #Define slots
         self.ui.patientUILaunch.clicked.connect(self.launchPatient)
         self.ui.exportUILaunch.clicked.connect(self.launchExport)
         self.ui.changeCredentialsUILaunch.clicked.connect(self.launchCredentials)
         self.ui.userCreatorLaunch.clicked.connect(self.launchUserCreator)
         self.ui.equipmentLaunch.clicked.connect(self.launchEquipment)
-        self.conf=confReader()
-        self.ui.version.setText(self.conf.version)
-        self.ui.juntaAnd.setPixmap(QPixmap(u"./assets/logo.jpg"))
-        self.ui.userCreatorLaunch.setEnabled(credentials[0]=="root")
         self.ui.update.clicked.connect(self.launchUpdate)
         self.ui.launchEquipmentRegistration.clicked.connect(self.launchEquipmentRegistration)
-        #self.ui.logOut.clicked.connect(exit)
+        self.ui.logOut.clicked.connect(exit)
         self.ui.about.clicked.connect(self.launchAbout)
-        self.updatable=0
 
 
-    def launchPatient(self):
+    def launchPatient(self):        #Launch patient activity
         self.patientActivity=patientActivity(self.credentials)
-        self.patientActivity.show()
+        self.dialog=dialogActivity("Las fechas se sacan de las listas de control de calidad", onCloseFunc=self.patientActivity.show)
 
-    def launchExport(self):
+    def launchExport(self):         #Launch export activity
         self.exploitActivity=exploitActivity(self.credentials)
         self.exploitActivity.show()
     
-    def launchCredentials(self):
+    def launchCredentials(self):    #Launch credentials change activity
         self.credentials=credentialsActivity(self.credentials)
         self.credentials.show()
     
-    def launchUserCreator(self):
+    def launchUserCreator(self):    #Launch user creator activity
         self.userCreator=userCreatorActivity(self.credentials)
         self.userCreator.show()
     
-    def launchEquipment(self):
+    def launchEquipment(self):      #Launch equipment control activity
         self.equipmentFollow=equipmentActivity(self.credentials)
         self.equipmentFollow.show()
 
-    def launchEquipmentRegistration(self):
+    def launchEquipmentRegistration(self):  #Launch equipment registration activity
         self.equipmentRegistration=equipmentRegistrationActivity(self.credentials)
         self.equipmentRegistration.show()
 
-    def launchAbout(self):
+    def launchAbout(self):          #Launch about activity
         self.about=aboutActivity()
         self.about.show()
 

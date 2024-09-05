@@ -1,3 +1,4 @@
+#Treatment type dict
 TREATMENT_DICT={None : 0,
     "Prioridad" : 0, 
     "Preferente" : 0,
@@ -9,6 +10,7 @@ TREATMENT_DICT={None : 0,
     "Urgente" : 7, 
     "Implante Semillas" :8}
 
+#Treatment options
 TREATMENT_OPTIONS=["Sin escoger",
     "3D",
     "VMAT",
@@ -19,6 +21,7 @@ TREATMENT_OPTIONS=["Sin escoger",
     "Urgencia", 
     "Implante semillas"]
 
+#Date type
 DATE_OPTIONS=["Sin escoger", 
     "Solicitud", 
     "Recepción completa", 
@@ -27,15 +30,24 @@ DATE_OPTIONS=["Sin escoger",
     "QA",
     "Emisión"]
 
+#Gender options
 GENDER_OPTIONS=["Masculino", 
     "Femenino"]
 
+#Gender guesser dict to transform to gender options
 GENDER_GUESSER_DICT={"male":0, 
     "unknown":0,
     "mostly_male":0,
     "mostly_female":1, 
     "female": 1}
 
+#Type of mantainement
 MANTAINEMENT_TYPE=["Sin escoger",
     "Cambio de tubo",
-    "Mantenimiento"]
+    "Pruebas de aceptación",
+    "Niveles de referencia",
+    "Niveles de referencia tras cambio de tubo",
+    "Niveles de referencia tras cambio de generador",
+    "Control de calidad anual",
+    "Control de calidad tras resolución de averías",
+    "Control de calidad tras cierre de incidencia"]

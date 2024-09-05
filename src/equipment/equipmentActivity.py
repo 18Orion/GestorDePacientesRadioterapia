@@ -17,17 +17,19 @@ class equipmentActivity(QMainWindow, equipmentToDB):
         self.ui.setupUi(self)
         self.operations=[]
         self.show()
+        #Populates the widgets
         self.ui.brandComboBox.addItems(self.brands)
         self.ui.technicianComboBox.addItems(self.technicians)
         self.ui.radiophysicianComboBox.addItems(self.radiophysicist)
         self.ui.typeOfOperation.addItems(MANTAINEMENT_TYPE)
+        self.ui.beginDate.setDate(date.today())
+        self.ui.endDate.setDate(date.today())
+        #Slot definition
         self.ui.brandComboBox.currentIndexChanged.connect(self.loadMatchingModels)
         self.ui.modelComboBox.currentIndexChanged.connect(self.loadMatchingSerials)
         self.ui.serialNumberComboBox.currentIndexChanged.connect(self.loadEquipment)
         self.ui.save.clicked.connect(self.writeSQL)
         self.ui.operation.currentIndexChanged.connect(self.onOperationChanged)
-        self.ui.beginDate.setDate(date.today())
-        self.ui.endDate.setDate(date.today())
 
 
     def loadMatchingModels(self):
@@ -82,6 +84,7 @@ class equipmentActivity(QMainWindow, equipmentToDB):
         for rowNumber in range(len(self.operations)):
             i=self.operations[rowNumber]
             self.ui.historyTable.insertRow(rowNumber)
+            #Writes the tuple
             self.ui.historyTable.setItem(rowNumber, 0, QTableWidgetItem(str(i[1])))
             self.ui.historyTable.setItem(rowNumber, 1, QTableWidgetItem(str(MANTAINEMENT_TYPE[i[2]])))
             self.ui.historyTable.setItem(rowNumber, 2, QTableWidgetItem(str(i[3])))
@@ -91,10 +94,10 @@ class equipmentActivity(QMainWindow, equipmentToDB):
 
 
     def writeSQL(self):
-        if self.ui.operation.currentIndex()==0:
+        if self.ui.operation.currentIndex()==0:         #Gives the operation a new number
             self.operationNumber=len(self.operations)+1
         else:
-            self.operationNumber=self.ui.operation.currentIndex()
+            self.operationNumber=self.ui.operation.currentIndex()   #Gives the operation its number
         self.sql.saveMantainement((self.serialNumbers[self.ui.serialNumberComboBox.currentIndex()],
             self.operationNumber,
             self.ui.typeOfOperation.currentIndex(),
@@ -102,12 +105,13 @@ class equipmentActivity(QMainWindow, equipmentToDB):
             self.technicians[self.ui.technicianComboBox.currentIndex()],
             self.ui.beginDate.date().toPython(),
             self.ui.endDate.date().toPython()), self.ui.operation.currentIndex()!=0)
-        self.sql.loadMantainementTable()
+        self.sql.loadMantainementTable()                        #Reloads the sql
         self.deviceChosen(True)
-        self.ui.operation.setCurrentIndex(self.operationNumber)
+        self.ui.operation.setCurrentIndex(self.operationNumber) #Changes the operation number to the newly given number
 
     def onOperationChanged(self):
         if self.ui.operation.currentIndex()!=0:
+            #If the operation exists it loads it
             self.operationNumber=self.ui.operation.currentIndex()-1
             loadOp=self.operations[self.ui.operation.currentIndex()-1]
             self.ui.typeOfOperation.setCurrentIndex(loadOp[2])
@@ -116,6 +120,7 @@ class equipmentActivity(QMainWindow, equipmentToDB):
             self.ui.beginDate.setDate(loadOp[5])
             self.ui.endDate.setDate(loadOp[6])
         else:
+            #If the operation is new it clears all fields
             self.ui.typeOfOperation.setCurrentIndex(0)
             self.ui.radiophysicianComboBox.setCurrentIndex(0)
             self.ui.technicianComboBox.setCurrentIndex(0)

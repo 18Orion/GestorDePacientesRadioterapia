@@ -12,9 +12,11 @@ class userCreatorActivity(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_userCreatorActivity()
         self.ui.setupUi(self)
+        #Slot definition
         self.ui.createUser.clicked.connect(self.createSQLUser)
     
     def createSQLUser(self):
+        #Creates a user with permission for editing the databases
         user=self.ui.user.text()
         passwd=self.ui.password.text()
         passwdRepeat=self.ui.repeatPassword.text()

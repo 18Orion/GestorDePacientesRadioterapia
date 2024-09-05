@@ -15,6 +15,7 @@ class dialogActivity(QDialog):
         self.show()
 
     def closeDialog(self):
+        #When pressed it executes a function and self closes
         if self.onCloseFunc:
             self.onCloseFunc()  #executes a function passed by the constructor
         self.close()
