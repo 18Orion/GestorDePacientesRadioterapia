@@ -4,7 +4,7 @@ try:
     from src.login.loginActivity import loginActivity
     from PySide6.QtWidgets import QApplication
     import sys
-except ImportError:
+except:
     from libs.funcs import installDependencies
     installDependencies("requirements.txt")
 finally:

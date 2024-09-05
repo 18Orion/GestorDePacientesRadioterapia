@@ -15,11 +15,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QComboBox, QDateEdit,
-    QFormLayout, QFrame, QHBoxLayout, QHeaderView,
-    QLabel, QLayout, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QTabWidget, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QComboBox,
+    QDateEdit, QFormLayout, QFrame, QHBoxLayout,
+    QHeaderView, QLabel, QLayout, QMainWindow,
+    QPushButton, QSizePolicy, QSpacerItem, QTabWidget,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_equipmentActivity(object):
     def setupUi(self, equipmentActivity):
@@ -32,7 +32,7 @@ class Ui_equipmentActivity(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.formLayout_2 = QFormLayout()
         self.formLayout_2.setObjectName(u"formLayout_2")
-        self.formLayout_2.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
+        self.formLayout_2.setSizeConstraint(QLayout.SetDefaultConstraint)
         self.label = QLabel(self.verticalLayoutWidget)
         self.label.setObjectName(u"label")
 
@@ -75,7 +75,7 @@ class Ui_equipmentActivity(object):
 
         self.formLayout_2.setWidget(3, QFormLayout.FieldRole, self.comment)
 
-        self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
+        self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
         self.formLayout_2.setItem(4, QFormLayout.SpanningRole, self.verticalSpacer)
 
@@ -109,8 +109,7 @@ class Ui_equipmentActivity(object):
         self.data = QFrame(self.filling)
         self.data.setObjectName(u"data")
         self.data.setEnabled(False)
-        self.data.setFrameShape(QFrame.Shape.StyledPanel)
-        self.data.setFrameShadow(QFrame.Shadow.Raised)
+        self.data.setFrameShape(QFrame.NoFrame)
         self.formLayout = QFormLayout(self.data)
         self.formLayout.setObjectName(u"formLayout")
         self.radiophysicianComboBox = QComboBox(self.data)
@@ -199,8 +198,9 @@ class Ui_equipmentActivity(object):
         sizePolicy1.setVerticalStretch(0)
         sizePolicy1.setHeightForWidth(self.historyTable.sizePolicy().hasHeightForWidth())
         self.historyTable.setSizePolicy(sizePolicy1)
-        self.historyTable.setFrameShape(QFrame.Shape.VLine)
-        self.historyTable.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        self.historyTable.setFrameShape(QFrame.NoFrame)
+        self.historyTable.setSizeAdjustPolicy(QAbstractScrollArea.AdjustIgnored)
+        self.historyTable.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.historyTable.horizontalHeader().setCascadingSectionResizes(False)
         self.historyTable.horizontalHeader().setMinimumSectionSize(60)
         self.historyTable.horizontalHeader().setDefaultSectionSize(140)
