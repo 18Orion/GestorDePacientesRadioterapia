@@ -14,7 +14,7 @@ class loginActivity(QMainWindow):
         self.ui.setupUi(self)
         #Slot connect
         self.ui.logIn.clicked.connect(self.loginClicked)
-        self.ui.user.returnPressed.connect(sself.ui.password.setFocus)
+        self.ui.user.returnPressed.connect(self.ui.password.setFocus)
         self.ui.password.returnPressed.connect(self.loginClicked)
 
     def loginClicked(self):
