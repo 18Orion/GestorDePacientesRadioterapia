@@ -181,7 +181,7 @@ class Ui_launcher(object):
 
         self.formLayout.setWidget(10, QFormLayout.SpanningRole, self.launchEquipmentRegistration)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalSpacer_4 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
 
         self.formLayout.setItem(7, QFormLayout.SpanningRole, self.verticalSpacer_4)
 
@@ -201,7 +201,7 @@ class Ui_launcher(object):
         self.label_5.setText(QCoreApplication.translate("launcher", u"Versi\u00f3n:", None))
         self.version.setText("")
         self.label_6.setText(QCoreApplication.translate("launcher", u"Herramientas del paciente", None))
-        self.patientUILaunch.setText(QCoreApplication.translate("launcher", u"Introducir/Editar tratamiento", None))
+        self.patientUILaunch.setText(QCoreApplication.translate("launcher", u"Ficha de paciente", None))
         self.exportUILaunch.setText(QCoreApplication.translate("launcher", u"Exportar datos", None))
         self.equipmentLaunch.setText(QCoreApplication.translate("launcher", u"Seguimiento de equipos", None))
         self.label_4.setText(QCoreApplication.translate("launcher", u"Herramientas de administraci\u00f3n", None))

@@ -11,26 +11,33 @@ class equipmentRegistrationActivity(QMainWindow):
         super().__init__(parent)
         self.ui = Ui_equipmentRegistrationActivity()
         self.ui.setupUi(self)
-        self.ui.brandEdit.setFocus()        #Set focus
+        self.ui.centreEdit.setFocus()        #Set focus
         self.sql=MySQLdb(credentials)
         self.sql.connectToEquipmentDB()
         #Slot definition
         self.ui.registrateEquipment.clicked.connect(self.registrateEquipment)
-        self.ui.brandEdit.returnPressed.connect(self.ui.modelEdit.setFocus)
-        self.ui.modelEdit.returnPressed.connect(self.ui.serialNumberEdit.setFocus)
-        self.ui.serialNumberEdit.returnPressed.connect(self.ui.commentEdit.setFocus)
-    
-    def registrateEquipment(self):
-        brand=self.ui.brandEdit.text()
-        model=self.ui.modelEdit.text()
-        serialNumber=self.ui.serialNumberEdit.text()
-        comment=self.ui.commentEdit.text()
-        if (brand)and(model)and(serialNumber):      #If all the important gaps are filled the equipment is registrated
-            try:
-                self.sql.saveEquipment((brand, model, serialNumber, comment))
-                self.dialog=dialogActivity("Equipamiento registrado")
-            except Exception as err:
-                self.dialgo=dialogActivity("Error: "+str(err)+" al registrar el equipo")
-        else:
-            self.dialgo=dialogActivity("Rellene marca, modelo y número de serie")
 
+
+    def registrateEquipment(self):
+        if self.placementModelFilled() and self.modelInfoFilled() and self.generatorInfoFilled():
+            equipment=(self.ui.centreEdit.text(),
+                self.ui.serviceEdit.text(),
+                self.ui.locationEdit.text(),
+                self.ui.brandEdit.text(),
+                self.ui.modelEdit.text(),
+                self.ui.serialNumberEdit.text(),
+                self.ui.generatorBrandEdit.text(),
+                self.ui.generatorModelEdit.text(),
+                self.ui.generatorSerialNumberEdit.text())
+            self.sql.saveEquipment(equipment)
+        else:
+            self.dialog=dialogActivity("Rellene todos los campos")
+            
+    def placementModelFilled(self):
+        return self.ui.centreEdit.text() and self.ui.serviceEdit.text() and self.ui.locationEdit.text()
+    
+    def modelInfoFilled(self):
+        return self.ui.brandEdit.text() and self.ui.modelEdit.text() and self.ui.serialNumberEdit.text()
+
+    def generatorInfoFilled(self):
+        return self.ui.generatorBrandEdit.text() and self.ui.generatorModelEdit.text() and self.ui.generatorSerialNumberEdit.text()

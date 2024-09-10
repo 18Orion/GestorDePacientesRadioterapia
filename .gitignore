@@ -18,3 +18,5 @@ Scripts
 package
 *.zip
 tests
+bak
+.venv

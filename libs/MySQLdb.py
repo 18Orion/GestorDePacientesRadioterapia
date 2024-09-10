@@ -186,10 +186,15 @@ class MySQLdb(object):
         self.equipmentDB=next(connectionTry)
         self.equipmentInterface=next(connectionTry)
         try:
-            self.equipmentInterface.execute("CREATE TABLE "+self.equipmentDBTuple[1]+" (Brand VARCHAR(100),\
-                Model VARCHAR(100), \
-                Serial_Number VARCHAR(100),\
-                Comment TEXT)")
+            self.equipmentInterface.execute("CREATE TABLE "+self.equipmentDBTuple[1]+" (Centre VARCHAR(100), \
+                Service VARCHAR(100), \
+                Placement VARCHAR(100), \
+                Equipment_Brand VARCHAR(100),\
+                Equipment_Model VARCHAR(100), \
+                Equipment_Serial_Number VARCHAR(100),\
+                Generator_Brand VARCHAR(100),\
+                Generator_Model VARCHAR(100), \
+                Generator_Serial_Number VARCHAR(100))")
         except Exception as err:
             pass
         self.loadEquipmentTable()
@@ -198,7 +203,7 @@ class MySQLdb(object):
         self.equipmentTable=self.loadTableFromDatabase(self.equipmentInterface, self.equipmentDBTuple[1])
 
     def saveEquipment(self, equipmentTuple):
-        self.equipmentInterface.execute("INSERT INTO "+self.equipmentDBTuple[1]+" VALUES (%s,%s,%s,%s)", equipmentTuple)
+        self.equipmentInterface.execute("INSERT INTO "+self.equipmentDBTuple[1]+" VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)", equipmentTuple)
         self.equipmentDB.commit()
     
     #End of definition of equipment database specific functions

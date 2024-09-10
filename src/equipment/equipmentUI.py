@@ -25,7 +25,7 @@ class Ui_equipmentActivity(object):
     def setupUi(self, equipmentActivity):
         if not equipmentActivity.objectName():
             equipmentActivity.setObjectName(u"equipmentActivity")
-        equipmentActivity.resize(932, 559)
+        equipmentActivity.resize(932, 645)
         self.verticalLayoutWidget = QWidget(equipmentActivity)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
@@ -38,46 +38,34 @@ class Ui_equipmentActivity(object):
 
         self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label)
 
-        self.brandComboBox = QComboBox(self.verticalLayoutWidget)
-        self.brandComboBox.setObjectName(u"brandComboBox")
+        self.centreComboBox = QComboBox(self.verticalLayoutWidget)
+        self.centreComboBox.setObjectName(u"centreComboBox")
 
-        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.brandComboBox)
+        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.centreComboBox)
 
         self.label_2 = QLabel(self.verticalLayoutWidget)
         self.label_2.setObjectName(u"label_2")
 
         self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.label_2)
 
-        self.modelComboBox = QComboBox(self.verticalLayoutWidget)
-        self.modelComboBox.setObjectName(u"modelComboBox")
-        self.modelComboBox.setEnabled(False)
+        self.serviceComboBox = QComboBox(self.verticalLayoutWidget)
+        self.serviceComboBox.setObjectName(u"serviceComboBox")
 
-        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.modelComboBox)
+        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.serviceComboBox)
 
         self.label_3 = QLabel(self.verticalLayoutWidget)
         self.label_3.setObjectName(u"label_3")
 
         self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.label_3)
 
-        self.serialNumberComboBox = QComboBox(self.verticalLayoutWidget)
-        self.serialNumberComboBox.setObjectName(u"serialNumberComboBox")
-        self.serialNumberComboBox.setEnabled(False)
+        self.locationComboBox = QComboBox(self.verticalLayoutWidget)
+        self.locationComboBox.setObjectName(u"locationComboBox")
 
-        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.serialNumberComboBox)
+        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.locationComboBox)
 
-        self.label_4 = QLabel(self.verticalLayoutWidget)
-        self.label_4.setObjectName(u"label_4")
+        self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
-        self.formLayout_2.setWidget(3, QFormLayout.LabelRole, self.label_4)
-
-        self.comment = QLabel(self.verticalLayoutWidget)
-        self.comment.setObjectName(u"comment")
-
-        self.formLayout_2.setWidget(3, QFormLayout.FieldRole, self.comment)
-
-        self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.formLayout_2.setItem(4, QFormLayout.SpanningRole, self.verticalSpacer)
+        self.formLayout_2.setItem(6, QFormLayout.SpanningRole, self.verticalSpacer)
 
         self.tabWidget = QTabWidget(self.verticalLayoutWidget)
         self.tabWidget.setObjectName(u"tabWidget")
@@ -212,7 +200,37 @@ class Ui_equipmentActivity(object):
 
         self.tabWidget.addTab(self.history, "")
 
-        self.formLayout_2.setWidget(5, QFormLayout.SpanningRole, self.tabWidget)
+        self.formLayout_2.setWidget(7, QFormLayout.SpanningRole, self.tabWidget)
+
+        self.label_4 = QLabel(self.verticalLayoutWidget)
+        self.label_4.setObjectName(u"label_4")
+
+        self.formLayout_2.setWidget(3, QFormLayout.LabelRole, self.label_4)
+
+        self.label_11 = QLabel(self.verticalLayoutWidget)
+        self.label_11.setObjectName(u"label_11")
+
+        self.formLayout_2.setWidget(4, QFormLayout.LabelRole, self.label_11)
+
+        self.label_12 = QLabel(self.verticalLayoutWidget)
+        self.label_12.setObjectName(u"label_12")
+
+        self.formLayout_2.setWidget(5, QFormLayout.LabelRole, self.label_12)
+
+        self.brandComboBox = QComboBox(self.verticalLayoutWidget)
+        self.brandComboBox.setObjectName(u"brandComboBox")
+
+        self.formLayout_2.setWidget(3, QFormLayout.FieldRole, self.brandComboBox)
+
+        self.serialComboBox = QComboBox(self.verticalLayoutWidget)
+        self.serialComboBox.setObjectName(u"serialComboBox")
+
+        self.formLayout_2.setWidget(5, QFormLayout.FieldRole, self.serialComboBox)
+
+        self.modelComboBox = QComboBox(self.verticalLayoutWidget)
+        self.modelComboBox.setObjectName(u"modelComboBox")
+
+        self.formLayout_2.setWidget(4, QFormLayout.FieldRole, self.modelComboBox)
 
 
         self.verticalLayout.addLayout(self.formLayout_2)
@@ -229,11 +247,9 @@ class Ui_equipmentActivity(object):
 
     def retranslateUi(self, equipmentActivity):
         equipmentActivity.setWindowTitle(QCoreApplication.translate("equipmentActivity", u"MainWindow", None))
-        self.label.setText(QCoreApplication.translate("equipmentActivity", u"Marca:", None))
-        self.label_2.setText(QCoreApplication.translate("equipmentActivity", u"Modelo:", None))
-        self.label_3.setText(QCoreApplication.translate("equipmentActivity", u"N\u00famero de serie", None))
-        self.label_4.setText(QCoreApplication.translate("equipmentActivity", u"Comentario:", None))
-        self.comment.setText("")
+        self.label.setText(QCoreApplication.translate("equipmentActivity", u"Centro:", None))
+        self.label_2.setText(QCoreApplication.translate("equipmentActivity", u"Servicio:", None))
+        self.label_3.setText(QCoreApplication.translate("equipmentActivity", u"Ubicaci\u00f3n:", None))
         self.label_7.setText(QCoreApplication.translate("equipmentActivity", u"Operaci\u00f3n", None))
         self.label_5.setText(QCoreApplication.translate("equipmentActivity", u"Radiof\u00edsico", None))
         self.label_6.setText(QCoreApplication.translate("equipmentActivity", u"T\u00e9cnico:", None))
@@ -257,5 +273,8 @@ class Ui_equipmentActivity(object):
         ___qtablewidgetitem5 = self.historyTable.horizontalHeaderItem(5)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("equipmentActivity", u"Fecha de final", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.history), QCoreApplication.translate("equipmentActivity", u"Historial", None))
+        self.label_4.setText(QCoreApplication.translate("equipmentActivity", u"Marca:", None))
+        self.label_11.setText(QCoreApplication.translate("equipmentActivity", u"Modelo:", None))
+        self.label_12.setText(QCoreApplication.translate("equipmentActivity", u"N\u00famero de serie:", None))
     # retranslateUi
 
