@@ -52,7 +52,7 @@ class launcherActivity(QMainWindow):
             self.ui.launchEquipmentRegistration.hide()
             self.ui.equipmentLaunch.hide()
             self.ui.equipmentLabel.hide()
-        if conf.equipment=="F":
+        if conf.patients=="F":
             self.ui.patientLabel.hide()
             self.ui.patientUILaunch.hide()
             self.ui.exportUILaunch.hide()
