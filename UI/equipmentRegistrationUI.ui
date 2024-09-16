@@ -42,10 +42,7 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::Shape::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Shadow::Raised</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
       <layout class="QFormLayout" name="formLayout">
        <item row="0" column="0">
@@ -55,18 +52,12 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="centreEdit"/>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_7">
          <property name="text">
           <string>Servicio:</string>
          </property>
         </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="serviceEdit"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_4">
@@ -77,6 +68,12 @@
        </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="locationEdit"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="centreComboBox"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="serviceComboBox"/>
        </item>
       </layout>
      </widget>
@@ -102,10 +99,7 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::Shape::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Shadow::Raised</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
       <layout class="QFormLayout" name="formLayout_3">
        <item row="0" column="0">
@@ -115,18 +109,12 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="brandEdit"/>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
           <string>Modelo:</string>
          </property>
         </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="modelEdit"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_3">
@@ -137,6 +125,12 @@
        </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="serialNumberEdit"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="brandComboBox"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="modelLineEdit"/>
        </item>
       </layout>
      </widget>
@@ -162,10 +156,7 @@
        </size>
       </property>
       <property name="frameShape">
-       <enum>QFrame::Shape::StyledPanel</enum>
-      </property>
-      <property name="frameShadow">
-       <enum>QFrame::Shadow::Raised</enum>
+       <enum>QFrame::NoFrame</enum>
       </property>
       <layout class="QFormLayout" name="formLayout_4">
        <item row="0" column="0">
@@ -176,7 +167,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="generatorBrandEdit"/>
+        <widget class="QComboBox" name="generatorBrandComboBox"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_10">
@@ -184,9 +175,6 @@
           <string>Modelo:</string>
          </property>
         </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="generatorModelEdit"/>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_11">
@@ -197,6 +185,9 @@
        </item>
        <item row="2" column="1">
         <widget class="QLineEdit" name="generatorSerialNumberEdit"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="generatorModelLineEdit"/>
        </item>
       </layout>
      </widget>

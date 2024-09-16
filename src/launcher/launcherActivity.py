@@ -19,12 +19,14 @@ from src.equipment.equipmentActivity import equipmentActivity
 from src.equipmentRegistration.equipmentRegistrationActivity import equipmentRegistrationActivity
 from src.about.aboutActivity import aboutActivity
 from sys import exit
+from libs.confReader import confReader
 
 class launcherActivity(QMainWindow):
     def __init__(self, credentials, parent=None):
         super().__init__(parent)
         self.ui = Ui_launcher()
         self.ui.setupUi(self)
+        conf=confReader()
         #SQL conf
         self.credentials=credentials
         #UI configuration
@@ -44,6 +46,16 @@ class launcherActivity(QMainWindow):
         self.ui.launchEquipmentRegistration.clicked.connect(self.launchEquipmentRegistration)
         self.ui.logOut.clicked.connect(exit)
         self.ui.about.clicked.connect(self.launchAbout)
+        self.ui.greeting.setText(conf.phrase)
+        #Hide or show entries
+        if conf.equipment=="F":
+            self.ui.launchEquipmentRegistration.hide()
+            self.ui.equipmentLaunch.hide()
+            self.ui.equipmentLabel.hide()
+        if conf.equipment=="F":
+            self.ui.patientLabel.hide()
+            self.ui.patientUILaunch.hide()
+            self.ui.exportUILaunch.hide()
 
 
     def launchPatient(self):        #Launch patient activity

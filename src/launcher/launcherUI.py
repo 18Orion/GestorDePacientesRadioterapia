@@ -46,10 +46,10 @@ class Ui_launcher(object):
 
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label_2 = QLabel(self.formLayoutWidget)
-        self.label_2.setObjectName(u"label_2")
+        self.greeting = QLabel(self.formLayoutWidget)
+        self.greeting.setObjectName(u"greeting")
 
-        self.verticalLayout.addWidget(self.label_2)
+        self.verticalLayout.addWidget(self.greeting)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -78,10 +78,10 @@ class Ui_launcher(object):
 
         self.formLayout.setItem(3, QFormLayout.SpanningRole, self.verticalSpacer_2)
 
-        self.label_6 = QLabel(self.formLayoutWidget)
-        self.label_6.setObjectName(u"label_6")
+        self.patientLabel = QLabel(self.formLayoutWidget)
+        self.patientLabel.setObjectName(u"patientLabel")
 
-        self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.label_6)
+        self.formLayout.setWidget(4, QFormLayout.SpanningRole, self.patientLabel)
 
         self.patientUILaunch = QPushButton(self.formLayoutWidget)
         self.patientUILaunch.setObjectName(u"patientUILaunch")
@@ -171,10 +171,10 @@ class Ui_launcher(object):
 
         self.formLayout.setLayout(1, QFormLayout.SpanningRole, self.useInfo)
 
-        self.label_3 = QLabel(self.formLayoutWidget)
-        self.label_3.setObjectName(u"label_3")
+        self.equipmentLabel = QLabel(self.formLayoutWidget)
+        self.equipmentLabel.setObjectName(u"equipmentLabel")
 
-        self.formLayout.setWidget(8, QFormLayout.SpanningRole, self.label_3)
+        self.formLayout.setWidget(8, QFormLayout.SpanningRole, self.equipmentLabel)
 
         self.launchEquipmentRegistration = QPushButton(self.formLayoutWidget)
         self.launchEquipmentRegistration.setObjectName(u"launchEquipmentRegistration")
@@ -197,10 +197,10 @@ class Ui_launcher(object):
 
     def retranslateUi(self, launcher):
         launcher.setWindowTitle(QCoreApplication.translate("launcher", u"Men\u00fa", None))
-        self.label_2.setText(QCoreApplication.translate("launcher", u"Servicio de Radiof\u00edsica, Hospital Reina Sof\u00eda", None))
+        self.greeting.setText("")
         self.label_5.setText(QCoreApplication.translate("launcher", u"Versi\u00f3n:", None))
         self.version.setText("")
-        self.label_6.setText(QCoreApplication.translate("launcher", u"Herramientas del paciente", None))
+        self.patientLabel.setText(QCoreApplication.translate("launcher", u"Herramientas del paciente", None))
         self.patientUILaunch.setText(QCoreApplication.translate("launcher", u"Ficha de paciente", None))
         self.exportUILaunch.setText(QCoreApplication.translate("launcher", u"Exportar datos", None))
         self.equipmentLaunch.setText(QCoreApplication.translate("launcher", u"Seguimiento de equipos", None))
@@ -213,7 +213,7 @@ class Ui_launcher(object):
         self.label.setText(QCoreApplication.translate("launcher", u"Has iniciado sesi\u00f3n como:", None))
         self.name.setText(QCoreApplication.translate("launcher", u"user", None))
         self.logOut.setText(QCoreApplication.translate("launcher", u"Cerrar sesi\u00f3n", None))
-        self.label_3.setText(QCoreApplication.translate("launcher", u"Administraci\u00f3n de equipos", None))
+        self.equipmentLabel.setText(QCoreApplication.translate("launcher", u"Administraci\u00f3n de equipos", None))
         self.launchEquipmentRegistration.setText(QCoreApplication.translate("launcher", u"Registrar equipo", None))
     # retranslateUi
 

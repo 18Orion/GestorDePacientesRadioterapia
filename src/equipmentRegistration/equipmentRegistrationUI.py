@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QLabel,
-    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QFormLayout, QFrame,
+    QLabel, QLineEdit, QMainWindow, QPushButton,
+    QSizePolicy, QVBoxLayout, QWidget)
 
 class Ui_equipmentRegistrationActivity(object):
     def setupUi(self, equipmentRegistrationActivity):
@@ -44,8 +44,7 @@ class Ui_equipmentRegistrationActivity(object):
         sizePolicy.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
         self.frame.setSizePolicy(sizePolicy)
         self.frame.setMinimumSize(QSize(0, 0))
-        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Shadow.Raised)
+        self.frame.setFrameShape(QFrame.NoFrame)
         self.formLayout = QFormLayout(self.frame)
         self.formLayout.setObjectName(u"formLayout")
         self.label_6 = QLabel(self.frame)
@@ -53,20 +52,10 @@ class Ui_equipmentRegistrationActivity(object):
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_6)
 
-        self.centreEdit = QLineEdit(self.frame)
-        self.centreEdit.setObjectName(u"centreEdit")
-
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.centreEdit)
-
         self.label_7 = QLabel(self.frame)
         self.label_7.setObjectName(u"label_7")
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_7)
-
-        self.serviceEdit = QLineEdit(self.frame)
-        self.serviceEdit.setObjectName(u"serviceEdit")
-
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.serviceEdit)
 
         self.label_4 = QLabel(self.frame)
         self.label_4.setObjectName(u"label_4")
@@ -77,6 +66,16 @@ class Ui_equipmentRegistrationActivity(object):
         self.locationEdit.setObjectName(u"locationEdit")
 
         self.formLayout.setWidget(2, QFormLayout.FieldRole, self.locationEdit)
+
+        self.centreComboBox = QComboBox(self.frame)
+        self.centreComboBox.setObjectName(u"centreComboBox")
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.centreComboBox)
+
+        self.serviceComboBox = QComboBox(self.frame)
+        self.serviceComboBox.setObjectName(u"serviceComboBox")
+
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.serviceComboBox)
 
 
         self.verticalLayout.addWidget(self.frame)
@@ -90,8 +89,7 @@ class Ui_equipmentRegistrationActivity(object):
         self.frame_2 = QFrame(self.verticalLayoutWidget)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setMinimumSize(QSize(0, 0))
-        self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
+        self.frame_2.setFrameShape(QFrame.NoFrame)
         self.formLayout_3 = QFormLayout(self.frame_2)
         self.formLayout_3.setObjectName(u"formLayout_3")
         self.label = QLabel(self.frame_2)
@@ -99,20 +97,10 @@ class Ui_equipmentRegistrationActivity(object):
 
         self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.label)
 
-        self.brandEdit = QLineEdit(self.frame_2)
-        self.brandEdit.setObjectName(u"brandEdit")
-
-        self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.brandEdit)
-
         self.label_2 = QLabel(self.frame_2)
         self.label_2.setObjectName(u"label_2")
 
         self.formLayout_3.setWidget(1, QFormLayout.LabelRole, self.label_2)
-
-        self.modelEdit = QLineEdit(self.frame_2)
-        self.modelEdit.setObjectName(u"modelEdit")
-
-        self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.modelEdit)
 
         self.label_3 = QLabel(self.frame_2)
         self.label_3.setObjectName(u"label_3")
@@ -123,6 +111,16 @@ class Ui_equipmentRegistrationActivity(object):
         self.serialNumberEdit.setObjectName(u"serialNumberEdit")
 
         self.formLayout_3.setWidget(2, QFormLayout.FieldRole, self.serialNumberEdit)
+
+        self.brandComboBox = QComboBox(self.frame_2)
+        self.brandComboBox.setObjectName(u"brandComboBox")
+
+        self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.brandComboBox)
+
+        self.modelLineEdit = QLineEdit(self.frame_2)
+        self.modelLineEdit.setObjectName(u"modelLineEdit")
+
+        self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.modelLineEdit)
 
 
         self.verticalLayout.addWidget(self.frame_2)
@@ -136,8 +134,7 @@ class Ui_equipmentRegistrationActivity(object):
         self.frame_3 = QFrame(self.verticalLayoutWidget)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setMinimumSize(QSize(0, 0))
-        self.frame_3.setFrameShape(QFrame.Shape.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
+        self.frame_3.setFrameShape(QFrame.NoFrame)
         self.formLayout_4 = QFormLayout(self.frame_3)
         self.formLayout_4.setObjectName(u"formLayout_4")
         self.label_9 = QLabel(self.frame_3)
@@ -145,20 +142,15 @@ class Ui_equipmentRegistrationActivity(object):
 
         self.formLayout_4.setWidget(0, QFormLayout.LabelRole, self.label_9)
 
-        self.generatorBrandEdit = QLineEdit(self.frame_3)
-        self.generatorBrandEdit.setObjectName(u"generatorBrandEdit")
+        self.generatorBrandComboBox = QComboBox(self.frame_3)
+        self.generatorBrandComboBox.setObjectName(u"generatorBrandComboBox")
 
-        self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.generatorBrandEdit)
+        self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.generatorBrandComboBox)
 
         self.label_10 = QLabel(self.frame_3)
         self.label_10.setObjectName(u"label_10")
 
         self.formLayout_4.setWidget(1, QFormLayout.LabelRole, self.label_10)
-
-        self.generatorModelEdit = QLineEdit(self.frame_3)
-        self.generatorModelEdit.setObjectName(u"generatorModelEdit")
-
-        self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.generatorModelEdit)
 
         self.label_11 = QLabel(self.frame_3)
         self.label_11.setObjectName(u"label_11")
@@ -169,6 +161,11 @@ class Ui_equipmentRegistrationActivity(object):
         self.generatorSerialNumberEdit.setObjectName(u"generatorSerialNumberEdit")
 
         self.formLayout_4.setWidget(2, QFormLayout.FieldRole, self.generatorSerialNumberEdit)
+
+        self.generatorModelLineEdit = QLineEdit(self.frame_3)
+        self.generatorModelLineEdit.setObjectName(u"generatorModelLineEdit")
+
+        self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.generatorModelLineEdit)
 
 
         self.verticalLayout.addWidget(self.frame_3)

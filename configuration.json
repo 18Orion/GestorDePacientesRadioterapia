@@ -1,16 +1,26 @@
 {
     "program":[
         {
-            "version": "1.1.2",
+            "version": "1.2.0",
             "pythonVersion": "3.12",
             "mysql": "9.0.1"
+        }
+    ],
+    "UI" :[
+        {
+            "frasemenu" : "Hospital",
+            "pacientes" : "T",
+            "equipos" : "T"
         }
     ],
     "files":[
         {
             "medicos": "medicos.cfg",
             "radiofisicos": "radiofisicos.cfg",
-            "tecnicos": "technicians.cfg"
+            "tecnicos": "technicians.cfg",
+            "centro": "centre.cfg",
+            "servicio": "service.cfg",
+            "marcas": "brand.cfg"
         }
     ], 
     "SQL":[

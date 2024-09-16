@@ -94,6 +94,7 @@ def getNameListFromFile(file, error):
         f=open(file,"w")
         f.write(error)
         f.close()
+        return nameList
 
 def installDependencies(requirementsFile):
     packages=[]

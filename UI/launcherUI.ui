@@ -49,9 +49,9 @@
     <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="greeting">
         <property name="text">
-         <string>Servicio de Radiofísica, Hospital Reina Sofía</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -98,7 +98,7 @@
      </spacer>
     </item>
     <item row="4" column="0" colspan="2">
-     <widget class="QLabel" name="label_6">
+     <widget class="QLabel" name="patientLabel">
       <property name="text">
        <string>Herramientas del paciente</string>
       </property>
@@ -262,7 +262,7 @@
      </layout>
     </item>
     <item row="8" column="0" colspan="2">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="equipmentLabel">
       <property name="text">
        <string>Administración de equipos</string>
       </property>

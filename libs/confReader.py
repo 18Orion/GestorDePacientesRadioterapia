@@ -13,12 +13,17 @@ class confReader(object):
             self.version=programData["version"]
             self.pythonVersion=programData["pythonVersion"]
             self.mysql=programData["mysql"]
-            
+        for programData in data["UI"]:
+            self.phrase=programData["frasemenu"]
+            self.patients=programData["pacientes"]
+            self.equipment=programData["equipos"]
         for filesData in data["files"]:
             self.doctorsFile=filesData["medicos"]
             self.physicistFile=filesData["radiofisicos"]
             self.techniciansFile=filesData["tecnicos"]
-
+            self.centreFile=filesData["centro"]
+            self.serviceFile=filesData["servicio"]
+            self.brandsFile=filesData["marcas"]
         for sqlData in data["SQL"]:
             self.host=sqlData["host"]
             self.demographicDBTuple=(str(sqlData["baseDatosDemografica"]), str(sqlData["tablaDemografica"]))
